@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="320dp"
+        android:minHeight="200dp"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/header_purple"
+            app:layout_constraintDimensionRatio="73:16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/pencil"
+            app:layout_constraintBottom_toBottomOf="@+id/textView13"
+            app:layout_constraintStart_toStartOf="@+id/imageView13"
+            app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Ölçümlerim"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView13"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView14"
+            app:layout_constraintTop_toTopOf="@+id/imageView13" />
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="8dp"
+            android:src="@drawable/close_white"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Tarih"
+            android:textColor="@color/ourPurple"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/date_show"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+        <ImageView
+            android:id="@+id/date_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_purple"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/date"
+            app:layout_constraintTop_toTopOf="@+id/date" />
+
+        <ImageView
+            android:id="@+id/date_icon"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/date_white"
+            app:layout_constraintBottom_toBottomOf="@id/date_show"
+            app:layout_constraintStart_toStartOf="@id/date_show"
+            app:layout_constraintTop_toTopOf="@id/date_show" />
+
+        <TextView
+            android:id="@+id/date_show_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserratlight"
+            android:padding="4dp"
+            android:text="08.10.2018"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/date_show"
+            app:layout_constraintEnd_toEndOf="@+id/date_show"
+            app:layout_constraintStart_toStartOf="@+id/date_icon"
+            app:layout_constraintTop_toTopOf="@+id/date_show"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <View
+            android:id="@+id/view0"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date" />
+
+
+        <TextView
+            android:id="@+id/left1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Toplam Vücut Kütlesi (kg)"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/right1"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view0" />
+
+        <EditText
+            android:id="@+id/right1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:fontFamily="@font/montserratlight"
+            android:gravity="center"
+            android:hint="-"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left1"
+            app:layout_constraintTop_toTopOf="@+id/left1" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left1" />
+
+        <TextView
+            android:id="@+id/left2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Beden Kütle İndeksi (kg/m2)"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/right2"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+        <EditText
+            android:id="@+id/right2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:fontFamily="@font/montserratlight"
+            android:gravity="center"
+            android:hint="-"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left2"
+            app:layout_constraintTop_toTopOf="@+id/left2" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left2" />
+
+        <TextView
+            android:id="@+id/left3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Yağ Oranı (%)"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/right3"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <EditText
+            android:id="@+id/right3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:fontFamily="@font/montserratlight"
+            android:gravity="center"
+            android:hint="-"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left3"
+            app:layout_constraintTop_toTopOf="@+id/left3" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left3" />
+
+        <TextView
+            android:id="@+id/left4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Su Oranı (%)"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/right4"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <EditText
+            android:id="@+id/right4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:fontFamily="@font/montserratlight"
+            android:gravity="center"
+            android:hint="-"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left4"
+            app:layout_constraintTop_toTopOf="@+id/left4" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left4" />
+
+        <TextView
+            android:id="@+id/left5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Kas Oranı (%)"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/right5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+        <EditText
+            android:id="@+id/right5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:fontFamily="@font/montserratlight"
+            android:gravity="center"
+            android:hint="-"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left5"
+            app:layout_constraintTop_toTopOf="@+id/left5" />
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left5" />
+
+        <TextView
+            android:id="@+id/left6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Bazal Metabolizma Hızı (kcal)"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/right6"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+        <EditText
+            android:id="@+id/right6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:fontFamily="@font/montserratlight"
+            android:gravity="center"
+            android:hint="-"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left6"
+            app:layout_constraintTop_toTopOf="@+id/left6" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left6" />
+
+        <TextView
+            android:id="@+id/left7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:padding="8dp"
+            android:text="Bazal Metabolizma Yaşı (yıl)"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/right7"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+        <EditText
+            android:id="@+id/right7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:fontFamily="@font/montserratlight"
+            android:gravity="center"
+            android:hint="-"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/left7"
+            app:layout_constraintTop_toTopOf="@+id/left7" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/left7" />
+
+
+        <ImageView
+            android:id="@+id/tamam_button"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/button_purple"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Tamam"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tamam_button"
+            app:layout_constraintEnd_toEndOf="@+id/tamam_button"
+            app:layout_constraintStart_toStartOf="@+id/tamam_button"
+            app:layout_constraintTop_toTopOf="@+id/tamam_button" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>

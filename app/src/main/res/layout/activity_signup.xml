@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="25dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/backbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/lifecarelogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_button" />
+
+    <EditText
+        android:id="@+id/name_field"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Ad - Soyad"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <EditText
+        android:id="@+id/email_field"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/montserratlight"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_field" />
+
+    <EditText
+        android:id="@+id/password_field"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Şifre"
+        android:inputType="textPassword"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_field" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:checked="false"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/password_field" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/montserratlight"
+        android:text="Gizlilik ilkesi ve kayıt şartlarını okuyup \n kabul ettiğimi onaylıyorum."
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/password_field"
+        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/password_field" />
+
+
+    <ImageView
+        android:id="@+id/signup_button"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/buttonbackground"
+        app:layout_constraintBottom_toTopOf="@+id/facebook_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/signup_button"
+        android:layout_alignTop="@+id/signup_button"
+        android:layout_alignEnd="@+id/signup_button"
+        android:layout_alignBottom="@+id/signup_button"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="Kayıt Ol"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/signup_button"
+        app:layout_constraintEnd_toEndOf="@+id/signup_button"
+        app:layout_constraintStart_toStartOf="@+id/signup_button"
+        app:layout_constraintTop_toTopOf="@+id/signup_button" />
+
+    <ImageView
+        android:id="@+id/facebook_signup"
+        android:layout_width="148dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/signup_button"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/facebookbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/signup_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintBottom_toBottomOf="@+id/facebook_signup"
+        app:layout_constraintEnd_toEndOf="@+id/facebook_signup"
+        app:layout_constraintStart_toStartOf="@+id/facebook_signup"
+        app:layout_constraintTop_toTopOf="@+id/facebook_signup" />
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/facebooklogo"
+        app:layout_constraintBottom_toBottomOf="@+id/facebook_signup"
+        app:layout_constraintStart_toStartOf="@+id/facebook_signup"
+        app:layout_constraintTop_toTopOf="@+id/facebook_signup" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="Facebook ile kayıt"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/facebook_signup"
+        app:layout_constraintEnd_toEndOf="@id/facebook_signup"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/facebook_signup" />
+
+
+    <ImageView
+        android:id="@+id/google_signup"
+        android:layout_width="148dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/signup_button"
+        android:layout_alignEnd="@+id/signup_button"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/googlebutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/signup_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/googlelogo"
+        app:layout_constraintBottom_toBottomOf="@+id/google_signup"
+        app:layout_constraintStart_toStartOf="@+id/google_signup"
+        app:layout_constraintTop_toTopOf="@+id/google_signup" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="Gmail ile kayıt"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/google_signup"
+        app:layout_constraintEnd_toEndOf="@+id/google_signup"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/google_signup" />
+
+</android.support.constraint.ConstraintLayout>

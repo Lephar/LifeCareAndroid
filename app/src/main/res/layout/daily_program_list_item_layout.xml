@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/program_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/day_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="1. GÜN"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/day"
+        app:layout_constraintEnd_toEndOf="@+id/day"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="@+id/day"
+        app:layout_constraintTop_toTopOf="@+id/day"
+        app:layout_constraintVertical_bias="0.225" />
+
+    <TextView
+        android:id="@+id/day_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="18.01.2019"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/day"
+        app:layout_constraintEnd_toEndOf="@+id/day"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="@+id/day"
+        app:layout_constraintTop_toTopOf="@+id/day"
+        app:layout_constraintVertical_bias="0.825" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/day_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day">
+
+
+        <ImageView
+            android:id="@+id/meal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/meal1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/day_frame" />
+
+        <TextView
+            android:id="@+id/meal1_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="SABAH KAHVALTISI (0 cal)"
+            android:textColor="@color/ourPurple"
+            app:layout_constraintBottom_toBottomOf="@+id/meal1"
+            app:layout_constraintStart_toEndOf="@+id/meal1"
+            app:layout_constraintTop_toTopOf="@+id/meal1" />
+
+        <TextView
+            android:id="@+id/meal1_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserratlight"
+            android:text="-Yumurta (2 adet) \n-Domates (kücük boy)"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/meal1"
+            app:layout_constraintTop_toBottomOf="@+id/meal1" />
+
+        <ImageView
+            android:id="@+id/meal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/meal2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal1_content" />
+
+        <TextView
+            android:id="@+id/meal2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="ARA ÖĞÜN (0 cal)"
+            android:textColor="@color/ourPurple"
+            app:layout_constraintBottom_toBottomOf="@+id/meal2"
+            app:layout_constraintStart_toEndOf="@+id/meal2"
+            app:layout_constraintTop_toTopOf="@+id/meal2" />
+
+        <TextView
+            android:id="@+id/meal2_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserratlight"
+            android:text="-Yumurta (2 adet) \n-Domates (kücük boy)"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/meal2"
+            app:layout_constraintTop_toBottomOf="@+id/meal2" />
+
+        <ImageView
+            android:id="@+id/meal3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/meal3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal2_content" />
+
+        <TextView
+            android:id="@+id/meal3_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="ÖĞLE YEMEĞİ (0 cal)"
+            android:textColor="@color/ourPurple"
+            app:layout_constraintBottom_toBottomOf="@+id/meal3"
+            app:layout_constraintStart_toEndOf="@+id/meal3"
+            app:layout_constraintTop_toTopOf="@+id/meal3" />
+
+        <TextView
+            android:id="@+id/meal3_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserratlight"
+            android:text="-Yumurta (2 adet) \n-Domates (kücük boy)"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/meal3"
+            app:layout_constraintTop_toBottomOf="@+id/meal3" />
+
+        <ImageView
+            android:id="@+id/meal4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/meal4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal3_content" />
+
+        <TextView
+            android:id="@+id/meal4_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="ARA ÖĞÜN (0 cal)"
+            android:textColor="@color/ourPurple"
+            app:layout_constraintBottom_toBottomOf="@+id/meal4"
+            app:layout_constraintStart_toEndOf="@+id/meal4"
+            app:layout_constraintTop_toTopOf="@+id/meal4" />
+
+        <TextView
+            android:id="@+id/meal4_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserratlight"
+            android:text="-Yumurta (2 adet) \n-Domates (kücük boy)"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/meal4"
+            app:layout_constraintTop_toBottomOf="@+id/meal4" />
+
+        <ImageView
+            android:id="@+id/meal5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/meal5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal4_content" />
+
+        <TextView
+            android:id="@+id/meal5_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="AKŞAM YEMEĞİ (0 cal)"
+            android:textColor="@color/ourPurple"
+            app:layout_constraintBottom_toBottomOf="@+id/meal5"
+            app:layout_constraintStart_toEndOf="@+id/meal5"
+            app:layout_constraintTop_toTopOf="@+id/meal5" />
+
+        <TextView
+            android:id="@+id/meal5_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserratlight"
+            android:text="-Yumurta (2 adet) \n-Domates (kücük boy)"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/meal5"
+            app:layout_constraintTop_toBottomOf="@+id/meal5" />
+
+        <ImageView
+            android:id="@+id/meal6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/meal6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal5_content" />
+
+        <TextView
+            android:id="@+id/meal6_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="ARA ÖĞÜN (0 cal)"
+            android:textColor="@color/ourPurple"
+            app:layout_constraintBottom_toBottomOf="@+id/meal6"
+            app:layout_constraintStart_toEndOf="@+id/meal6"
+            app:layout_constraintTop_toTopOf="@+id/meal6" />
+
+        <TextView
+            android:id="@+id/meal6_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserratlight"
+            android:text="-Yumurta (2 adet) \n-Domates (kücük boy)"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/meal6"
+            app:layout_constraintTop_toBottomOf="@+id/meal6" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>
