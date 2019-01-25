@@ -20,6 +20,7 @@ public class ProgramlarimData implements Serializable {
     private String program_name;
     private String sabahKahvaltisi;
     private String sabahKahvaltisiCalory;
+    private String toplamCalory;
     private String ucuncuAraOgun;
     private String ucuncuAraOgunCalory;
 
@@ -28,7 +29,7 @@ public class ProgramlarimData implements Serializable {
 
     }
 
-    public ProgramlarimData(String aksamYemegi, String aksamYemegiCalory, String alternatif, String alternatifCalory, String birinciAraOgun, String birinciAraOgunCalory, String date, String ikinciAraOgun, String ikinciAraOgunCalory, String name, String ogleYemegi, String ogleYemegiCalory, String program_name, String sabahKahvaltisi, String sabahKahvaltisiCalory, String ucuncuAraOgun, String ucuncuAraOgunCalory) {
+    public ProgramlarimData(String aksamYemegi, String aksamYemegiCalory, String alternatif, String alternatifCalory, String birinciAraOgun, String birinciAraOgunCalory, String date, String ikinciAraOgun, String ikinciAraOgunCalory, String name, String ogleYemegi, String ogleYemegiCalory, String program_name, String sabahKahvaltisi, String sabahKahvaltisiCalory, String toplamCalory, String ucuncuAraOgun, String ucuncuAraOgunCalory) {
         this.aksamYemegi = aksamYemegi;
         this.aksamYemegiCalory = aksamYemegiCalory;
         this.alternatif = alternatif;
@@ -44,6 +45,7 @@ public class ProgramlarimData implements Serializable {
         this.program_name = program_name;
         this.sabahKahvaltisi = sabahKahvaltisi;
         this.sabahKahvaltisiCalory = sabahKahvaltisiCalory;
+        this.toplamCalory = toplamCalory;
         this.ucuncuAraOgun = ucuncuAraOgun;
         this.ucuncuAraOgunCalory = ucuncuAraOgunCalory;
     }
@@ -166,6 +168,14 @@ public class ProgramlarimData implements Serializable {
 
     public void setSabahKahvaltisiCalory(String sabahKahvaltisiCalory) {
         this.sabahKahvaltisiCalory = sabahKahvaltisiCalory;
+    }
+
+    public String getToplamCalory() {
+        return toplamCalory;
+    }
+
+    public void setToplamCalory(String toplamCalory) {
+        this.toplamCalory = toplamCalory;
     }
 
     public String getUcuncuAraOgun() {

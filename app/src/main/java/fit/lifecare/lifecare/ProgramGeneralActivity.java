@@ -86,6 +86,10 @@ public class ProgramGeneralActivity extends AppCompatActivity {
             String new_meal6_title = meal6_title.getText().toString().replace("0",programlarimData.getUcuncuAraOgunCalory());
             meal6_title.setText(new_meal6_title);
         }
+        if(programlarimData.getToplamCalory() != null) {
+            String totalCal = date.getText() + "\n("  +programlarimData.getToplamCalory() + " cal)";
+            date.setText(totalCal);
+        }
 
         meal1_content.setText(programlarimData.getSabahKahvaltisi());
         meal2_content.setText(programlarimData.getBirinciAraOgun());

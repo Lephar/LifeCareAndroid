@@ -42,8 +42,10 @@ public class ProgramFragment extends Fragment {
     // Firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mProgramDatabaseReference;
     private DatabaseReference mGeneralProgramDatabaseReference;
     private DatabaseReference mDailyProgramDatabaseReference;
+    private ValueEventListener mValueEventListener;
     private ValueEventListener mGeneralValueEventListener;
     private ValueEventListener mDailyValueEventListener;
 
@@ -65,18 +67,105 @@ public class ProgramFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        mProgramDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
+                .child(currentUserId).child("Programlar");
+
         mGeneralProgramDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Programlar").child("Genel");
 
         mDailyProgramDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Programlar").child("Günlük");
 
-        attachGeneralProgramFirebaseListener();
-        attachDailyProgramFirebaseListener();
+
+        attachProgramFirebaseListener();
+//        attachGeneralProgramFirebaseListener();
+//        attachDailyProgramFirebaseListener();
 
         initializeListviewListener();
 
         return view;
+    }
+
+
+    private void attachProgramFirebaseListener() {
+
+        if(mValueEventListener == null) {
+            mValueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    mGeneralProgramlarimDataList.clear();
+                    mDailyProgramlarimDataList.clear();
+                    mProgramItemsAdapter.clear();
+
+                    for(DataSnapshot dataSnapshotDailyGeneral : dataSnapshot.getChildren()) {
+
+                        if(dataSnapshotDailyGeneral.getKey().equals("Genel")) {
+
+                            for (DataSnapshot postSnapshot : dataSnapshotDailyGeneral.getChildren()) {
+
+                                ProgramlarimData program_data = postSnapshot.getValue(ProgramlarimData.class);
+
+                                Integer index = mGeneralProgramlarimDataList.size();
+                                mGeneralProgramlarimDataList.add(program_data);
+
+                                String program_date = postSnapshot.getKey();
+                                String program_name = program_data.getProgram_name();
+                                String dietitian_name = program_data.getName();
+
+                                // adding program_item to array adapter
+                                ProgramItems program_item = new ProgramItems(program_date, program_name, dietitian_name, "general", index);
+                                mProgramItemsAdapter.insert(program_item, 0);
+
+                            }
+                        }
+
+                        else if (dataSnapshotDailyGeneral.getKey().equals("Günlük")) {
+
+                            for (DataSnapshot postSnapshot : dataSnapshotDailyGeneral.getChildren()) {
+
+                                String program_date = postSnapshot.getKey();
+
+                                for (DataSnapshot subSnapshot : postSnapshot.getChildren()) {
+
+                                    // parsing firebase key to get program_name and dietitian_name
+                                    String head = subSnapshot.getKey();
+                                    int index = head.lastIndexOf("*");
+                                    String program_name = head.substring(0, index);
+                                    String dietitian_name = head.substring(index + 1);
+
+
+                                    mDailyProgramlarimSubDataList.clear();
+                                    for (DataSnapshot daySnapshots : subSnapshot.getChildren()) {
+
+                                        ProgramlarimData programlarimData = daySnapshots.getValue(ProgramlarimData.class);
+                                        mDailyProgramlarimSubDataList.add(programlarimData);
+
+                                    }
+                                    Integer index_program = mDailyProgramlarimDataList.size();
+                                    mDailyProgramlarimDataList.add(mDailyProgramlarimSubDataList);
+
+                                    // adding program_item to array adapter
+                                    ProgramItems program_item = new ProgramItems(program_date, program_name, dietitian_name, "daily",index_program);
+                                    mProgramItemsAdapter.insert(program_item, 0);
+
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            mProgramDatabaseReference.addValueEventListener(mValueEventListener);
+        }
     }
 
 
