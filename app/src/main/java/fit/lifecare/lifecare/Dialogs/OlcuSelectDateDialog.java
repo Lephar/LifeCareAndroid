@@ -66,7 +66,7 @@ public class OlcuSelectDateDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_select_date2, container, false);
+        View view = inflater.inflate(R.layout.dialog_select_date, container, false);
 
         //initialize buttons
         closeButton = view.findViewById(R.id.close_button);
@@ -75,7 +75,7 @@ public class OlcuSelectDateDialog extends DialogFragment {
         numberPicker = view.findViewById(R.id.numberPicker);
 
         TextView title = view.findViewById(R.id.dialog_title);
-        title.setText("Geçmiş Ölçülerim");
+        title.setText(getString(R.string.past_measurement));
 
         //get parent view
         Activity parentview = getActivity();
@@ -125,7 +125,7 @@ public class OlcuSelectDateDialog extends DialogFragment {
                 } else {
                     builder = new AlertDialog.Builder(getActivity());
                 }
-                builder.setMessage("Verinizi silmek istediğinize emin misiniz?")
+                builder.setMessage(getString(R.string.sure_delete))
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete

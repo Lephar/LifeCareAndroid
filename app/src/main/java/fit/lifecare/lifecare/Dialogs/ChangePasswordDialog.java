@@ -27,7 +27,6 @@ import fit.lifecare.lifecare.R;
 
 public class ChangePasswordDialog extends DialogFragment {
 
-    private String TAG = "change_passi";
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //Layout Views
@@ -96,18 +95,16 @@ public class ChangePasswordDialog extends DialogFragment {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(getContext(), "Şifre Değiştirildi", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), getString(R.string.pass_changed), Toast.LENGTH_SHORT).show();
                                             dismiss();
-                                        } else {
-                                            Log.d(TAG, "Hata");
                                         }
                                     }
                                 });
                             } else {
-                                Toast.makeText(getContext(), "Hatalı Şifre", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), getString(R.string.wrong_pass), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Yeni Şifreler Eşleşmedi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.pass_match), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -120,7 +117,7 @@ public class ChangePasswordDialog extends DialogFragment {
 
         String password0 = pass0.getText().toString();
         if (TextUtils.isEmpty(password0)) {
-            Toast.makeText(getContext(), "Lütfen e-mail adresinizi giriniz.",
+            Toast.makeText(getContext(), getString(R.string.enter_email),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else {
@@ -129,7 +126,7 @@ public class ChangePasswordDialog extends DialogFragment {
 
         String password1 = pass1.getText().toString();
         if (TextUtils.isEmpty(password1)) {
-            Toast.makeText(getContext(), "Lütfen şifrenizi giriniz.",
+            Toast.makeText(getContext(), getString(R.string.enter_pass),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else {
@@ -138,7 +135,7 @@ public class ChangePasswordDialog extends DialogFragment {
 
         String password2 = pass2.getText().toString();
         if (TextUtils.isEmpty(password2)) {
-            Toast.makeText(getContext(), "Lütfen şifrenizi giriniz.",
+            Toast.makeText(getContext(), getString(R.string.enter_pass),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else {

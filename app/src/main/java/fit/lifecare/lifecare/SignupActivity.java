@@ -122,7 +122,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!checkBox.isChecked()) {
-                    Toast.makeText(SignupActivity.this, "Lütfen gizlilik sözleşmelerini onaylayın", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, getString(R.string.accept_aggrements), Toast.LENGTH_SHORT).show();
                 } else {
                     facebook_real_login_button.performClick();
                 }
@@ -134,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!checkBox.isChecked()) {
-                    Toast.makeText(SignupActivity.this, "Lütfen gizlilik sözleşmelerini onaylayın", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, getString(R.string.accept_aggrements), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                     startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -209,7 +209,7 @@ public class SignupActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(SignupActivity.this, "Authentication failed.",
+                            Toast.makeText(SignupActivity.this, getString(R.string.auth_failed),
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
@@ -387,13 +387,13 @@ public class SignupActivity extends AppCompatActivity {
                         } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignupActivity.this, "Bu mail adresi kullanılıyor.",
+                            Toast.makeText(SignupActivity.this, getString(R.string.email_in_use),
                                     Toast.LENGTH_SHORT).show();
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignupActivity.this, "Lütfen geçerli bir mail adresi giriniz.",
+                            Toast.makeText(SignupActivity.this, getString(R.string.enter_valid_email),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -406,13 +406,13 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
 
         if (!checkBox.isChecked()) {
-            Toast.makeText(SignupActivity.this, "Lütfen gizlilik sözleşmelerini onaylayın", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignupActivity.this, getString(R.string.accept_aggrements), Toast.LENGTH_SHORT).show();
             valid = false;
         }
 
         String name = name_field.getText().toString();
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(SignupActivity.this, "Lütfen isminizi adresinizi giriniz.",
+            Toast.makeText(SignupActivity.this, getString(R.string.enter_name),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else {
@@ -421,7 +421,7 @@ public class SignupActivity extends AppCompatActivity {
 
         String email = email_field.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(SignupActivity.this, "Lütfen e-mail adresinizi giriniz.",
+            Toast.makeText(SignupActivity.this, getString(R.string.enter_email),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else {
@@ -430,11 +430,11 @@ public class SignupActivity extends AppCompatActivity {
 
         String password = password_field.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(SignupActivity.this, "Lütfen en az 6 haneli şifre giriniz",
+            Toast.makeText(SignupActivity.this, getString(R.string.atleast_six),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else if (password.length() < 6) {
-            Toast.makeText(SignupActivity.this, "Lütfen en az 6 haneli şifre giriniz", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignupActivity.this, getString(R.string.atleast_six), Toast.LENGTH_SHORT).show();
             valid = false;
         } else {
             password_field.setError(null);

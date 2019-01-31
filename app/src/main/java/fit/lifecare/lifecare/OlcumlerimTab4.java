@@ -50,7 +50,7 @@ public class OlcumlerimTab4 extends Fragment {
 
     public void setSelectedValues(String selected_value1, String selected_value2) {
         this.value1.setText(selected_value1 + " kcal");
-        this.value2.setText(selected_value2 + " yaş");
+        this.value2.setText(selected_value2);
     }
 
     private final SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
@@ -68,8 +68,8 @@ public class OlcumlerimTab4 extends Fragment {
         value2 = view.findViewById(R.id.textViewRight2);
         mChart2 = view.findViewById(R.id.chart2);
 
-        title1.setText("Metabolizma Hızı (kcal)");
-        title2.setText("Metabolizma Yaşı (yıl)");
+        title1.setText(getString(R.string.basal_metabolism));
+        title2.setText(getString(R.string.basal_metabolism_age));
 
         if (!yValues1.isEmpty()) {
             setData1();
@@ -95,7 +95,7 @@ public class OlcumlerimTab4 extends Fragment {
         OnChartValueSelectedListener onChartValueSelectedListener2 = new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                value2.setText(String.valueOf(e.getY()) + " yaş");
+                value2.setText(String.valueOf((int) e.getY()));
             }
 
             @Override

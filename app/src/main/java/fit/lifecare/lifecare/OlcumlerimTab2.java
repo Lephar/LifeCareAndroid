@@ -69,9 +69,8 @@ public class OlcumlerimTab2 extends Fragment {
         value2 = view.findViewById(R.id.textViewRight2);
         mChart2 = view.findViewById(R.id.chart2);
 
-
-        title1.setText("Yağ (%)");
-        title2.setText("Su (%)");
+        title1.setText(getString(R.string.lipid_ratio));
+        title2.setText(getString(R.string.water_ratio));
 
 
         if (!yValues1.isEmpty()) {

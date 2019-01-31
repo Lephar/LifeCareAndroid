@@ -8,25 +8,25 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/olcumlerim"
-            android:title="Ölçümlerim" />
+            android:title="@string/olcumlerim" />
         <item
             android:id="@+id/cihazim"
-            android:title="Cihazım" />
+            android:title="@string/cihazim" />
         <item
             android:id="@+id/danismanim"
-            android:title="Danışmanım" />
+            android:title="@string/danismanlarim" />
         <item
             android:id="@+id/program"
-            android:title="Beslenme Programım" />
+            android:title="@string/beslenme_prog" />
         <item
             android:id="@+id/profilim"
-            android:title="Profilim" />
+            android:title="@string/profilim" />
         <item
             android:id="@+id/ayarlar"
-            android:title="Ayarlar" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/hakkinda"
-            android:title="Lifecare Hakkında" />
+            android:title="@string/about" />
     </group>
 
     <group android:id="@+id/group2">
@@ -34,7 +34,7 @@
         <item
             android:id="@+id/cikis"
             android:icon="@drawable/exit_icon"
-            android:title="Çıkış Yap" />
+            android:title="@string/logout" />
 
     </group>
 

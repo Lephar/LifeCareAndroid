@@ -428,7 +428,7 @@ public class ProfilimTab3 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -441,7 +441,7 @@ public class ProfilimTab3 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -454,7 +454,7 @@ public class ProfilimTab3 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -467,7 +467,7 @@ public class ProfilimTab3 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -480,7 +480,7 @@ public class ProfilimTab3 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -493,7 +493,7 @@ public class ProfilimTab3 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -506,7 +506,7 @@ public class ProfilimTab3 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

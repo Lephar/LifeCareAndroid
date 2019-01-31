@@ -5,6 +5,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class NotificationChannels extends Application {
 
 
@@ -14,6 +16,9 @@ public class NotificationChannels extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+    
+        // enable offline capabilities of firebase
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         createNotificationChannels();
     }

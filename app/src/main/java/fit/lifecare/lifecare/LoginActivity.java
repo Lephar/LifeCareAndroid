@@ -290,7 +290,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, getString(R.string.auth_failed),
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
@@ -323,7 +323,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Kullanıcı adı yada şifre hatalı.",
+                            Toast.makeText(LoginActivity.this, getString(R.string.pass_or_username_wrong),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -336,7 +336,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String email = email_field.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(LoginActivity.this, "Lütfen e-mail adresinizi giriniz.",
+            Toast.makeText(LoginActivity.this, getString(R.string.enter_email),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else {
@@ -345,7 +345,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String password = password_field.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(LoginActivity.this, "Lütfen şifrenizi giriniz.",
+            Toast.makeText(LoginActivity.this, getString(R.string.enter_pass),
                     Toast.LENGTH_SHORT).show();
             valid = false;
         } else {
@@ -399,6 +399,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 /*
+    this will be added as a feature later on
+
         dietitian_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

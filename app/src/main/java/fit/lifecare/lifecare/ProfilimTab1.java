@@ -31,11 +31,11 @@ import fit.lifecare.lifecare.Dialogs.KisiselGenderSelect;
 import fit.lifecare.lifecare.Dialogs.KisiselHeightSelect;
 
 public class ProfilimTab1 extends Fragment {
-
+    
     //global arrays
     private String[] countries;
     private String[] cities;
-
+    
     //Layout views
     private TextView gender_select;
     private TextView gender_textview;
@@ -49,18 +49,18 @@ public class ProfilimTab1 extends Fragment {
     private TextView city_textview;
     private AutoCompleteTextView country_edit;
     private AutoCompleteTextView city_edit;
-
+    
     //firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mProfilimKisiselDatabaseReference;
     private ValueEventListener mValueEventListener;
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profilim_tab1, container, false);
-
+        
         //initialize layout views
         gender_textview = view.findViewById(R.id.textView1);
         gender_select = view.findViewById(R.id.textView2);
@@ -74,14 +74,14 @@ public class ProfilimTab1 extends Fragment {
         country_edit = view.findViewById(R.id.textView10);
         city_textview = view.findViewById(R.id.textView11);
         city_edit = view.findViewById(R.id.textView12);
-
+        
         // initialize firebase components
         mAuth = FirebaseAuth.getInstance();
         String currentUserId = mAuth.getCurrentUser().getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mProfilimKisiselDatabaseReference = mFirebaseDatabase.getReference()
                 .child("AppUsers").child(currentUserId).child("PersonalInfo");
-
+        
         //initialize Listeners
         initializeButtonListeners();
         initializeFirebaseListeners();
@@ -89,10 +89,10 @@ public class ProfilimTab1 extends Fragment {
         initializeAutoCompleters();
         //handle edittext views actions
         editTextsActions();
-
+        
         return view;
     }
-
+    
     private void editTextsActions() {
         //set listener to keyboard done button to save text to firebase database
         phone_edit.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -103,17 +103,17 @@ public class ProfilimTab1 extends Fragment {
                     InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
-
+        
         country_edit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String country = (String) adapterView.getItemAtPosition(i);
                 mProfilimKisiselDatabaseReference.child("country").setValue(country);
-
+                
                 if (country.equals("Türkiye")) {
                     city_textview.setVisibility(View.VISIBLE);
                     city_edit.setVisibility(View.VISIBLE);
@@ -124,7 +124,7 @@ public class ProfilimTab1 extends Fragment {
                 }
             }
         });
-
+        
         city_edit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -132,25 +132,25 @@ public class ProfilimTab1 extends Fragment {
                 mProfilimKisiselDatabaseReference.child("city").setValue(city);
             }
         });
-
+        
     }
-
+    
     private void initializeAutoCompleters() {
-
+        
         countries = getResources().getStringArray(R.array.countries_array);
         cities = getResources().getStringArray(R.array.turkey_city);
-
+        
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_dropdown_item_1line, countries);
-
+        
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_dropdown_item_1line, cities);
-
+        
         country_edit.setAdapter(adapter1);
         city_edit.setAdapter(adapter2);
-
+        
     }
-
+    
     private void initializeButtonListeners() {
         phone_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,49 +158,49 @@ public class ProfilimTab1 extends Fragment {
                 phone_edit.setCursorVisible(true);
             }
         });
-
+        
         gender_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new KisiselGenderSelect().show(getChildFragmentManager(), "Select Gender Dialog");
             }
         });
-
+        
         birthday_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new KisiselBirthdaySelect().show(getChildFragmentManager(), "Select Height Dialog");
             }
         });
-
+        
         height_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new KisiselHeightSelect().show(getChildFragmentManager(), "Select Height Dialog");
             }
         });
-
+        
         gender_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 gender_select.performClick();
             }
         });
-
+        
         birthday_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 birthday_select.performClick();
             }
         });
-
+        
         height_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 height_select.performClick();
             }
         });
-
+        
         phone_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,7 +209,7 @@ public class ProfilimTab1 extends Fragment {
                 imm.showSoftInput(phone_edit, InputMethodManager.SHOW_IMPLICIT);
             }
         });
-
+        
         country_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,7 +218,7 @@ public class ProfilimTab1 extends Fragment {
                 imm.showSoftInput(country_edit, InputMethodManager.SHOW_IMPLICIT);
             }
         });
-
+        
         city_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,41 +227,52 @@ public class ProfilimTab1 extends Fragment {
                 imm.showSoftInput(city_edit, InputMethodManager.SHOW_IMPLICIT);
             }
         });
-
-
+        
+        
     }
-
+    
     //listening firebase database to update ui
     private void initializeFirebaseListeners() {
         mValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                
                 PersonalInfoData personalInfoData = dataSnapshot.getValue(PersonalInfoData.class);
-                gender_select.setText(personalInfoData.getGender());
-                birthday_select.setText(personalInfoData.getBirth_date());
-                height_select.setText(personalInfoData.getHeight());
-                //check if user entered any location before, there is no need to check for others
-                //because we get them while user creating new account
-                if (personalInfoData.getPhone_num() != null) {
-                    phone_edit.setCursorVisible(false);
-                    phone_edit.setText(personalInfoData.getPhone_num());
-                }
-                if (personalInfoData.getCountry() != null) {
-                    country_edit.setText(personalInfoData.getCountry());
-                    if(!country_edit.getText().toString().equals("Türkiye")) {
-                        city_textview.setVisibility(View.GONE);
-                        city_edit.setVisibility(View.GONE);
+                
+                if (personalInfoData != null) {
+                    
+                    String gender = personalInfoData.getGender();
+                    if(gender.equals("Erkek")) {
+                        gender_select.setText(getString(R.string.boy));
                     } else {
-                        if(personalInfoData.getCity() != null) {
-                            city_edit.setText(personalInfoData.getCity());
+                        gender_select.setText(getString(R.string.girl));
+                    }
+                    birthday_select.setText(personalInfoData.getBirth_date());
+                    height_select.setText(personalInfoData.getHeight());
+                    //check if user entered any location before, there is no need to check for others
+                    //because we get them while user creating new account
+                    if (personalInfoData.getPhone_num() != null) {
+                        phone_edit.setCursorVisible(false);
+                        phone_edit.setText(personalInfoData.getPhone_num());
+                    }
+                    if (personalInfoData.getCountry() != null) {
+                        country_edit.setText(personalInfoData.getCountry());
+                        if (!country_edit.getText().toString().equals("Türkiye")) {
+                            city_textview.setVisibility(View.GONE);
+                            city_edit.setVisibility(View.GONE);
+                        } else {
+                            if (personalInfoData.getCity() != null) {
+                                city_edit.setText(personalInfoData.getCity());
+                            }
                         }
                     }
                 }
+                
             }
-
+            
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+            
             }
         };
         mProfilimKisiselDatabaseReference.addValueEventListener(mValueEventListener);

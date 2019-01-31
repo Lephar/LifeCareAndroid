@@ -97,7 +97,7 @@ public class KisiselBirthdaySelect extends DialogFragment {
             @Override
             public void onClick(View view) {
                 mProfilimKisiselDatabaseReference.setValue(birthdate);
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });

@@ -23,7 +23,7 @@
         android:layout_marginTop="80dp"
         android:fontFamily="@font/montserratlight"
         android:gravity="center"
-        android:text="Merhaba x\n Lifecare ile\n Sağlıklı Hayata\n Başlıyoruz!"
+        android:text="@string/welcome_after_login"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"

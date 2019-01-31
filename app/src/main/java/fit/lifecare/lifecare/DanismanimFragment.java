@@ -97,9 +97,11 @@ public class DanismanimFragment extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mChatIDReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("PersonalInfo").child("ChatIDs");
+        
         mChatDatabaseReference = mFirebaseDatabase.getReference().child("Chats");
+        
         mdietitianDatabaseReference = mFirebaseDatabase.getReference().child("WebUsers").child("UserInfos");
-
+        
 
         attachPersonalDatabaseReadListener();
         initializeFabButtonListeners();
@@ -212,7 +214,7 @@ public class DanismanimFragment extends Fragment {
                             }
                         }
 
-                        ChatListMembers chatListMember = new ChatListMembers(dietitianPhotoUrl, dietitianName, chat_id, dietitianID, unreaded_messages);
+                        ChatListMembers chatListMember = new ChatListMembers(dietitianPhotoUrl,"Dyt. " + dietitianName, chat_id, dietitianID, unreaded_messages);
                         mChatAdapter.add(chatListMember);
 
                     }
@@ -256,7 +258,7 @@ public class DanismanimFragment extends Fragment {
                 } else {
                     builder = new AlertDialog.Builder(getActivity());
                 }
-                builder.setMessage("Danışanın ile olan iletişimini koparmak istediğinize emin misiniz?")
+                builder.setMessage(getString(R.string.sure_disconnect))
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete

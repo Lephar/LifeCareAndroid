@@ -69,8 +69,8 @@ public class SaglikActivitySelect extends DialogFragment {
         level1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProfilimSaglikDatabaseReference.setValue("Sadanter");
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                mProfilimSaglikDatabaseReference.setValue(getString(R.string.sedanter));
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
@@ -78,8 +78,8 @@ public class SaglikActivitySelect extends DialogFragment {
         level2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProfilimSaglikDatabaseReference.setValue("Hafif");
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                mProfilimSaglikDatabaseReference.setValue(getString(R.string.mild));
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
@@ -87,8 +87,8 @@ public class SaglikActivitySelect extends DialogFragment {
         level3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProfilimSaglikDatabaseReference.setValue("Orta");
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                mProfilimSaglikDatabaseReference.setValue(getString(R.string.moderate));
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
@@ -96,8 +96,8 @@ public class SaglikActivitySelect extends DialogFragment {
         level4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProfilimSaglikDatabaseReference.setValue("Ağır");
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                mProfilimSaglikDatabaseReference.setValue(getString(R.string.heavy));
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });

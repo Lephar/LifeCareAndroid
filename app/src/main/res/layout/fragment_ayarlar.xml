@@ -14,22 +14,20 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="Dil"
+        android:text="@string/language"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/lang"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:padding="8dp"
         android:fontFamily="@font/montserratlight"
-        android:text="Türkçe"
+        android:text="@string/selected_language"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView1"
@@ -53,7 +51,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="Birim"
+        android:text="@string/unit"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -91,18 +89,19 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="Bildirimler"
+        android:text="@string/notifications"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/View6"
+        app:layout_constraintEnd_toStartOf="@+id/switch_view"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <Switch
-        android:id="@+id/View6"
+        android:id="@+id/switch_view"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
+        android:checked="true"
         android:fontFamily="@font/montserratlight"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
@@ -128,7 +127,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="Şifre"
+        android:text="@string/password"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/password_field"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -158,4 +157,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/hesap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/delete_account"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+
 </android.support.constraint.ConstraintLayout>

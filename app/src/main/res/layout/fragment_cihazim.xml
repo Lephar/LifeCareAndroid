@@ -37,7 +37,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="Lifecare aranıyor..."
+        android:text="@string/searching_device"
         android:textColor="@color/ourPurple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

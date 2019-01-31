@@ -65,8 +65,8 @@ public class KisiselGenderSelect extends DialogFragment {
         kadin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProfilimKisiselDatabaseReference.setValue("Kadın");
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                mProfilimKisiselDatabaseReference.setValue(getString(R.string.girl));
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
@@ -74,8 +74,8 @@ public class KisiselGenderSelect extends DialogFragment {
         erkek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProfilimKisiselDatabaseReference.setValue("Erkek");
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                mProfilimKisiselDatabaseReference.setValue(getString(R.string.boy));
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });

@@ -77,7 +77,7 @@ public class SelectGenderActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (gender_flag == 0) {
-                    Toast.makeText(SelectGenderActivity.this, "Lütfen cinsiyetinizi seçiniz", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SelectGenderActivity.this, getString(R.string.select_gender), Toast.LENGTH_SHORT).show();
                 } else {
                     if (gender_flag == 1) {
                         editor.putString("gender", "Kadın");
@@ -100,7 +100,7 @@ public class SelectGenderActivity extends AppCompatActivity {
             super.onBackPressed();
         } else {
             this.backPressedToExitOnce = true;
-            Toast.makeText(this, "Çıkmak için tekrar basınız.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.press_again_exit), Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

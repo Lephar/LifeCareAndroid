@@ -13,14 +13,34 @@
         android:scaleType="fitCenter" />
 
     <ImageView
+        android:id="@+id/transparent_background"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/header_gradient_transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:padding="8dp"
+        android:src="@drawable/backbutton_white2"
+        app:layout_constraintBottom_toBottomOf="@id/transparent_background"
+        app:layout_constraintStart_toStartOf="@id/transparent_background"
+        app:layout_constraintTop_toTopOf="@id/transparent_background" />
+
+    <ImageView
         android:id="@+id/download_icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
         android:padding="8dp"
-        android:src="@drawable/download_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/full_screen_img" />
+        android:src="@drawable/downloadwhite_icon"
+        app:layout_constraintBottom_toBottomOf="@id/transparent_background"
+        app:layout_constraintEnd_toEndOf="@id/transparent_background"
+        app:layout_constraintTop_toTopOf="@id/transparent_background" />
 
 </android.support.constraint.ConstraintLayout>

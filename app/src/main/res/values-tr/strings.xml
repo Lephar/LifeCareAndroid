@@ -1,0 +1,489 @@
+<resources>
+    <string name="app_name">LifeCare</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="facebook_app_id">231935270813994</string>
+    <string name="fb_login_protocol_scheme">fb231935270813994</string>
+
+    <string name="default_notification_channel_id">Messaging_channel</string>
+    <string name="fcm_message_title">Lifecare</string>
+
+
+    <!-- collapsable calendar day strings -->
+    <string name="monday">P.TESİ</string>
+    <string name="tuesday">SALI</string>
+    <string name="wednesday">ÇAR</string>
+    <string name="thursday">PER</string>
+    <string name="friday">CUMA</string>
+    <string name="saturday">C.TESİ</string>
+    <string name="sunday">PAZAR</string>
+
+    <string-array name="turkey_city">
+        <item>""</item>
+        <item>Adana</item>
+        <item>Adıyaman</item>
+        <item>Afyon</item>
+        <item>Ağrı</item>
+        <item>Amasya</item>
+        <item>Ankara</item>
+        <item>Antalya</item>
+        <item>Artvin</item>
+        <item>Aydın</item>
+        <item>Balıkesir</item>
+        <item>Bilecik</item>
+        <item>Bingöl</item>
+        <item>Bitlis</item>
+        <item>Bolu</item>
+        <item>Burdur</item>
+        <item>Bursa</item>
+        <item>Çanakkale</item>
+        <item>Çankırı</item>
+        <item>Çorum</item>
+        <item>Denizli</item>
+        <item>Diyarbakır</item>
+        <item>Edirne</item>
+        <item>Elazığ</item>
+        <item>Erzincan</item>
+        <item>Erzurum</item>
+        <item>Eskişehir</item>
+        <item>Gaziantep</item>
+        <item>Giresun</item>
+        <item>Gümüşhane</item>
+        <item>Hakkari</item>
+        <item>Hatay</item>
+        <item>Isparta</item>
+        <item>İçel</item>
+        <item>İstanbul</item>
+        <item>İzmir</item>
+        <item>Kars</item>
+        <item>Kastamonu</item>
+        <item>Kayseri</item>
+        <item>Kırklareli</item>
+        <item>Kırşehir</item>
+        <item>Kocaeli</item>
+        <item>Konya</item>
+        <item>Kütahya</item>
+        <item>Malatya</item>
+        <item>Manisa</item>
+        <item>Kahramanmaraş</item>
+        <item>Mardin</item>
+        <item>Muğla</item>
+        <item>Muş</item>
+        <item>Nevşehir</item>
+        <item>Niğde</item>
+        <item>Ordu</item>
+        <item>Rize</item>
+        <item>Sakarya</item>
+        <item>Samsun</item>
+        <item>Siirt</item>
+        <item>Sinop</item>
+        <item>Sivas</item>
+        <item>Tekirdağ</item>
+        <item>Tokat</item>
+        <item>Trabzon</item>
+        <item>Tunceli</item>
+        <item>Şanlıurfa</item>
+        <item>Uşak</item>
+        <item>Van</item>
+        <item>Yozgat</item>
+        <item>Zonguldak</item>
+        <item>Aksaray</item>
+        <item>Bayburt</item>
+        <item>Karaman</item>
+        <item>Kırıkkale</item>
+        <item>Batman</item>
+        <item>Şırnak</item>
+        <item>Bartın</item>
+        <item>Ardahan</item>
+        <item>Iğdır</item>
+        <item>Yalova</item>
+        <item>Karabük</item>
+        <item>Kilis</item>
+        <item>Osmaniye</item>
+        <item>Düzce</item>
+    </string-array>
+
+    <string-array name="countries_array">
+        <item>Türkiye</item>
+        <item>Almanya</item>
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Algeria</item>
+        <item>American Samoa</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Anguilla</item>
+        <item>Antarctica</item>
+        <item>Antigua and Barbuda</item>
+        <item>Argentina</item>
+        <item>Armenia</item>
+        <item>Aruba</item>
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Azerbaijan</item>
+        <item>Bahamas</item>
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Barbados</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Belize</item>
+        <item>Benin</item>
+        <item>Bermuda</item>
+        <item>Bhutan</item>
+        <item>Bolivia</item>
+        <item>Bosnia and Herzegovina</item>
+        <item>Botswana</item>
+        <item>Brazil</item>
+        <item>British Indian Ocean Territory</item>
+        <item>British Virgin Islands</item>
+        <item>Brunei</item>
+        <item>Bulgaria</item>
+        <item>Burkina Faso</item>
+        <item>Burundi</item>
+        <item>Cambodia</item>
+        <item>Cameroon</item>
+        <item>Canada</item>
+        <item>Cape Verde</item>
+        <item>Cayman Islands</item>
+        <item>Central African Republic</item>
+        <item>Chad</item>
+        <item>Chile</item>
+        <item>China</item>
+        <item>Christmas Island</item>
+        <item>Cocos Islands</item>
+        <item>Colombia</item>
+        <item>Comoros</item>
+        <item>Cook Islands</item>
+        <item>Costa Rica</item>
+        <item>Croatia</item>
+        <item>Cuba</item>
+        <item>Cyprus</item>
+        <item>Czech Republic</item>
+        <item>Democratic Republic of the Congo</item>
+        <item>Denmark</item>
+        <item>Djibouti</item>
+        <item>Dominica</item>
+        <item>Dominican Republic</item>
+        <item>East Timor</item>
+        <item>Ecuador</item>
+        <item>Egypt</item>
+        <item>El Salvador</item>
+        <item>Equatorial Guinea</item>
+        <item>Eritrea</item>
+        <item>Estonia</item>
+        <item>Ethiopia</item>
+        <item>Falkland Islands</item>
+        <item>Faroe Islands</item>
+        <item>Fiji</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>French Polynesia</item>
+        <item>Gabon</item>
+        <item>Gambia</item>
+        <item>Georgia</item>
+        <item>Germany</item>
+        <item>Ghana</item>
+        <item>Gibraltar</item>
+        <item>Greece</item>
+        <item>Greenland</item>
+        <item>Grenada</item>
+        <item>Guam</item>
+        <item>Guatemala</item>
+        <item>Guinea</item>
+        <item>Guinea-Bissau</item>
+        <item>Guyana</item>
+        <item>Haiti</item>
+        <item>Honduras</item>
+        <item>Hong Kong</item>
+        <item>Hungary</item>
+        <item>Iceland</item>
+        <item>India</item>
+        <item>Indonesia</item>
+        <item>Iran</item>
+        <item>Iraq</item>
+        <item>Ireland</item>
+        <item>Isle of Man</item>
+        <item>Israel</item>
+        <item>Italy</item>
+        <item>Ivory Coast</item>
+        <item>Jamaica</item>
+        <item>Japan</item>
+        <item>Jersey</item>
+        <item>Jordan</item>
+        <item>Kazakhstan</item>
+        <item>Kenya</item>
+        <item>Kiribati</item>
+        <item>Kuwait</item>
+        <item>Kyrgyzstan</item>
+        <item>Laos</item>
+        <item>Latvia</item>
+        <item>Lebanon</item>
+        <item>Lesotho</item>
+        <item>Liberia</item>
+        <item>Libya</item>
+        <item>Liechtenstein</item>
+        <item>Lithuania</item>
+        <item>Luxembourg</item>
+        <item>Macao</item>
+        <item>Macedonia</item>
+        <item>Madagascar</item>
+        <item>Malawi</item>
+        <item>Malaysia</item>
+        <item>Maldives</item>
+        <item>Mali</item>
+        <item>Malta</item>
+        <item>Marshall Islands</item>
+        <item>Mauritania</item>
+        <item>Mauritius</item>
+        <item>Mayotte</item>
+        <item>Mexico</item>
+        <item>Micronesia</item>
+        <item>Moldova</item>
+        <item>Monaco</item>
+        <item>Mongolia</item>
+        <item>Montenegro</item>
+        <item>Montserrat</item>
+        <item>Morocco</item>
+        <item>Mozambique</item>
+        <item>Myanmar</item>
+        <item>Namibia</item>
+        <item>Nauru</item>
+        <item>Nepal</item>
+        <item>Netherlands</item>
+        <item>Netherlands Antilles</item>
+        <item>New Caledonia</item>
+        <item>New Zealand</item>
+        <item>Nicaragua</item>
+        <item>Niger</item>
+        <item>Nigeria</item>
+        <item>Niue</item>
+        <item>North Korea</item>
+        <item>Northern Mariana Islands</item>
+        <item>Norway</item>
+        <item>Oman</item>
+        <item>Pakistan</item>
+        <item>Palau</item>
+        <item>Panama</item>
+        <item>Papua New Guinea</item>
+        <item>Paraguay</item>
+        <item>Peru</item>
+        <item>Philippines</item>
+        <item>Pitcairn</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Puerto Rico</item>
+        <item>Qatar</item>
+        <item>Republic of the Congo</item>
+        <item>Romania</item>
+        <item>Russia</item>
+        <item>Rwanda</item>
+        <item>Saint Barthelemy</item>
+        <item>Saint Helena</item>
+        <item>Saint Kitts and Nevis</item>
+        <item>Saint Lucia</item>
+        <item>Saint Martin</item>
+        <item>Saint Pierre and Miquelon</item>
+        <item>Saint Vincent and the Grenadines</item>
+        <item>Samoa</item>
+        <item>San Marino</item>
+        <item>Sao Tome and Principe</item>
+        <item>Saudi Arabia</item>
+        <item>Senegal</item>
+        <item>Serbia</item>
+        <item>Seychelles</item>
+        <item>Sierra Leone</item>
+        <item>Singapore</item>
+        <item>Slovakia</item>
+        <item>Slovenia</item>
+        <item>Solomon Islands</item>
+        <item>Somalia</item>
+        <item>South Africa</item>
+        <item>South Georgia and the South Sandwich Islands</item>
+        <item>South Korea</item>
+        <item>Spain</item>
+        <item>Sri Lanka</item>
+        <item>Sudan</item>
+        <item>Suriname</item>
+        <item>Svalbard and Jan Mayen</item>
+        <item>Swaziland</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Syria</item>
+        <item>Taiwan</item>
+        <item>Tajikistan</item>
+        <item>Tanzania</item>
+        <item>Thailand</item>
+        <item>Togo</item>
+        <item>Tokelau</item>
+        <item>Tonga</item>
+        <item>Trinidad and Tobago</item>
+        <item>Tunisia</item>
+        <item>Turkmenistan</item>
+        <item>Turks and Caicos Islands</item>
+        <item>Tuvalu</item>
+        <item>U.S. Virgin Islands</item>
+        <item>Uganda</item>
+        <item>Ukraine</item>
+        <item>United Arab Emirates</item>
+        <item>United Kingdom</item>
+        <item>United States</item>
+        <item>Uruguay</item>
+        <item>Uzbekistan</item>
+        <item>Vanuatu</item>
+        <item>Vatican</item>
+        <item>Venezuela</item>
+        <item>Vietnam</item>
+        <item>Wallis and Futuna</item>
+        <item>Western Sahara</item>
+        <item>Yemen</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
+    </string-array>
+
+    <string name="title_activity_general_program">GeneralProgramActivity</string>
+    <string name="write_a_message">Bir mesaj yaz</string>
+    <string name="advisee">Danışan</string>
+    <string name="dietitian">Diyetisyen</string>
+    <string name="sport_coach">Spor Koçu</string>
+    <string name="password">Şifre</string>
+    <string name="forgotten_password">Şifremi unuttum</string>
+    <string name="login">Giriş</string>
+    <string name="login_with_face">Facebook ile giriş</string>
+    <string name="login_with_google">Gmail ile giriş</string>
+    <string name="olcumlerim">Ölçümlerim</string>
+    <string name="cihazim">Cihazım</string>
+    <string name="danismanlarim">Danışmanlarım</string>
+    <string name="beslenme_prog">Beslenme Programım</string>
+    <string name="profilim">Profilim</string>
+    <string name="settings">Ayarlar</string>
+    <string name="about">Lifecare Hakkında</string>
+    <string name="logout">Çıkış Yap</string>
+    <string name="birthday_date">Doğum Tarihin</string>
+    <string name="gender">Cinsiyetin</string>
+    <string name="height">Boyun</string>
+    <string name="profile_picture">Profil Fotoğrafın</string>
+    <string name="next">İleri</string>
+    <string name="name_surname">Ad - Soyad</string>
+    <string name="agreement">Gizlilik ilkesi ve kayıt şartlarını okuyup   kabul ettiğimi onaylıyorum.</string>
+    <string name="sign_up">Kayıt Ol</string>
+    <string name="signup_with_face">Facebook ile kayıt</string>
+    <string name="Sign_Up_with_Gmail">Gmail ile kayıt</string>
+    <string name="welcome">Hoşgeldiniz!</string>
+    <string name="welcome_after_login">Merhaba x\n Lifecare ile\n Sağlıklı Hayata\n Başlıyoruz!</string>
+    <string name="enter_code">Danışmanınızdan aldığınız kodu giriniz.</string>
+    <string name="okey">Tamam</string>
+    <string name="blood_results">Kan Sonuçları</string>
+    <string name="date">Tarih</string>
+    <string name="aclik_kan">Açlık kan şekeri</string>
+    <string name="insulin">İnsülin</string>
+    <string name="vitamin_d">D vitamini</string>
+    <string name="blood_lipids">Kan yağları</string>
+    <string name="zinc">Çinko</string>
+    <string name="ferittin">Ferittin</string>
+    <string name="olcumler">Ölçümlerim</string>
+    <string name="total_mass">Toplam Vücut Kütlesi (kg)</string>
+    <string name="BMI">BKİ (kg/m2)</string>
+    <string name="lipid_ratio">Yağ Oranı (%)</string>
+    <string name="water_ratio">Su Oranı (%)</string>
+    <string name="muscle_ratio">Kas Oranı (%)</string>
+    <string name="basal_metabolism">Bazal Metabolizma Hızı (kcal)</string>
+    <string name="basal_metabolism_age">Bazal Metabolizma Yaşı (year)</string>
+    <string name="change_pass">Şifre Değiştir</string>
+    <string name="current_pass">Mevcut şifre</string>
+    <string name="new_pass">Yeni şifre</string>
+    <string name="new_pass_again">Yeni şifre(tekrar)</string>
+    <string name="enter_email">Lütfen E-mail adresinizi giriniz</string>
+    <string name="activity_level">Aktivite Seviyesi</string>
+    <string name="sadanter_activity">Sedanter fiziksel aktivite</string>
+    <string name="mild_activity">Hafif düzeyde fiziksel aktivite</string>
+    <string name="moderate_activity">Orta düzeyde fiziksel aktivite</string>
+    <string name="heavy_activity">İleri düzeyde fiziksel aktivite</string>
+    <string name="girl">Kadın</string>
+    <string name="boy">Erkek</string>
+    <string name="language">Dil</string>
+    <string name="selected_language">Türkçe</string>
+    <string name="unit">Birim</string>
+    <string name="notifications">Bildirimler</string>
+    <string name="delete_account">Hesabımı Sil</string>
+    <string name="searching_device">Lifecare aranıyor...</string>
+    <string name="privacy_policy">Gizlilik Koşulları</string>
+    <string name="contact_us">Bize Ulaşın</string>
+    <string name="faqs">Sıkça Sorulan Sorular</string>
+    <string name="phone">Telefon</string>
+    <string name="country">Ülke</string>
+    <string name="City">Şehir</string>
+    <string name="absent">yok</string>
+    <string name="exist">var</string>
+    <string name="enter_and_save">Açıklamanızı buraya yazın ve kaydedin.</string>
+    <string name="tab2_1">Tanısı konulmuş hastalığınız</string>
+    <string name="tab2_2">Yakın akrabanızda kronik hastalık</string>
+    <string name="tab2_3">Düzenli kullandığınız ilaçlar</string>
+    <string name="tab2_4">Geçirdiğiniz işlem/ameliyat</string>
+    <string name="tab2_5">Besin alerji(leri)</string>
+    <string name="tab2_6">Besin / bitkisel destek kullanma</string>
+    <string name="tab2_7">Besin intoleransı</string>
+    <string name="tab2_8">Sigara kullanımı</string>
+    <string name="tab2_9">Alkol tüketimi</string>
+    <string name="tab2_10">İçeceklerde şeker kullanma</string>
+    <string name="target_weight">Hedeflenen kilo</string>
+    <string name="tab3_1">Öğün düzeniniz</string>
+    <string name="tab3_2">Günlük su tüketim miktarı</string>
+    <string name="tab3_3">Atlanan öğün</string>
+    <string name="tab3_4">Ara öğün alışkanlığı</string>
+    <string name="tab3_5">Atıştırma alışkanlığı</string>
+    <string name="tab3_6">Dışarda yemek yeme alışkanlığı</string>
+    <string name="tab3_7">Gece yeme alışkanlığı</string>
+    <string name="tab3_8">Sabah kahvaltı saatiniz</string>
+    <string name="tab3_9">Öğle yemeği saatiniz</string>
+    <string name="tab3_10">Akşam yemeği saatiniz</string>
+    <string name="past_blood">Geçmiş kan değerlerim</string>
+    <string name="past_measurement">Geçmiş vücut ölçülerim</string>
+    <string name="pass_changed">Şifre Değiştirildi</string>
+    <string name="wrong_pass">Hatalı Şifre</string>
+    <string name="pass_match">Yeni Şifreler Eşleşmedi</string>
+    <string name="enter_pass">Lütfen şifrenizi giriniz.</string>
+    <string name="used_code">Bu kod daha önce kullanılmış</string>
+    <string name="match_succes">Eşleşme başarılı</string>
+    <string name="invalid_code">Geçersiz Kod</string>
+    <string name="select">Seç</string>
+    <string name="cancel">İptal</string>
+    <string name="empty_data">Boş veri girilemez.</string>
+    <string name="delete">Sil</string>
+    <string name="sure_delete">Verinizi silmek istediğinize emin misiniz?</string>
+    <string name="saved">Kaydedildi</string>
+    <string name="enter_weight">kilonuzu giriniz</string>
+    <string name="email_sent">E-mail gönderildi.</string>
+    <string name="no_such_mail">Girdiğiniz mail adresi kayıtlı bulunmamaktadır.</string>
+    <string name="sedanter">Sedanter</string>
+    <string name="mild">Hafif</string>
+    <string name="moderate">Orta</string>
+    <string name="heavy">Ağır</string>
+    <string name="dont_forget_drink">Su içmeyi unutmayın</string>
+    <string name="dont_forget_profile">Profilinizi eksiksiz doldurun.</string>
+    <string name="sure_delete_account">Hesabınızı tamamen silmek istediğinize emin misiniz?</string>
+    <string name="sure_disconnect">Danışanın ile olan iletişimini koparmak istediğinize emin misiniz?</string>
+    <string name="photo_saved">Fotoğraf LifeCarePhotos klasörüne kaydedildi.</string>
+    <string name="auth_failed">Kimlik doğrulama başarısız oldu.</string>
+    <string name="pass_or_username_wrong">Kullanıcı adı yada şifre hatalı.</string>
+    <string name="press_again_exit">Çıkmak için tekrar basınız.</string>
+    <string name="personal">KİŞİSEL</string>
+    <string name="health">SAĞLIK</string>
+    <string name="meal">ÖĞÜN</string>
+    <string name="blood">KAN</string>
+    <string name="measure">ÖLÇÜ</string>
+    <string name="select_gender">Lütfen cinsiyetinizi seçiniz</string>
+    <string name="accept_aggrements">Lütfen gizlilik sözleşmelerini onaylayın</string>
+    <string name="email_in_use">Bu mail adresi kullanılıyor.</string>
+    <string name="enter_valid_email">Lütfen geçerli bir mail adresi giriniz.</string>
+    <string name="enter_name">Lütfen isminizi giriniz.</string>
+    <string name="atleast_six">Lütfen en az 6 haneli şifre giriniz</string>
+    <string name="sure_internet_connection">İnternet bağlantınız olduğuna emin olun</string>
+    <string name="coming_soon">Pek yakında</string>
+</resources>

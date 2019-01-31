@@ -1,72 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="250dp"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:minWidth="320dp"
+    android:minHeight="240dp"
+    android:paddingBottom="24dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/header_purple"
+        app:layout_constraintDimensionRatio="73:16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="24dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/date_white"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dialog_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="147dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/blood_results"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/close_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView14"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_weight="3"
-            android:src="@drawable/date_orange" />
-
-        <TextView
-            android:id="@+id/dialog_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_weight="10"
-            android:fontFamily="@font/montserrat"
-            android:gravity="left|center"
-            android:text="Kan Sonuçları"
-            android:textSize="16sp" />
-
-
-        <ImageView
-            android:id="@+id/close_button"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="right|top"
-            android:layout_marginRight="-8dp"
-            android:padding="8dp"
-            android:src="@drawable/close_button" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/close_button"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:padding="8dp"
+        android:src="@drawable/close_white"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <NumberPicker
         android:id="@+id/numberPicker"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:clickable="false"
+        android:theme="@style/DefaultNumberPickerTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+
+    <ImageView
+        android:id="@+id/tamam_button"
+        android:layout_width="100dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/button_purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
+
+    <ImageView
+        android:id="@+id/delete_button"
+        android:layout_width="100dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/button_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:fontFamily="@font/montserrat"
+        android:text="@string/okey"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tamam_button"
+        app:layout_constraintEnd_toEndOf="@+id/tamam_button"
+        app:layout_constraintStart_toStartOf="@+id/tamam_button"
+        app:layout_constraintTop_toTopOf="@+id/tamam_button" />
 
-
-    <FrameLayout
-        android:layout_width="200dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:fontFamily="@font/montserrat"
+        android:text="@string/delete"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/delete_button"
+        app:layout_constraintEnd_toEndOf="@+id/delete_button"
+        app:layout_constraintStart_toStartOf="@+id/delete_button"
+        app:layout_constraintTop_toTopOf="@+id/delete_button" />
 
-        <TextView
-            android:id="@+id/tamam_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:fontFamily="@font/montserrat"
-            android:gravity="right"
-            android:padding="8dp"
-            android:text="Tamam"
-            android:textColor="#F5A623"
-            android:textSize="16sp" />
-
-    </FrameLayout>
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

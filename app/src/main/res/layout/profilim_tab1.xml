@@ -6,7 +6,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/view0"
@@ -25,7 +25,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Cinsiyet"
+            android:text="@string/gender"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -40,7 +40,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserratlight"
-            android:text="Erkek"
+            android:text="@string/boy"
             android:textColor="@color/ourPurple"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Doğum Tarihi"
+            android:text="@string/birthday_date"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -105,7 +105,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Boy"
+            android:text="@string/height"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/textView6"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -145,7 +145,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Telefon"
+            android:text="@string/phone"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/textView8"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -189,7 +189,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Ülke"
+            android:text="@string/country"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -231,7 +231,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Şehir"
+            android:text="@string/City"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/textView12"
             app:layout_constraintHorizontal_chainStyle="spread_inside"

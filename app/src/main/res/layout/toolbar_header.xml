@@ -16,7 +16,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/montserrat"
             android:gravity="center"
-            android:text="Ölçümlerim"
+            android:text="@string/olcumlerim"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 

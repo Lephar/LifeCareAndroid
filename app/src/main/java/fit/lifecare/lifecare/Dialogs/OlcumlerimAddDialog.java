@@ -232,8 +232,8 @@ public class OlcumlerimAddDialog extends DialogFragment {
                 dpd.getDatePicker().setMaxDate(takvim.getTimeInMillis());
 
                 //set button text
-                dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Seç", dpd);
-                dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "İptal", dpd);
+                dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.select), dpd);
+                dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), dpd);
                 dpd.show();
             }
         });
@@ -254,13 +254,13 @@ public class OlcumlerimAddDialog extends DialogFragment {
     }
 
     //to prevent user enter totally empty data
-    public boolean validateForm() {
+    private boolean validateForm() {
 
         if (TextUtils.isEmpty(mEdittext_row1.getText().toString())) {
-            Toast.makeText(getContext(),"kilonuzu giriniz",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),getString(R.string.enter_weight),Toast.LENGTH_SHORT).show();
             return false;
         } else if (mEdittext_row1.getText().toString().equals("0")) {
-            Toast.makeText(getContext(),"kilonuzu giriniz",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),getString(R.string.enter_weight),Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;

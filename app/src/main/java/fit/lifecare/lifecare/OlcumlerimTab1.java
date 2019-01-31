@@ -65,9 +65,9 @@ public class OlcumlerimTab1 extends Fragment{
         title2 = view.findViewById(R.id.textViewLeft2);
         value2 = view.findViewById(R.id.textViewRight2);
         mChart2 = view.findViewById(R.id.chart2);
-
-        title1.setText("Vucüt Ağırlığı (kg)");
-        title2.setText("BKİ (kg/m2)");
+        
+        title1.setText(getString(R.string.total_mass));
+        title2.setText(getString(R.string.BMI));
 
         if (!yValues1.isEmpty()) {
             setData1();

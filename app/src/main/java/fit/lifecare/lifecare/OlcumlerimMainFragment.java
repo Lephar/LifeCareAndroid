@@ -294,7 +294,6 @@ public class OlcumlerimMainFragment extends Fragment {
                     olcumlerimTab2.setData2();
                     olcumlerimTab3.setyValues(yValues5, yValues6);
                     olcumlerimTab3.setData1();
-//                    olcumlerimTab3.setData2();
                     olcumlerimTab4.setyValues(yValues7, yValues8);
                     olcumlerimTab4.setData1();
                     olcumlerimTab4.setData2();
@@ -392,7 +391,7 @@ public class OlcumlerimMainFragment extends Fragment {
                 } else {
                     builder = new AlertDialog.Builder(getActivity());
                 }
-                builder.setMessage("Verinizi silmek istediğinize emin misiniz?")
+                builder.setMessage(getString(R.string.sure_delete))
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete

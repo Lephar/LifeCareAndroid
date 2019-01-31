@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserratlight"
         android:padding="8dp"
-        android:text="Gizlilik Koşulları"
+        android:text="@string/privacy_policy"
         android:textSize="14sp" />
 
     <View
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserratlight"
         android:padding="8dp"
-        android:text="Bize Ulaşın"
+        android:text="@string/contact_us"
         android:textSize="14sp" />
 
     <View
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserratlight"
         android:padding="8dp"
-        android:text="Sıkça Sorulan Sorular"
+        android:text="@string/faqs"
         android:textSize="14sp" />
 
 </LinearLayout>

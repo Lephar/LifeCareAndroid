@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ProgramDailyActivity extends AppCompatActivity {
     // Layout Views
     private ListView day_list;
     private ImageView back_button;
+    private TextView program_name;
 
     private ArrayAdapter<ProgramlarimData> mProgramItemsAdapter;
     private ArrayList<ProgramlarimData> programlarimData;
@@ -31,6 +33,7 @@ public class ProgramDailyActivity extends AppCompatActivity {
 
         // initialize layout views
         day_list = findViewById(R.id.day_list);
+        program_name = findViewById(R.id.program_name);
         back_button = findViewById(R.id.back_button);
 
         // Initialize ListView and its adapter
@@ -40,6 +43,8 @@ public class ProgramDailyActivity extends AppCompatActivity {
 
         ProgramItems programItem = (ProgramItems) getIntent().getSerializableExtra("ProgramItem");
         programlarimData = (ArrayList<ProgramlarimData>) getIntent().getSerializableExtra("DailyProgramlarimData");
+        
+        program_name.setText(programItem.getProgramName());
 
         Log.d("hasada", programlarimData.get(0).getSabahKahvaltisi());
 

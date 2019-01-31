@@ -69,17 +69,17 @@ public class PasswordResetDialog extends DialogFragment {
 
                 String email = mEditText.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    mEditText.setError("Lütfen mail adresinizi giriniz.");
+                    mEditText.setError(getString(R.string.enter_email));
                 } else {
                     mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getContext(), "E-mail gönderildi.",
+                                Toast.makeText(getContext(), getString(R.string.email_sent),
                                         Toast.LENGTH_SHORT).show();
                                 dismiss();
                             } else {
-                                Toast.makeText(getContext(), "Girdiğiniz mail adresi kayıtlı bulunmamaktadır.",
+                                Toast.makeText(getContext(), getString(R.string.no_such_mail),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

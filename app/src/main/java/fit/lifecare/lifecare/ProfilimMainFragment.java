@@ -39,15 +39,15 @@ public class ProfilimMainFragment extends Fragment {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        adapter.addFragment(new ProfilimTab1(),"KİŞİSEL");
+        adapter.addFragment(new ProfilimTab1(),getString(R.string.personal));
 
-        adapter.addFragment(new ProfilimTab2(),"SAĞLIK");
+        adapter.addFragment(new ProfilimTab2(),getString(R.string.health));
 
-        adapter.addFragment(new ProfilimTab3(),"ÖĞÜN");
+        adapter.addFragment(new ProfilimTab3(),getString(R.string.meal));
 
-        adapter.addFragment(new ProfilimTab4(),"KAN");
+        adapter.addFragment(new ProfilimTab4(),getString(R.string.blood));
 
-        adapter.addFragment(new ProfilimTab5(),"ÖLÇÜ");
+        adapter.addFragment(new ProfilimTab5(),getString(R.string.measure));
 
         viewPager.setAdapter(adapter);
     }

@@ -14,7 +14,7 @@
         android:background="@drawable/header_gradient"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
-        android:text="Beslenme Programı 2"
+        android:text="Beslenme Programı"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,10 +26,9 @@
         android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:padding="8dp"
         android:src="@drawable/backbutton_white"
-        app:layout_constraintBottom_toBottomOf="@+id/header_title_id"
+        app:layout_constraintBottom_toTopOf="@+id/day_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

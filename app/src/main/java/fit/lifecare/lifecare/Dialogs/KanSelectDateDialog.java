@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -24,13 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import fit.lifecare.lifecare.DatabaseClasses.ProfilimKanData;
-import fit.lifecare.lifecare.DatabaseClasses.ProfilimOlcuData;
 import fit.lifecare.lifecare.R;
 
 public class KanSelectDateDialog extends DialogFragment {
@@ -77,7 +71,7 @@ public class KanSelectDateDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_select_date2, container, false);
+        View view = inflater.inflate(R.layout.dialog_select_date, container, false);
 
         //initialize buttons
         closeButton = view.findViewById(R.id.close_button);
@@ -139,7 +133,7 @@ public class KanSelectDateDialog extends DialogFragment {
                 } else {
                     builder = new AlertDialog.Builder(getActivity());
                 }
-                builder.setMessage("Verinizi silmek istediğinize emin misiniz?")
+                builder.setMessage(getString(R.string.sure_delete))
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete

@@ -69,7 +69,7 @@ public class OlcumlerimTab3 extends Fragment {
 //        mChart2 = view.findViewById(R.id.chart2);
 
 
-        title1.setText("Kas (%)");
+        title1.setText(getString(R.string.muscle_ratio));
 //        title2.setText("Kas (kg)");
 
 

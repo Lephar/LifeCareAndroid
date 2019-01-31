@@ -79,7 +79,7 @@ public class KisiselHeightSelect extends DialogFragment {
             public void onClick(View view) {
                 selected_value = Integer.toString(mNumberPicker.getValue());
                 mProfilimKisiselDatabaseReference.setValue(selected_value);
-                Toast.makeText(getContext(), "Kaydedildi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
