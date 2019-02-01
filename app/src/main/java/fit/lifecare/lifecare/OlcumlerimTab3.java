@@ -49,7 +49,7 @@ public class OlcumlerimTab3 extends Fragment {
     }
 
     public void setSelectedValues(String selected_value1, String selected_value2) {
-        this.value1.setText(selected_value1 + " %");
+        this.value1.setText(selected_value1);
 //        this.value2.setText(selected_value2 + " kg");
     }
 
@@ -83,7 +83,7 @@ public class OlcumlerimTab3 extends Fragment {
         OnChartValueSelectedListener onChartValueSelectedListener1 = new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                value1.setText(String.valueOf(e.getY()) + " %");
+                value1.setText(String.valueOf(e.getY()));
             }
 
             @Override

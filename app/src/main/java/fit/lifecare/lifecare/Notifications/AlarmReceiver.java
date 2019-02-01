@@ -30,8 +30,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     // shared preferences
     private SharedPreferences preferences;
     
-    private PendingIntent pendingIntent;
-    
     public AlarmReceiver() {
     
     }
@@ -48,9 +46,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         
         Log.d("notasd", "bu :" + type);
         
-        Intent notificationIntent = new Intent(context, MainActivity.class);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        
         //initialize shared preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         
@@ -58,23 +53,33 @@ public class AlarmReceiver extends BroadcastReceiver {
         
         if (showNotification) {
             if (type.equals("su")) {
+    
+                Intent notificationIntent = new Intent(context, MainActivity.class);
+                notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 
-                pendingIntent = PendingIntent.getActivity(context, 1,
+                notificationIntent.putExtra("start_where","main_screen");
+                
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 1,
                         notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                sendNotificationForWater();
+                sendNotificationForWater(pendingIntent);
                 
             } else {
+    
+                Intent notificationIntent = new Intent(context, MainActivity.class);
+                notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    
+                notificationIntent.putExtra("start_where","profile");
                 
-                pendingIntent = PendingIntent.getActivity(context, 2,
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 2,
                         notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                sendNotificationForProfile();
+                sendNotificationForProfile(pendingIntent);
             }
         }
         
     }
     
     
-    private void sendNotificationForWater() {
+    private void sendNotificationForWater(PendingIntent pendingIntent) {
         
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
@@ -87,7 +92,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationManager.notify(1, notification);
     }
     
-    private void sendNotificationForProfile() {
+    private void sendNotificationForProfile(PendingIntent pendingIntent) {
         
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_2_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_foreground)

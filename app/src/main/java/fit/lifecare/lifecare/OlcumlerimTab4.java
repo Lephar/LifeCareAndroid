@@ -49,7 +49,7 @@ public class OlcumlerimTab4 extends Fragment {
     }
 
     public void setSelectedValues(String selected_value1, String selected_value2) {
-        this.value1.setText(selected_value1 + " kcal");
+        this.value1.setText(selected_value1);
         this.value2.setText(selected_value2);
     }
 
@@ -81,7 +81,7 @@ public class OlcumlerimTab4 extends Fragment {
         OnChartValueSelectedListener onChartValueSelectedListener1 = new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                value1.setText(String.valueOf(e.getY()) + " kcal");
+                value1.setText(String.valueOf(e.getY()));
             }
 
             @Override

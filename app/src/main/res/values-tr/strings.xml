@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LifeCare</string>
     <string name="title_activity_main">MainActivity</string>
@@ -23,6 +24,19 @@
     <string name="friday">CUMA</string>
     <string name="saturday">C.TESİ</string>
     <string name="sunday">PAZAR</string>
+
+    <string name="january">Oca</string>
+    <string name="february">Şub</string>
+    <string name="march">Mar</string>
+    <string name="april">Nis</string>
+    <string name="may">May</string>
+    <string name="june">Haz</string>
+    <string name="july">Tem</string>
+    <string name="august">Ağu</string>
+    <string name="september">Eyl</string>
+    <string name="october">Eki</string>
+    <string name="november">Kas</string>
+    <string name="december">Ara</string>
 
     <string-array name="turkey_city">
         <item>""</item>
@@ -390,9 +404,9 @@
     <string name="olcumler">Ölçümlerim</string>
     <string name="total_mass">Toplam Vücut Kütlesi (kg)</string>
     <string name="BMI">BKİ (kg/m2)</string>
-    <string name="lipid_ratio">Yağ Oranı (%)</string>
-    <string name="water_ratio">Su Oranı (%)</string>
-    <string name="muscle_ratio">Kas Oranı (%)</string>
+    <string name="lipid_ratio">Yağ (%)</string>
+    <string name="water_ratio">Su (%)</string>
+    <string name="muscle_ratio">Kas (%)</string>
     <string name="basal_metabolism">Bazal Metabolizma Hızı (kcal)</string>
     <string name="basal_metabolism_age">Bazal Metabolizma Yaşı (year)</string>
     <string name="change_pass">Şifre Değiştir</string>
@@ -485,5 +499,11 @@
     <string name="enter_name">Lütfen isminizi giriniz.</string>
     <string name="atleast_six">Lütfen en az 6 haneli şifre giriniz</string>
     <string name="sure_internet_connection">İnternet bağlantınız olduğuna emin olun</string>
-    <string name="coming_soon">Pek yakında</string>
+    <string name="coming_soon">En yakın zamanda sizlerle</string>
+    <string name="disconnet_con">iletişimi kopar</string>
+    <string name="days">1. GÜN</string>
+    <string name="breakfast">SABAH KAHVALTISI (0 cal)</string>
+    <string name="snack">ARA ÖĞÜN (0 cal)</string>
+    <string name="dinner">ÖĞLE YEMEĞİ (0 cal)</string>
+    <string name="lunch">AKŞAM YEMEĞİ (0 cal)</string>
 </resources>

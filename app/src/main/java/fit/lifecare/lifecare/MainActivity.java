@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
     private Toolbar mToolbar_footer;
     private ImageView device_button;
     private ImageView home_button;
+    private ImageView schedule_button;
     private ImageView talk_button;
     private ImageView profile_picture;
     private ImageView header_profile_pic;
@@ -111,7 +112,9 @@ public class MainActivity extends AppCompatActivity
         //initialize footer buttons
         device_button = mToolbar_footer.findViewById(R.id.footer_lifecareicon);
         home_button = mToolbar_footer.findViewById(R.id.home_button);
+        schedule_button = mToolbar_footer.findViewById(R.id.footer_schedule);
         talk_button = mToolbar_footer.findViewById(R.id.footer_talkbutton);
+        
         message_alert = mToolbar_footer.findViewById(R.id.message_alert);
         
         //initialize Firebase components
@@ -160,6 +163,9 @@ public class MainActivity extends AppCompatActivity
         hide_footer();
         
         //set the first fragment
+        String starting_frag = getIntent().getStringExtra("start_where");
+        // TODO
+        // burada starting_frag a göre baslangıc fragmentını ayarlayıver.
         home_button.setImageResource(R.drawable.home_clicked);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OlcumlerimMainFragment()).commit();
     }
@@ -201,6 +207,7 @@ public class MainActivity extends AppCompatActivity
             //set footer images colors according to selected item
             device_button.setImageResource(R.drawable.device_non_clicked);
             home_button.setImageResource(R.drawable.home_clicked);
+            schedule_button.setImageResource(R.drawable.schedule_non_clicked);
             talk_button.setImageResource(R.drawable.talk_non_clicked);
             //replace current fragment with new one
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OlcumlerimMainFragment()).commit();
@@ -211,6 +218,7 @@ public class MainActivity extends AppCompatActivity
             //set footer images colors according to selected item
             device_button.setImageResource(R.drawable.device_clicked);
             home_button.setImageResource(R.drawable.home_non_clicked);
+            schedule_button.setImageResource(R.drawable.schedule_non_clicked);
             talk_button.setImageResource(R.drawable.talk_non_clicked);
             //replace current fragment with new one
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CihazimFragment()).commit();
@@ -221,6 +229,7 @@ public class MainActivity extends AppCompatActivity
             //set footer images colors according to selected item
             device_button.setImageResource(R.drawable.device_non_clicked);
             home_button.setImageResource(R.drawable.home_non_clicked);
+            schedule_button.setImageResource(R.drawable.schedule_non_clicked);
             talk_button.setImageResource(R.drawable.talk_clicked);
             //replace current fragment with new one
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DanismanimFragment()).commit();
@@ -231,6 +240,7 @@ public class MainActivity extends AppCompatActivity
             //set footer images colors according to selected item
             device_button.setImageResource(R.drawable.device_non_clicked);
             home_button.setImageResource(R.drawable.home_non_clicked);
+            schedule_button.setImageResource(R.drawable.schedule_clicked);
             talk_button.setImageResource(R.drawable.talk_non_clicked);
             //replace current fragment with new one
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProgramFragment()).commit();
@@ -241,6 +251,7 @@ public class MainActivity extends AppCompatActivity
             //set footer images colors according to selected item
             device_button.setImageResource(R.drawable.device_non_clicked);
             home_button.setImageResource(R.drawable.home_non_clicked);
+            schedule_button.setImageResource(R.drawable.schedule_non_clicked);
             talk_button.setImageResource(R.drawable.talk_non_clicked);
             //replace current fragment with new one
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfilimMainFragment()).commit();
@@ -251,6 +262,7 @@ public class MainActivity extends AppCompatActivity
             //set footer images colors according to selected item
             device_button.setImageResource(R.drawable.device_non_clicked);
             home_button.setImageResource(R.drawable.home_non_clicked);
+            schedule_button.setImageResource(R.drawable.schedule_non_clicked);
             talk_button.setImageResource(R.drawable.talk_non_clicked);
             //replace current fragment with new one
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AyarlarFragment()).commit();
@@ -261,6 +273,7 @@ public class MainActivity extends AppCompatActivity
             //set footer images colors according to selected item
             device_button.setImageResource(R.drawable.device_non_clicked);
             home_button.setImageResource(R.drawable.home_non_clicked);
+            schedule_button.setImageResource(R.drawable.schedule_non_clicked);
             talk_button.setImageResource(R.drawable.talk_non_clicked);
             //replace current fragment with new one
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HakkindaFragment()).commit();
@@ -351,6 +364,7 @@ public class MainActivity extends AppCompatActivity
                 //set footer images colors according to selected item
                 device_button.setImageResource(R.drawable.device_non_clicked);
                 home_button.setImageResource(R.drawable.home_non_clicked);
+                schedule_button.setImageResource(R.drawable.schedule_non_clicked);
                 talk_button.setImageResource(R.drawable.talk_non_clicked);
                 //replace current fragment with new one
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfilimMainFragment()).commit();
@@ -367,6 +381,7 @@ public class MainActivity extends AppCompatActivity
                 //set footer images colors according to selected item
                 device_button.setImageResource(R.drawable.device_clicked);
                 home_button.setImageResource(R.drawable.home_non_clicked);
+                schedule_button.setImageResource(R.drawable.schedule_non_clicked);
                 talk_button.setImageResource(R.drawable.talk_non_clicked);
                 //replace current fragment with new one
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CihazimFragment()).commit();
@@ -382,9 +397,26 @@ public class MainActivity extends AppCompatActivity
                 //set footer images colors according to selected item
                 device_button.setImageResource(R.drawable.device_non_clicked);
                 home_button.setImageResource(R.drawable.home_clicked);
+                schedule_button.setImageResource(R.drawable.schedule_non_clicked);
                 talk_button.setImageResource(R.drawable.talk_non_clicked);
                 //replace current fragment with new one
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OlcumlerimMainFragment()).commit();
+            }
+        });
+        //footer schedule button listener
+        schedule_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //set title according to selected item
+                TextView tv = (TextView) mToolbar_header.findViewById(R.id.header_title_id);
+                tv.setText(getString(R.string.beslenme_prog));
+                //set footer images colors according to selected item
+                device_button.setImageResource(R.drawable.device_non_clicked);
+                home_button.setImageResource(R.drawable.home_non_clicked);
+                schedule_button.setImageResource(R.drawable.schedule_clicked);
+                talk_button.setImageResource(R.drawable.talk_non_clicked);
+                //replace current fragment with new one
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProgramFragment()).commit();
             }
         });
         //footer diyetisyenim button listener
@@ -397,6 +429,7 @@ public class MainActivity extends AppCompatActivity
                 //set footer images colors according to selected item
                 device_button.setImageResource(R.drawable.device_non_clicked);
                 home_button.setImageResource(R.drawable.home_non_clicked);
+                schedule_button.setImageResource(R.drawable.schedule_non_clicked);
                 talk_button.setImageResource(R.drawable.talk_clicked);
                 //replace current fragment with new one
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DanismanimFragment()).commit();
