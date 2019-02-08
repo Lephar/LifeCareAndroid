@@ -2,11 +2,13 @@ package fit.lifecare.lifecare;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -39,6 +41,8 @@ import java.util.concurrent.TimeUnit;
 import fit.lifecare.lifecare.DatabaseClasses.OlcumlerimData;
 import fit.lifecare.lifecare.Dialogs.OlcumlerimAddDialog;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class OlcumlerimMainFragment extends Fragment {
 
     //Layout Views
@@ -63,11 +67,15 @@ public class OlcumlerimMainFragment extends Fragment {
     private int mm;
     private int dd;
     private String selected_date;
+    private String height;
     private OlcumlerimTab1 olcumlerimTab1;
     private OlcumlerimTab2 olcumlerimTab2;
     private OlcumlerimTab3 olcumlerimTab3;
     private OlcumlerimTab4 olcumlerimTab4;
     private Boolean once_loaded = false;
+    
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     //firebase instance variables
     private FirebaseAuth mAuth;
@@ -95,6 +103,14 @@ public class OlcumlerimMainFragment extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mOlcumlerimDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Olcumlerim");
+    
+    
+        //initialize shared preferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = preferences.edit();
+        
+        height = preferences.getString("height", "0");
+        Log.d("heightbulmaca",height);
 
         //attach firebase database listener to get selectable dates
         attachSelectableDatesListener();
@@ -416,6 +432,7 @@ public class OlcumlerimMainFragment extends Fragment {
                 OlcumlerimAddDialog olcumlerimAddDialog = new OlcumlerimAddDialog();
                 Bundle args = new Bundle();
                 args.putString("date",selected_date);
+                args.putString("height",height);
                 olcumlerimAddDialog.setArguments(args);
                 olcumlerimAddDialog.show(getChildFragmentManager(), "AddingDialog");
             }

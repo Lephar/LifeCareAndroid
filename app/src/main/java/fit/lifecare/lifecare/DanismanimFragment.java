@@ -66,7 +66,6 @@ public class DanismanimFragment extends Fragment {
     private DatabaseReference mChatDatabaseReference;
     private DatabaseReference mChatClickedDatabaseReference;
     private DatabaseReference mChatIDReference;
-    private DatabaseReference mdietitianDatabaseReference;
     private ChildEventListener mChildEventListener;
     private ValueEventListener mValueEventListener;
     private ValueEventListener mValueEventListenerForDietitianDatabase;
@@ -98,9 +97,10 @@ public class DanismanimFragment extends Fragment {
         mChatIDReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("PersonalInfo").child("ChatIDs");
         
-        mChatDatabaseReference = mFirebaseDatabase.getReference().child("Chats");
+        // set new_message value to false to make disappear new message alert
+        mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_message").setValue(false);
         
-        mdietitianDatabaseReference = mFirebaseDatabase.getReference().child("WebUsers").child("UserInfos");
+        mChatDatabaseReference = mFirebaseDatabase.getReference().child("Chats");
         
 
         attachPersonalDatabaseReadListener();
@@ -203,7 +203,7 @@ public class DanismanimFragment extends Fragment {
                             if (childrenKey.equals("dietitian_name")) {
                                 dietitianName = (String) postSnapshot.getValue();
                             }
-                            if (childrenKey.equals("photo_url")) {
+                            if (childrenKey.equals("dietetian_photo_url")) {
                                 dietitianPhotoUrl = (String) postSnapshot.getValue();
                             }
                             if (childrenKey.equals("dietitian_id")) {

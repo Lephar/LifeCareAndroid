@@ -2,7 +2,9 @@ package fit.lifecare.lifecare;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +32,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 
 import fit.lifecare.lifecare.DatabaseClasses.ProfilimOgunData;
+import fit.lifecare.lifecare.Dialogs.EatingHabitSelect;
+import fit.lifecare.lifecare.Dialogs.SaglikActivitySelect;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ProfilimTab3 extends Fragment {
 
@@ -44,6 +50,7 @@ public class ProfilimTab3 extends Fragment {
     private TextView clock1;
     private TextView clock2;
     private TextView clock3;
+    private TextView eatingHabit;
     private EditText editText1;
     private EditText editText2;
     private EditText editText3;
@@ -64,6 +71,10 @@ public class ProfilimTab3 extends Fragment {
     private DatabaseReference mProfilimOgunDatabaseReference;
     private ValueEventListener mValueEventListener;
     private FirebaseAuth mAuth;
+    
+    // shared preferences
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Nullable
     @Override
@@ -95,6 +106,7 @@ public class ProfilimTab3 extends Fragment {
         textView5 = view.findViewById(R.id.textView5);
         textView6 = view.findViewById(R.id.textView6);
         textView7 = view.findViewById(R.id.textView7);
+        eatingHabit = view.findViewById(R.id.imageView11);
 
         // initialize firebase components
         mAuth = FirebaseAuth.getInstance();
@@ -102,6 +114,10 @@ public class ProfilimTab3 extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mProfilimOgunDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("ProfilimOgun");
+    
+        //initialize shared preferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = preferences.edit();
 
         //initialize ontouch listeners
         initializeOnTouchListeners();
@@ -182,6 +198,7 @@ public class ProfilimTab3 extends Fragment {
                     clock1.setText(profilimOgunData.getProfilimOgunRow8());
                     clock2.setText(profilimOgunData.getProfilimOgunRow9());
                     clock3.setText(profilimOgunData.getProfilimOgunRow10());
+                    eatingHabit.setText(profilimOgunData.getProfilimOgunRow11());
                 }
             }
 
@@ -207,6 +224,10 @@ public class ProfilimTab3 extends Fragment {
                 mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        
+                        editor.putString("breakfast_time", String.valueOf(selectedHour) + ":" + String.valueOf(selectedMinute));
+                        editor.commit();
+                        
                         if (selectedHour < 10 && selectedMinute < 10) {
                             clock1.setText("0" + selectedHour + ":0" + selectedMinute);
                         } else if (selectedHour < 10) {
@@ -235,6 +256,10 @@ public class ProfilimTab3 extends Fragment {
                 mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+    
+                        editor.putString("lunch_time", String.valueOf(selectedHour) + ":" + String.valueOf(selectedMinute));
+                        editor.commit();
+                        
                         if (selectedHour < 10 && selectedMinute < 10) {
                             clock2.setText("0" + selectedHour + ":0" + selectedMinute);
                         } else if (selectedHour < 10) {
@@ -263,6 +288,10 @@ public class ProfilimTab3 extends Fragment {
                 mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+    
+                        editor.putString("dinner_time", String.valueOf(selectedHour) + ":" + String.valueOf(selectedMinute));
+                        editor.commit();
+                        
                         if (selectedHour < 10 && selectedMinute < 10) {
                             clock3.setText("0" + selectedHour + ":0" + selectedMinute);
                         } else if (selectedHour < 10) {
@@ -514,6 +543,14 @@ public class ProfilimTab3 extends Fragment {
 
     //detect which part of the image touched and handle gui accordingly
     private void initializeOnTouchListeners() {
+        
+        eatingHabit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new EatingHabitSelect().show(getChildFragmentManager(), "Select Height Dialog");
+        
+            }
+        });
 
         imageView1.setOnTouchListener(new View.OnTouchListener() {
             @Override

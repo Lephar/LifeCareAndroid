@@ -456,6 +456,7 @@
     <string name="tab3_8">Breakfast time</string>
     <string name="tab3_9">Lunch time</string>
     <string name="tab3_10">Dinner time</string>
+    <string name="tab3_11">Eating habit</string>
     <string name="past_blood">Past Blood Values</string>
     <string name="past_measurement">Past Measurements</string>
     <string name="pass_changed">Password Changed</string>
@@ -505,4 +506,28 @@
     <string name="breakfast">BREAKFAST (0 cal)</string>
     <string name="lunch">LUNCH (0 cal)</string>
     <string name="dinner">DINNER (0 cal)</string>
+    <string name="breakfast_reminder">Breakfast time approached</string>
+    <string name="lunch_reminder">Lunch time approached</string>
+    <string name="dinner_reminder">Dinner time approached</string>
+    <string name="eating_habits">Eating Habits</string>
+    <string name="none">None</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="high_protein_diet">High protein diet</string>
+    <string name="ketogenic_diet">Ketogenic diet</string>
+    <string name="dash_diet">Dash diet</string>
+    <string name="lacto_ovo_vegetarian">Lacto - ovo vegetarian</string>
+    <string name="flexitarian_primaraly_vegetarian">Flexitarian primaraly vegetarian</string>
+    <string name="pollo_pescatarian">Pollo - pescatarian</string>
+    <string name="paleolithic_diet">Paleolithic diet</string>
+    <string name="gluten_free">Gluten free</string>
+    <string name="pescetarian">Pescetarian</string>
+    <string name="pollotarian">Pollotarian</string>
+    <string name="lacto_vegetarian">Lacto - vegetarian</string>
+    <string name="ovo_vegetarian">Ovo vegetarian</string>
+    <string name="raw_foodist">Raw foodist</string>
+    <string name="macrobiotic">Macrobiotic</string>
+    <string name="fruitarian">Fruitarian</string>
+    <string name="dairy_free">Dairy - free</string>
+    <string name="mediterranean_diet">Mediterranean diet</string>
+    <string name="vegan">Vegan</string>
 </resources>

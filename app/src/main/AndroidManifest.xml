@@ -98,6 +98,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".DanismanimChatActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
 
         <activity

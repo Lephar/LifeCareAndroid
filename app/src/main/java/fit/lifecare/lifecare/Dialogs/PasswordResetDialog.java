@@ -40,6 +40,8 @@ public class PasswordResetDialog extends DialogFragment {
 
 
         View view = inflater.inflate(R.layout.dialog_reset_password, container, false);
+    
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         //initialize buttons
         closeButton = view.findViewById(R.id.dialog_close_button);

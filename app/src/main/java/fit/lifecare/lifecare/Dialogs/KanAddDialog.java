@@ -80,6 +80,8 @@ public class KanAddDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_add_kan_data, container, false);
+    
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         
         //initialize layout views
         textView0 = view.findViewById(R.id.date);

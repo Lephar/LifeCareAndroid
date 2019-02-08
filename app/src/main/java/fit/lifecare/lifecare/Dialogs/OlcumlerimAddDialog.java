@@ -10,7 +10,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,7 +35,7 @@ import fit.lifecare.lifecare.DatabaseClasses.OlcumlerimData;
 import fit.lifecare.lifecare.R;
 
 public class OlcumlerimAddDialog extends DialogFragment {
-
+    
     //Layout views
     private View view;
     private ImageView closeButton;
@@ -40,7 +43,7 @@ public class OlcumlerimAddDialog extends DialogFragment {
     private ImageView showDateImageView;
     private TextView showDateTextView;
     private EditText mEdittext_row1;
-    private EditText mEdittext_row2;
+    private TextView mEdittext_row2;
     private EditText mEdittext_row3;
     private EditText mEdittext_row4;
     private EditText mEdittext_row5;
@@ -55,22 +58,27 @@ public class OlcumlerimAddDialog extends DialogFragment {
     private TextView textView_row6;
     private TextView textView_row7;
     private FloatingActionButton fab;
-
-
+    
     private String theDate;
-
+    private String height;
+    
     //firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mOlcumlerimDatabaseReference;
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_add_olcum_data, container, false);
-
+    
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+    
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        
         String selected_date = getArguments().getString("date");
-
+        height = getArguments().getString("height");
+        
         //initialize views
         closeButton = view.findViewById(R.id.close_button);
         tamamButton = view.findViewById(R.id.tamam_button);
@@ -91,49 +99,70 @@ public class OlcumlerimAddDialog extends DialogFragment {
         textView_row5 = view.findViewById(R.id.left5);
         textView_row6 = view.findViewById(R.id.left6);
         textView_row7 = view.findViewById(R.id.left7);
-
+        
         Activity parentview = getActivity();
         fab = parentview.findViewById(R.id.fab);
-
-
+        
+        
         showDateTextView.setText(selected_date);
-
+        
         // initialize firebase components
         mAuth = FirebaseAuth.getInstance();
         String currentUserId = mAuth.getCurrentUser().getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mOlcumlerimDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Olcumlerim");
-
+        
         //initialize onClick Listeners
         initOnClickListeners();
-
+        
         return view;
     }
-
+    
+    
     private void initOnClickListeners() {
-
+        
+        mEdittext_row1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            
+            }
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    Float total_mass = Float.parseFloat(s.toString().trim());
+                    Float h = Float.parseFloat(height.trim()) / 100;
+                    if (h != 0) {
+                        String calculated_bmi = String.valueOf(total_mass / (h * h));
+                        mEdittext_row2.setText(calculated_bmi);
+                    }
+                } catch (Exception e) {
+                    Log.d("exsepsın", e.getMessage());
+                    mEdittext_row2.setText("");
+                }
+            }
+            
+            @Override
+            public void afterTextChanged(Editable s) {
+            
+            }
+        });
+        
         textView_row0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDateTextView.performClick();
             }
         });
-
+        
         textView_row1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mEdittext_row1.requestFocus();
             }
         });
-
-        textView_row2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mEdittext_row2.requestFocus();
-            }
-        });
-
+        
         textView_row3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,27 +193,27 @@ public class OlcumlerimAddDialog extends DialogFragment {
                 mEdittext_row7.requestFocus();
             }
         });
-
-
+        
+        
         //set Onclicklistener to closeButton
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fab.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(42,48,127)));
+                fab.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(42, 48, 127)));
                 dismiss();
             }
         });
-
+        
         //set onClickListener to tamamButton for saving current content to firebase database
         tamamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                
                 if (validateForm()) {
                     theDate = showDateTextView.getText().toString();
                     //change theDate format to ISO 8601 before pushing to firebase database
                     theDate = theDate.substring(6) + "-" + theDate.substring(3, 5) + "-" + theDate.substring(0, 2);
-
+                    
                     //creating a olcumlerimData object and getting data from edittext views
                     OlcumlerimData olcumlerimData = new OlcumlerimData(
                             mEdittext_row1.getText().toString(), mEdittext_row2.getText().toString()
@@ -193,12 +222,12 @@ public class OlcumlerimAddDialog extends DialogFragment {
                             , mEdittext_row7.getText().toString());
                     //pushing olcumlerimData object to FirebaseDatabase
                     mOlcumlerimDatabaseReference.child(theDate).setValue(olcumlerimData);
-                    fab.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(42,48,127)));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(42, 48, 127)));
                     dismiss();
                 }
             }
         });
-
+        
         showDateImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,13 +236,13 @@ public class OlcumlerimAddDialog extends DialogFragment {
                 int yil = takvim.get(Calendar.YEAR);
                 int ay = takvim.get(Calendar.MONTH);
                 int gun = takvim.get(Calendar.DAY_OF_MONTH);
-
+                
                 DatePickerDialog dpd = new DatePickerDialog(getContext(),
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 month += 1;
-
+                                
                                 //this code block for getting 01-01-2018 date format
                                 if (dayOfMonth < 10 && month < 10) {
                                     showDateTextView.setText("0" + dayOfMonth + "-" + "0" + month + "-" + year);
@@ -227,40 +256,40 @@ public class OlcumlerimAddDialog extends DialogFragment {
                                 //this code block for getting 01-01-2018 date format
                             }
                         }, yil, ay, gun);
-
+                
                 //prevent selecting future dates
                 dpd.getDatePicker().setMaxDate(takvim.getTimeInMillis());
-
+                
                 //set button text
                 dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.select), dpd);
                 dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), dpd);
                 dpd.show();
             }
         });
-
+        
         //hide the keyboard if user touch somewhere else than edittext
         view.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
-
+                
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
+                    
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
+                    
                 }
                 return true;
             }
         });
     }
-
+    
     //to prevent user enter totally empty data
     private boolean validateForm() {
-
+        
         if (TextUtils.isEmpty(mEdittext_row1.getText().toString())) {
-            Toast.makeText(getContext(),getString(R.string.enter_weight),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.enter_weight), Toast.LENGTH_SHORT).show();
             return false;
         } else if (mEdittext_row1.getText().toString().equals("0")) {
-            Toast.makeText(getContext(),getString(R.string.enter_weight),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.enter_weight), Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;

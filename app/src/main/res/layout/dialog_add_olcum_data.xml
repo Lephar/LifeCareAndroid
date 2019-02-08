@@ -177,7 +177,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1" />
 
-        <EditText
+        <TextView
             android:id="@+id/right2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -186,7 +186,6 @@
             android:fontFamily="@font/montserratlight"
             android:gravity="center"
             android:hint="-"
-            android:inputType="numberDecimal"
             android:maxLength="6"
             android:padding="8dp"
             android:selectAllOnFocus="true"

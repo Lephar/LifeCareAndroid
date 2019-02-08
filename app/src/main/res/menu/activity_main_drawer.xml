@@ -13,11 +13,11 @@
             android:id="@+id/cihazim"
             android:title="@string/cihazim" />
         <item
-            android:id="@+id/danismanim"
-            android:title="@string/danismanlarim" />
-        <item
             android:id="@+id/program"
             android:title="@string/beslenme_prog" />
+        <item
+            android:id="@+id/danismanim"
+            android:title="@string/danismanlarim" />
         <item
             android:id="@+id/profilim"
             android:title="@string/profilim" />

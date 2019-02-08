@@ -1,5 +1,6 @@
 package fit.lifecare.lifecare.Notifications;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,18 +14,23 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import fit.lifecare.lifecare.MainActivity;
 import fit.lifecare.lifecare.R;
 
+import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_2_ID;
+import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_6_ID;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-
+    
     private static final String TAG = "MyFirebaseMsgService";
-    //firebase instance variables
-    private FirebaseAuth mAuth;
-
+    
+    private NotificationManager notificationManager;
+    
     /**
      * Called when message is received.
      *
@@ -48,49 +54,49 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // sends notification
         // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
         // [END_EXCLUDE]
-
+        
         // Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-
-            // Check if message contains a notification payload.
-            if (remoteMessage.getNotification() != null) {
-                Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            }
-
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                    PendingIntent.FLAG_ONE_SHOT);
-
-            String channelId = "Default";
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
-                    .setSmallIcon(R.mipmap.ic_launcher_round)
-                    .setContentTitle("test")
-                    .setContentText(remoteMessage.getNotification().getBody()).setAutoCancel(true).setContentIntent(pendingIntent);
-            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel channel = new NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT);
-                manager.createNotificationChannel(channel);
-            }
-            manager.notify(0, builder.build());
-
-            // Also if you intend on generating your own notifications as a result of a received FCM
-            // message, here is where that should be initiated. See sendNotification method below.
-        }
-
-
-
-
+//        Log.d(TAG, "From: " + remoteMessage.getFrom());
+//
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//
+//            // Check if message contains a notification payload.
+//            if (remoteMessage.getNotification() != null) {
+//                Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+//            }
+//
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+//                    PendingIntent.FLAG_ONE_SHOT);
+//
+//            String channelId = "Default";
+//            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+//                    .setSmallIcon(R.mipmap.ic_launcher_round)
+//                    .setContentTitle("test")
+//                    .setContentText(remoteMessage.getNotification().getBody()).setAutoCancel(true).setContentIntent(pendingIntent);
+//            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                NotificationChannel channel = new NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT);
+//                manager.createNotificationChannel(channel);
+//            }
+//            manager.notify(0, builder.build());
+//
+//            // Also if you intend on generating your own notifications as a result of a received FCM
+//            // message, here is where that should be initiated. See sendNotification method below.
+//        }
+        
+        notificationManager = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
+        mySendNotification();
+        
     }
     // [END receive_message]
-
-
+    
+    
     // [START on_new_token]
-
+    
     /**
      * Called if InstanceID token is updated. This may occur if the security of
      * the previous token had been compromised. Note that this is called when the InstanceID token
@@ -99,14 +105,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String token) {
         Log.d(TAG, "Refreshed token: " + token);
-
+        
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         sendRegistrationToServer(token);
     }
     // [END on_new_token]
-
+    
     /**
      * Persist token to third-party servers.
      * <p>
@@ -116,9 +122,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
+        
+        
+        //firebase instance variables
+        FirebaseAuth mAuth;
+        FirebaseDatabase mFirebaseDatabase;
+        DatabaseReference mUserPersonalInfoDatabaseReference;
+        
+        //initialize Firebase components
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            String currentUserId = mAuth.getCurrentUser().getUid();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            mUserPersonalInfoDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
+                    .child(currentUserId).child("PersonalInfo");
+            mUserPersonalInfoDatabaseReference.child("fcm_token").setValue(token);
+        }
     }
-
+    
     /**
      * Create and show a simple notification containing the received FCM message.
      *
@@ -129,7 +150,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
-
+        
         String channelId = getString(R.string.default_notification_channel_id);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
@@ -140,10 +161,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
-
+        
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
+        
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
@@ -151,8 +172,46 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
-
+        
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
-
+    
+    private void mySendNotification() {
+        
+        //firebase instance variables
+        FirebaseAuth mAuth;
+        FirebaseDatabase mFirebaseDatabase;
+        DatabaseReference mUserPersonalInfoDatabaseReference;
+        
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        
+        notificationIntent.putExtra("start_where", "chat");
+        
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 6,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_6_ID)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                .setContentTitle("Lifecare")
+                .setContentText("Mesajınız var.")
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build();
+        
+        notificationManager.notify(6, notification);
+    
+        //initialize Firebase components
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            String currentUserId = mAuth.getCurrentUser().getUid();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            mUserPersonalInfoDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
+                    .child(currentUserId).child("PersonalInfo");
+        
+            mUserPersonalInfoDatabaseReference.child("new_message").setValue(true);
+        }
+        
+    }
+    
 }

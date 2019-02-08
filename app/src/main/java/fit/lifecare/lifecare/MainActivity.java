@@ -10,6 +10,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -44,6 +46,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,6 +56,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import fit.lifecare.lifecare.Notifications.AlarmReceiver;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -67,6 +73,7 @@ public class MainActivity extends AppCompatActivity
     private ImageView profile_picture;
     private ImageView header_profile_pic;
     private ImageView message_alert;
+    private ImageView schedule_alert;
     private TextView user_name;
     
     private boolean backPressedToExitOnce = false;
@@ -74,21 +81,15 @@ public class MainActivity extends AppCompatActivity
     private static final int RC_PHOTO_PICKER = 2;
     
     
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
-    
-    
-    private ArrayList<String> appUserChatIDs = new ArrayList<>();
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
     
     //firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mUserPersonalInfoDatabaseReference;
-    private DatabaseReference chatListenerReference;
-    private DatabaseReference appUserChatIdsReference;
-    private ValueEventListener appUserChatIdsListener;
     private ValueEventListener mValueEventListener;
-    private ChildEventListener mChildEventListener;
+    private ValueEventListener mNewMessageListener;
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mStorageReference;
     
@@ -101,8 +102,8 @@ public class MainActivity extends AppCompatActivity
         //initialize rootview
         rootview = findViewById(R.id.drawer_layout);
         
-        // initialize sharedPreferences
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        //initialize shared preferences
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = sharedPref.edit();
         
         //initialize toolbars
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity
         schedule_button = mToolbar_footer.findViewById(R.id.footer_schedule);
         talk_button = mToolbar_footer.findViewById(R.id.footer_talkbutton);
         
+        schedule_alert = mToolbar_footer.findViewById(R.id.schedule_alert);
         message_alert = mToolbar_footer.findViewById(R.id.message_alert);
         
         //initialize Firebase components
@@ -126,9 +128,22 @@ public class MainActivity extends AppCompatActivity
         
         mUserPersonalInfoDatabaseReference.getParent().keepSynced(true);
         
-        chatListenerReference = mFirebaseDatabase.getReference().child("Chats");
-        appUserChatIdsReference = mFirebaseDatabase.getReference().child("AppUsers")
-                .child(currentUserId).child("PersonalInfo").child("ChatIDs");
+        //firebase fcm token listener
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        mUserPersonalInfoDatabaseReference.child("fcm_token").setValue(token);
+                    }
+                });
+        //firebase fcm token listener
+        
+        
         mFirebaseStorage = FirebaseStorage.getInstance();
         mStorageReference = mFirebaseStorage.getReference().child("appUsers").child(currentUserId)
                 .child("photos");
@@ -157,23 +172,36 @@ public class MainActivity extends AppCompatActivity
         //initialize listeners
         initializeFirebaseListenersForName();
         initializeFirebaseListenersForPhoto();
-        initializeFirebaseListenerForAppUserChatIDs();
+        initializeFirebaseListenerForNewMessage();
         initializeButtonClickListeners();
         //when softkeyboard is opened hide footer toolbar and when it is closed show it again
         hide_footer();
         
-        //set the first fragment
+        //set the starting fragment
         String starting_frag = getIntent().getStringExtra("start_where");
-        // TODO
-        // burada starting_frag a göre baslangıc fragmentını ayarlayıver.
-        home_button.setImageResource(R.drawable.home_clicked);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OlcumlerimMainFragment()).commit();
+        if (starting_frag != null) {
+            if (starting_frag.equals("profile")) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfilimMainFragment()).commit();
+            } else if (starting_frag.equals("chat")) {
+                talk_button.setImageResource(R.drawable.talk_clicked);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DanismanimFragment()).commit();
+            } else if (starting_frag.equals("meal_schedule")) {
+                schedule_button.setImageResource(R.drawable.schedule_clicked);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProgramFragment()).commit();
+            } else {
+                home_button.setImageResource(R.drawable.home_clicked);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OlcumlerimMainFragment()).commit();
+            }
+        } else {
+            home_button.setImageResource(R.drawable.home_clicked);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OlcumlerimMainFragment()).commit();
+        }
     }
     
     //handle back button actions
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         //if drawer is open, close the drawer when back button clicked
         //else force user press back button second time for exiting app
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -324,7 +352,7 @@ public class MainActivity extends AppCompatActivity
                         Log.e("hasanurl", downloadUri.toString());
                         mUserPersonalInfoDatabaseReference.child("photo_url").setValue(downloadUri.toString());
                     } else {
-                        Log.d(TAG,":Fotoğraf yüklenemedi ");
+                        Log.d(TAG, ":Fotoğraf yüklenemedi ");
                     }
                 }
             });
@@ -486,17 +514,20 @@ public class MainActivity extends AppCompatActivity
         mUserPersonalInfoDatabaseReference.child("name").addListenerForSingleValueEvent(mValueEventListener);
     }
     
-    private void initializeFirebaseListenerForAppUserChatIDs() {
+    private void initializeFirebaseListenerForNewMessage() {
         
-        appUserChatIdsListener = new ValueEventListener() {
+        mNewMessageListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    if (dataSnapshot1.getValue() != null) {
-                        appUserChatIDs.add(dataSnapshot1.getValue().toString());
+                
+                Boolean new_message = (Boolean) dataSnapshot.getValue();
+                if (new_message != null) {
+                    if (new_message) {
+                        message_alert.setVisibility(View.VISIBLE);
+                    } else {
+                        message_alert.setVisibility(View.GONE);
                     }
                 }
-                initializeFirebaseListenerForChat();
             }
             
             @Override
@@ -504,48 +535,7 @@ public class MainActivity extends AppCompatActivity
             
             }
         };
-        appUserChatIdsReference.addValueEventListener(appUserChatIdsListener);
-    }
-    
-    private void initializeFirebaseListenerForChat() {
-        
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Log.d("hasee  ", dataSnapshot1.getValue().toString());
-                    if (dataSnapshot1.getKey().equals("dietitian_id")) {
-                        //TODO
-                        //haci simdi app user her bir chatini dinleyecekki mesaj geldiğinde direk uyarılsın
-                    }
-                }
-                
-                
-            }
-            
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            
-            }
-            
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            
-            }
-            
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            
-            }
-            
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            
-            }
-        };
-        
-        chatListenerReference.addChildEventListener(mChildEventListener);
+        mUserPersonalInfoDatabaseReference.child("new_message").addValueEventListener(mNewMessageListener);
     }
     
     //when softkeyboard is opened hide footer toolbar and when it is closed show it again
@@ -578,13 +568,74 @@ public class MainActivity extends AppCompatActivity
     private void notificationAlarms() {
         
         
-        checkProfileRemainderNeed();
+        profileReminder();
         
         notificationTypeSu();
         
         notificationTypeProfil();
         
+        String breakfast_time = sharedPref.getString("breakfast_time", null);
+        String lunch_time = sharedPref.getString("lunch_time", null);
+        String dinner_time = sharedPref.getString("dinner_time", null);
+        
+        Log.d("nottimes", "break :" + breakfast_time + " lunch_time :" + lunch_time + " dinner :" + dinner_time);
+        
+        if (breakfast_time != null) {
+            
+            String splited[] = breakfast_time.split(":");
+            int hour = Integer.parseInt(splited[0]);
+            int min = Integer.parseInt(splited[1]);
+            
+            notificationTypeMealReminder(hour, min, "breakfast", 3);
+        }
+        
+        if (lunch_time != null) {
+            
+            String splited[] = lunch_time.split(":");
+            int hour = Integer.parseInt(splited[0]);
+            int min = Integer.parseInt(splited[1]);
+            
+            notificationTypeMealReminder(hour, min, "lunch", 4);
+        }
+        
+        if (dinner_time != null) {
+            
+            String splited[] = dinner_time.split(":");
+            int hour = Integer.parseInt(splited[0]);
+            int min = Integer.parseInt(splited[1]);
+            
+            notificationTypeMealReminder(hour, min, "dinner", 5);
+        }
+        
     }
+    
+    private void notificationTypeMealReminder(int hour, int min, String type, int reqcode) {
+        
+        Log.d("mealreminding", "hour :" + hour + "min :" + min + "type :" + type + "req :" + reqcode);
+        
+        if (min < 30) {
+            min = min + 30;
+            hour = hour - 1;
+        } else {
+            min = min - 30;
+        }
+        Calendar calendar = Calendar.getInstance();
+        Calendar timeNow = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, min);
+        calendar.set(Calendar.SECOND, 0);
+        if (calendar.before(timeNow)) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        
+        AlarmReceiver alarmReceiver = new AlarmReceiver();
+        Intent intent = new Intent(MainActivity.this, alarmReceiver.getClass());
+        intent.putExtra("type", type);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, reqcode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+    
     
     private void notificationTypeSu() {
         Calendar calendar = Calendar.getInstance();
@@ -635,7 +686,7 @@ public class MainActivity extends AppCompatActivity
     }
     
     
-    private void checkProfileRemainderNeed() {
+    private void profileReminder() {
         
         mUserPersonalInfoDatabaseReference.getParent().child("ProfilimSaglik").addValueEventListener(new ValueEventListener() {
             @Override

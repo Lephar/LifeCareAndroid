@@ -42,6 +42,8 @@ public class ChangePasswordDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.dialog_change_pass, container, false);
+    
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         //initialize layout views
         pass0 = view.findViewById(R.id.pass0);

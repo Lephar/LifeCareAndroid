@@ -67,6 +67,8 @@ public class OlcuSelectDateDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_select_date, container, false);
+    
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         //initialize buttons
         closeButton = view.findViewById(R.id.close_button);
