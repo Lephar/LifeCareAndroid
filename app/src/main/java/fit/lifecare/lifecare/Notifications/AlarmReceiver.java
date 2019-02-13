@@ -8,6 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -116,18 +118,21 @@ public class AlarmReceiver extends BroadcastReceiver {
     
     private void sendNotify(PendingIntent pendingIntent, Context context, String channel_id, String context_text, int id) {
         
+        
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Notification notification = new NotificationCompat.Builder(context, channel_id)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("Lifecare")
                 .setContentText(context_text)
                 .setAutoCancel(true)
+                .setSound(alarmSound)
                 .setContentIntent(pendingIntent)
                 .build();
         
         notificationManager.notify(id, notification);
     }
-    
-    
+
+
 //    private void sendNotificationForWater(PendingIntent pendingIntent, Context context) {
 //
 //        Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)

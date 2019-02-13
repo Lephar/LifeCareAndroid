@@ -16,6 +16,7 @@ public class NotificationChannels extends Application {
     public static final String CHANNEL_4_ID = "channel_for_lunch_reminder";
     public static final String CHANNEL_5_ID = "channel_for_dinner_reminder";
     public static final String CHANNEL_6_ID = "channel_for_chats";
+    public static final String CHANNEL_7_ID = "channel_for_meal_schedule";
 
     @Override
     public void onCreate() {
@@ -73,8 +74,15 @@ public class NotificationChannels extends Application {
                     NotificationManager.IMPORTANCE_HIGH
             );
             notificationChannel6.setDescription("Channel for chat messages");
-
-
+    
+            NotificationChannel notificationChannel7 = new NotificationChannel(
+                    CHANNEL_7_ID,
+                    "channelMealSchedule",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            notificationChannel7.setDescription("Channel for meal schedule");
+    
+    
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(notificationChannel1);
             notificationManager.createNotificationChannel(notificationChannel2);
@@ -82,6 +90,7 @@ public class NotificationChannels extends Application {
             notificationManager.createNotificationChannel(notificationChannel4);
             notificationManager.createNotificationChannel(notificationChannel5);
             notificationManager.createNotificationChannel(notificationChannel6);
+            notificationManager.createNotificationChannel(notificationChannel7);
         }
     }
 }

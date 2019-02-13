@@ -24,6 +24,7 @@ import fit.lifecare.lifecare.R;
 
 import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_2_ID;
 import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_6_ID;
+import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_7_ID;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     
@@ -88,8 +89,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //            // message, here is where that should be initiated. See sendNotification method below.
 //        }
         
+        // Check if message contains a notification payload.
         notificationManager = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
-        mySendNotification();
+        
+        
+        String type;
+        String body;
+        String program_name;
+        
+        if (remoteMessage.getData() != null) {
+            body = remoteMessage.getData().get("body");
+            type = remoteMessage.getData().get("type");
+            program_name = remoteMessage.getData().get("program_name");
+            if (type.equals("Message")) {
+                SendMessageNotification(body);
+            } else {
+                SendMealScheduleNotification(body, program_name);
+            }
+        }
+        
         
     }
     // [END receive_message]
@@ -176,7 +194,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
     
-    private void mySendNotification() {
+    private void SendMessageNotification(String body) {
         
         //firebase instance variables
         FirebaseAuth mAuth;
@@ -191,16 +209,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 6,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_6_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_foreground)
                 .setContentTitle("Lifecare")
-                .setContentText("Mesajınız var.")
+                .setContentText(body + " yeni mesajınız var.")
                 .setAutoCancel(true)
+                .setSound(alarmSound)
                 .setContentIntent(pendingIntent)
                 .build();
         
         notificationManager.notify(6, notification);
-    
+        
         //initialize Firebase components
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
@@ -208,8 +228,55 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             mFirebaseDatabase = FirebaseDatabase.getInstance();
             mUserPersonalInfoDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                     .child(currentUserId).child("PersonalInfo");
-        
+            
             mUserPersonalInfoDatabaseReference.child("new_message").setValue(true);
+        }
+        
+    }
+    
+    private void SendMealScheduleNotification(String body, String program_name) {
+        
+        //firebase instance variables
+        FirebaseAuth mAuth;
+        FirebaseDatabase mFirebaseDatabase;
+        DatabaseReference mUserPersonalInfoDatabaseReference;
+        
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        
+        notificationIntent.putExtra("start_where", "meal_schedule");
+        
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 7,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        
+        String context_text;
+        if(program_name != null) {
+            context_text = program_name + " isimli programınız güncellendi";
+        } else {
+            context_text = body + " size özel yeni programınızı hazırladı.";
+        }
+        
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_7_ID)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                .setContentTitle("Lifecare")
+                .setContentText(context_text)
+                .setAutoCancel(true)
+                .setSound(alarmSound)
+                .setContentIntent(pendingIntent)
+                .build();
+        
+        notificationManager.notify(7, notification);
+        
+        //initialize Firebase components
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            String currentUserId = mAuth.getCurrentUser().getUid();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            mUserPersonalInfoDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
+                    .child(currentUserId).child("PersonalInfo");
+            
+            mUserPersonalInfoDatabaseReference.child("new_meal_schedule").setValue(true);
         }
         
     }

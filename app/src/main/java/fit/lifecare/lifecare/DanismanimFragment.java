@@ -192,6 +192,13 @@ public class DanismanimFragment extends Fragment {
                     mChatAdapter.clear();
 
                     for (int i = 0; i < chatIDs.size(); i++) {
+                        
+                        // clearing global variables to prevent getting previous dietitian info.
+                        dietitianPhotoUrl = null;
+                        dietitianName = null;
+                        dietitianID = null;
+                        unreaded_messages = null;
+                        
                         String chat_id = chatIDs.get(i);
                         DataSnapshot dataSnapshot1 = dataSnapshot.child(chat_id);
 

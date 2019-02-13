@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
     private DatabaseReference mUserPersonalInfoDatabaseReference;
     private ValueEventListener mValueEventListener;
     private ValueEventListener mNewMessageListener;
+    private ValueEventListener mNewMealScheduleListener;
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mStorageReference;
     
@@ -173,6 +174,7 @@ public class MainActivity extends AppCompatActivity
         initializeFirebaseListenersForName();
         initializeFirebaseListenersForPhoto();
         initializeFirebaseListenerForNewMessage();
+        initializeFirebaseListenerForNewMealSchedule();
         initializeButtonClickListeners();
         //when softkeyboard is opened hide footer toolbar and when it is closed show it again
         hide_footer();
@@ -536,6 +538,30 @@ public class MainActivity extends AppCompatActivity
             }
         };
         mUserPersonalInfoDatabaseReference.child("new_message").addValueEventListener(mNewMessageListener);
+    }
+    
+    private void initializeFirebaseListenerForNewMealSchedule() {
+        
+        mNewMealScheduleListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                
+                Boolean new_schedule = (Boolean) dataSnapshot.getValue();
+                if (new_schedule != null) {
+                    if (new_schedule) {
+                        schedule_alert.setVisibility(View.VISIBLE);
+                    } else {
+                        schedule_alert.setVisibility(View.GONE);
+                    }
+                }
+            }
+            
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            
+            }
+        };
+        mUserPersonalInfoDatabaseReference.child("new_meal_schedule").addValueEventListener(mNewMealScheduleListener);
     }
     
     //when softkeyboard is opened hide footer toolbar and when it is closed show it again
