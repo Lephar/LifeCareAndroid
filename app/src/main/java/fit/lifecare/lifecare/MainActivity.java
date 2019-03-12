@@ -183,11 +183,26 @@ public class MainActivity extends AppCompatActivity
         String starting_frag = getIntent().getStringExtra("start_where");
         if (starting_frag != null) {
             if (starting_frag.equals("profile")) {
+                
+                //set title according to selected item
+                TextView tv = (TextView) mToolbar_header.findViewById(R.id.header_title_id);
+                tv.setText(getString(R.string.profilim));
+                
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfilimMainFragment()).commit();
             } else if (starting_frag.equals("chat")) {
+                
+                //set title according to selected item
+                TextView tv = (TextView) mToolbar_header.findViewById(R.id.header_title_id);
+                tv.setText(getString(R.string.danismanlarim));
+                
                 talk_button.setImageResource(R.drawable.talk_clicked);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DanismanimFragment()).commit();
             } else if (starting_frag.equals("meal_schedule")) {
+                
+                //set title according to selected item
+                TextView tv = (TextView) mToolbar_header.findViewById(R.id.header_title_id);
+                tv.setText(getString(R.string.beslenme_prog));
+                
                 schedule_button.setImageResource(R.drawable.schedule_clicked);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProgramFragment()).commit();
             } else {
@@ -666,19 +681,71 @@ public class MainActivity extends AppCompatActivity
     private void notificationTypeSu() {
         Calendar calendar = Calendar.getInstance();
         Calendar timeNow = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.HOUR_OF_DAY, 10);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         if (calendar.before(timeNow)) {
             calendar.add(Calendar.DATE, 1);
         }
         
-        AlarmReceiver alarmReceiver = new AlarmReceiver();
-        Intent intent = new Intent(MainActivity.this, alarmReceiver.getClass());
-        intent.putExtra("type", "su");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmReceiver alarmReceiver1 = new AlarmReceiver();
+        Intent intent1 = new Intent(MainActivity.this, alarmReceiver1.getClass());
+        intent1.putExtra("type", "su");
+        PendingIntent pendingIntent1 = PendingIntent.getBroadcast(MainActivity.this, 11, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent1);
+        
+        calendar.set(Calendar.HOUR_OF_DAY, 13);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        if (calendar.before(timeNow)) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        
+        AlarmReceiver alarmReceiver2 = new AlarmReceiver();
+        Intent intent2 = new Intent(MainActivity.this, alarmReceiver2.getClass());
+        intent2.putExtra("type", "su");
+        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(MainActivity.this, 12, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent2);
+        
+        calendar.set(Calendar.HOUR_OF_DAY, 16);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        if (calendar.before(timeNow)) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        
+        AlarmReceiver alarmReceiver3 = new AlarmReceiver();
+        Intent intent3 = new Intent(MainActivity.this, alarmReceiver3.getClass());
+        intent3.putExtra("type", "su");
+        PendingIntent pendingIntent3 = PendingIntent.getBroadcast(MainActivity.this, 13, intent3, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent3);
+        
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        if (calendar.before(timeNow)) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        
+        AlarmReceiver alarmReceiver4 = new AlarmReceiver();
+        Intent intent4 = new Intent(MainActivity.this, alarmReceiver4.getClass());
+        intent4.putExtra("type", "su");
+        PendingIntent pendingIntent4 = PendingIntent.getBroadcast(MainActivity.this, 14, intent4, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent4);
+        
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        if (calendar.before(timeNow)) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        
+        AlarmReceiver alarmReceiver5 = new AlarmReceiver();
+        Intent intent5 = new Intent(MainActivity.this, alarmReceiver5.getClass());
+        intent5.putExtra("type", "su");
+        PendingIntent pendingIntent5 = PendingIntent.getBroadcast(MainActivity.this, 15, intent5, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent5);
     }
     
     private void notificationTypeProfil() {

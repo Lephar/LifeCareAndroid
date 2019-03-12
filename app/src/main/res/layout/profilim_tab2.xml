@@ -749,7 +749,7 @@
             android:background="@null"
             android:fontFamily="@font/montserratlight"
             android:gravity="end|center"
-            android:hint="70kg"
+            android:hint="- (kg)"
             android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:textSize="14sp"

@@ -139,7 +139,7 @@ public class ProfilimTab2 extends Fragment {
                 if (dataSnapshot.exists()) {
                     ProfilimSaglikData profilimSaglikData = dataSnapshot.getValue(ProfilimSaglikData.class);
                     editText1.setText(profilimSaglikData.getProfilimSaglikRow1());
-                    if (editText1.getText().toString().equals("no")) {
+                    if (editText1.getText().toString().equals("yok")) {
                         imageView1.setImageResource(R.drawable.state_no);
                     } else if (editText1.getText().toString().equals("")) {
                         imageView1.setImageResource(R.drawable.state_default);
@@ -147,7 +147,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView1.setImageResource(R.drawable.state_yes);
                     }
                     editText2.setText(profilimSaglikData.getProfilimSaglikRow2());
-                    if (editText2.getText().toString().equals("no")) {
+                    if (editText2.getText().toString().equals("yok")) {
                         imageView2.setImageResource(R.drawable.state_no);
                     } else if (editText2.getText().toString().equals("")) {
                         imageView2.setImageResource(R.drawable.state_default);
@@ -155,7 +155,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView2.setImageResource(R.drawable.state_yes);
                     }
                     editText3.setText(profilimSaglikData.getProfilimSaglikRow3());
-                    if (editText3.getText().toString().equals("no")) {
+                    if (editText3.getText().toString().equals("yok")) {
                         imageView3.setImageResource(R.drawable.state_no);
                     } else if (editText3.getText().toString().equals("")) {
                         imageView3.setImageResource(R.drawable.state_default);
@@ -163,7 +163,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView3.setImageResource(R.drawable.state_yes);
                     }
                     editText4.setText(profilimSaglikData.getProfilimSaglikRow4());
-                    if (editText4.getText().toString().equals("no")) {
+                    if (editText4.getText().toString().equals("yok")) {
                         imageView4.setImageResource(R.drawable.state_no);
                     } else if (editText4.getText().toString().equals("")) {
                         imageView4.setImageResource(R.drawable.state_default);
@@ -171,7 +171,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView4.setImageResource(R.drawable.state_yes);
                     }
                     editText5.setText(profilimSaglikData.getProfilimSaglikRow5());
-                    if (editText5.getText().toString().equals("no")) {
+                    if (editText5.getText().toString().equals("yok")) {
                         imageView5.setImageResource(R.drawable.state_no);
                     } else if (editText5.getText().toString().equals("")) {
                         imageView5.setImageResource(R.drawable.state_default);
@@ -179,7 +179,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView5.setImageResource(R.drawable.state_yes);
                     }
                     editText6.setText(profilimSaglikData.getProfilimSaglikRow6());
-                    if (editText6.getText().toString().equals("no")) {
+                    if (editText6.getText().toString().equals("yok")) {
                         imageView6.setImageResource(R.drawable.state_no);
                     } else if (editText6.getText().toString().equals("")) {
                         imageView6.setImageResource(R.drawable.state_default);
@@ -187,7 +187,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView6.setImageResource(R.drawable.state_yes);
                     }
                     editText7.setText(profilimSaglikData.getProfilimSaglikRow7());
-                    if (editText7.getText().toString().equals("no")) {
+                    if (editText7.getText().toString().equals("yok")) {
                         imageView7.setImageResource(R.drawable.state_no);
                     } else if (editText7.getText().toString().equals("")) {
                         imageView7.setImageResource(R.drawable.state_default);
@@ -195,7 +195,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView7.setImageResource(R.drawable.state_yes);
                     }
                     editText8.setText(profilimSaglikData.getProfilimSaglikRow8());
-                    if (editText8.getText().toString().equals("no")) {
+                    if (editText8.getText().toString().equals("yok")) {
                         imageView8.setImageResource(R.drawable.state_no);
                     } else if (editText8.getText().toString().equals("")) {
                         imageView8.setImageResource(R.drawable.state_default);
@@ -203,7 +203,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView8.setImageResource(R.drawable.state_yes);
                     }
                     editText9.setText(profilimSaglikData.getProfilimSaglikRow9());
-                    if (editText9.getText().toString().equals("no")) {
+                    if (editText9.getText().toString().equals("yok")) {
                         imageView9.setImageResource(R.drawable.state_no);
                     } else if (editText9.getText().toString().equals("")) {
                         imageView9.setImageResource(R.drawable.state_default);
@@ -211,7 +211,7 @@ public class ProfilimTab2 extends Fragment {
                         imageView9.setImageResource(R.drawable.state_yes);
                     }
                     editText10.setText(profilimSaglikData.getProfilimSaglikRow10());
-                    if (editText10.getText().toString().equals("no")) {
+                    if (editText10.getText().toString().equals("yok")) {
                         imageView10.setImageResource(R.drawable.state_no);
                     } else if (editText10.getText().toString().equals("")) {
                         imageView10.setImageResource(R.drawable.state_default);
@@ -238,7 +238,7 @@ public class ProfilimTab2 extends Fragment {
         textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText1.getText().toString().length() != 0 && !editText1.getText().toString().equals("no")) {
+                if (editText1.getText().toString().length() != 0 && !editText1.getText().toString().equals("yok")) {
                     if (editText1.isShown()) {
                         editText1.setVisibility(view.GONE);
                     } else {
@@ -260,7 +260,7 @@ public class ProfilimTab2 extends Fragment {
         textView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText2.getText().toString().length() != 0 && !editText2.getText().toString().equals("no")) {
+                if (editText2.getText().toString().length() != 0 && !editText2.getText().toString().equals("yok")) {
                     if (editText2.isShown()) {
                         editText2.setVisibility(view.GONE);
                     } else {
@@ -282,7 +282,7 @@ public class ProfilimTab2 extends Fragment {
         textView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText3.getText().toString().length() != 0 && !editText3.getText().toString().equals("no")) {
+                if (editText3.getText().toString().length() != 0 && !editText3.getText().toString().equals("yok")) {
                     if (editText3.isShown()) {
                         editText3.setVisibility(view.GONE);
                     } else {
@@ -304,7 +304,7 @@ public class ProfilimTab2 extends Fragment {
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText4.getText().toString().length() != 0 && !editText4.getText().toString().equals("no")) {
+                if (editText4.getText().toString().length() != 0 && !editText4.getText().toString().equals("yok")) {
                     if (editText4.isShown()) {
                         editText4.setVisibility(view.GONE);
                     } else {
@@ -326,7 +326,7 @@ public class ProfilimTab2 extends Fragment {
         textView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText5.getText().toString().length() != 0 && !editText5.getText().toString().equals("no")) {
+                if (editText5.getText().toString().length() != 0 && !editText5.getText().toString().equals("yok")) {
                     if (editText5.isShown()) {
                         editText5.setVisibility(view.GONE);
                     } else {
@@ -348,7 +348,7 @@ public class ProfilimTab2 extends Fragment {
         textView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText6.getText().toString().length() != 0 && !editText6.getText().toString().equals("no")) {
+                if (editText6.getText().toString().length() != 0 && !editText6.getText().toString().equals("yok")) {
                     if (editText6.isShown()) {
                         editText6.setVisibility(view.GONE);
                     } else {
@@ -370,7 +370,7 @@ public class ProfilimTab2 extends Fragment {
         textView7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText7.getText().toString().length() != 0 && !editText7.getText().toString().equals("no")) {
+                if (editText7.getText().toString().length() != 0 && !editText7.getText().toString().equals("yok")) {
                     if (editText7.isShown()) {
                         editText7.setVisibility(view.GONE);
                     } else {
@@ -392,7 +392,7 @@ public class ProfilimTab2 extends Fragment {
         textView8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText8.getText().toString().length() != 0 && !editText8.getText().toString().equals("no")) {
+                if (editText8.getText().toString().length() != 0 && !editText8.getText().toString().equals("yok")) {
                     if (editText8.isShown()) {
                         editText8.setVisibility(view.GONE);
                     } else {
@@ -414,7 +414,7 @@ public class ProfilimTab2 extends Fragment {
         textView9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText9.getText().toString().length() != 0 && !editText9.getText().toString().equals("no")) {
+                if (editText9.getText().toString().length() != 0 && !editText9.getText().toString().equals("yok")) {
                     if (editText9.isShown()) {
                         editText9.setVisibility(view.GONE);
                     } else {
@@ -436,7 +436,7 @@ public class ProfilimTab2 extends Fragment {
         textView10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText10.getText().toString().length() != 0 && !editText10.getText().toString().equals("no")) {
+                if (editText10.getText().toString().length() != 0 && !editText10.getText().toString().equals("yok")) {
                     if (editText10.isShown()) {
                         editText10.setVisibility(view.GONE);
                     } else {
@@ -630,12 +630,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView1.getWidth() / 2) {
                         editText1.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow1").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow1").setValue("yok");
                         imageView1.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText1.getText().toString().equals("no")) {
+                        if (editText1.getText().toString().equals("yok")) {
                             editText1.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow1").setValue("var");
                         editText1.setVisibility(View.VISIBLE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);
@@ -662,12 +663,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView2.getWidth() / 2) {
                         editText2.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow2").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow2").setValue("yok");
                         imageView2.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText2.getText().toString().equals("no")) {
+                        if (editText2.getText().toString().equals("yok")) {
                             editText2.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow2").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.VISIBLE);
                         editText3.setVisibility(View.GONE);
@@ -693,12 +695,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView3.getWidth() / 2) {
                         editText3.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow3").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow3").setValue("yok");
                         imageView3.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText3.getText().toString().equals("no")) {
+                        if (editText3.getText().toString().equals("yok")) {
                             editText3.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow3").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.VISIBLE);
@@ -724,12 +727,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView4.getWidth() / 2) {
                         editText4.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow4").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow4").setValue("yok");
                         imageView4.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText4.getText().toString().equals("no")) {
+                        if (editText4.getText().toString().equals("yok")) {
                             editText4.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow4").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);
@@ -755,12 +759,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView5.getWidth() / 2) {
                         editText5.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow5").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow5").setValue("yok");
                         imageView5.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText5.getText().toString().equals("no")) {
+                        if (editText5.getText().toString().equals("yok")) {
                             editText5.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow5").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);
@@ -786,12 +791,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView6.getWidth() / 2) {
                         editText6.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow6").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow6").setValue("yok");
                         imageView6.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText6.getText().toString().equals("no")) {
+                        if (editText6.getText().toString().equals("yok")) {
                             editText6.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow6").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);
@@ -817,12 +823,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView7.getWidth() / 2) {
                         editText7.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow7").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow7").setValue("yok");
                         imageView7.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText7.getText().toString().equals("no")) {
+                        if (editText7.getText().toString().equals("yok")) {
                             editText7.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow7").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);
@@ -848,12 +855,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView8.getWidth() / 2) {
                         editText8.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow8").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow8").setValue("yok");
                         imageView8.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText8.getText().toString().equals("no")) {
+                        if (editText8.getText().toString().equals("yok")) {
                             editText8.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow8").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);
@@ -879,12 +887,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView9.getWidth() / 2) {
                         editText9.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow9").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow9").setValue("yok");
                         imageView9.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText9.getText().toString().equals("no")) {
+                        if (editText9.getText().toString().equals("yok")) {
                             editText9.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow9").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);
@@ -910,12 +919,13 @@ public class ProfilimTab2 extends Fragment {
 
                     if (motionEvent.getX() < imageView10.getWidth() / 2) {
                         editText10.setVisibility(View.GONE);
-                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow10").setValue("no");
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow10").setValue("yok");
                         imageView10.setImageResource(R.drawable.state_no);
                     } else {
-                        if (editText10.getText().toString().equals("no")) {
+                        if (editText10.getText().toString().equals("yok")) {
                             editText10.setText("");
                         }
+                        mProfilimSaglikDatabaseReference.child("ProfilimSaglikRow10").setValue("var");
                         editText1.setVisibility(View.GONE);
                         editText2.setVisibility(View.GONE);
                         editText3.setVisibility(View.GONE);

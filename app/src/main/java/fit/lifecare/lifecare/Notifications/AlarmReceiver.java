@@ -52,18 +52,23 @@ public class AlarmReceiver extends BroadcastReceiver {
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         
         boolean showNotification = preferences.getBoolean("SHOW_NOTIFICATION", true);
+        boolean showNotificationWater = preferences.getBoolean("SHOW_NOTIFICATION_WATER", true);
         
         if (showNotification) {
             if (type.equals("su")) {
                 
-                Intent notificationIntent = new Intent(context, MainActivity.class);
-                notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                if (showNotificationWater) {
+                    
+                    Intent notificationIntent = new Intent(context, MainActivity.class);
+                    notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    
+                    notificationIntent.putExtra("start_where", "main_screen");
+                    
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 1,
+                            notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    sendNotify(pendingIntent, context, CHANNEL_1_ID, context.getString(R.string.dont_forget_drink), 1);
+                }
                 
-                notificationIntent.putExtra("start_where", "main_screen");
-                
-                PendingIntent pendingIntent = PendingIntent.getActivity(context, 1,
-                        notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                sendNotify(pendingIntent, context, CHANNEL_1_ID, context.getString(R.string.dont_forget_drink), 1);
                 
             } else if (type.equals("breakfast")) {
                 

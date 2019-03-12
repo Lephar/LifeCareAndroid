@@ -37,6 +37,7 @@ public class AyarlarFragment extends Fragment {
     private TextView password;
     private TextView hesap;
     private Switch mSwitch;
+    private Switch mSwitch2;
     
     // Firebase instance variables
     private FirebaseUser user;
@@ -60,6 +61,7 @@ public class AyarlarFragment extends Fragment {
         password = view.findViewById(R.id.password_field);
         hesap = view.findViewById(R.id.hesap);
         mSwitch = view.findViewById(R.id.switch_view);
+        mSwitch2 = view.findViewById(R.id.switch_view2);
         
         // initialize firebase components
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -78,8 +80,10 @@ public class AyarlarFragment extends Fragment {
     private void initializeViewListeners() {
     
         boolean showNotification = preferences.getBoolean("SHOW_NOTIFICATION", true);
+        boolean showNotificationWater = preferences.getBoolean("SHOW_NOTIFICATION_WATER", true);
         
         mSwitch.setChecked(showNotification);
+        mSwitch2.setChecked(showNotificationWater);
         
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -93,6 +97,21 @@ public class AyarlarFragment extends Fragment {
                     editor.commit();
                 }
                 
+            }
+        });
+    
+        mSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            
+                if (mSwitch2.isChecked()) {
+                    editor.putBoolean("SHOW_NOTIFICATION_WATER", true);
+                    editor.commit();
+                } else {
+                    editor.putBoolean("SHOW_NOTIFICATION_WATER", false);
+                    editor.commit();
+                }
+            
             }
         });
         
