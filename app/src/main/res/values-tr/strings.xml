@@ -505,6 +505,7 @@
     <string name="days">1. GÜN</string>
     <string name="breakfast">SABAH KAHVALTISI (0 cal)</string>
     <string name="snack">ARA ÖĞÜN (0 cal)</string>
+    <string name="alternative_0_cal">ALTERNATİF (0 cal)</string>
     <string name="dinner">ÖĞLE YEMEĞİ (0 cal)</string>
     <string name="lunch">AKŞAM YEMEĞİ (0 cal)</string>
     <string name="breakfast_reminder">Kahvaltı saatiniz yaklaştı</string>

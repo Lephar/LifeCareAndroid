@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fit.lifecare.lifecare.DatabaseClasses.ProgramlarimData;
@@ -29,23 +30,26 @@ public class ProgramDailyListAdapter extends ArrayAdapter {
         String program_name = programItem.getName();
         String total_cal = programItem.getToplamCalory();
 
-        String meal1_str = programItem.getSabahKahvaltisi();
+        ArrayList<String> meal1_str = programItem.getSabahKahvaltisi();
         String meal1_cal = programItem.getSabahKahvaltisiCalory();
-
-        String meal2_str = programItem.getBirinciAraOgun();
+    
+        ArrayList<String> meal2_str = programItem.getBirinciAraOgun();
         String meal2_cal = programItem.getBirinciAraOgunCalory();
-
-        String meal3_str = programItem.getOgleYemegi();
+    
+        ArrayList<String> meal3_str = programItem.getOgleYemegi();
         String meal3_cal = programItem.getOgleYemegiCalory();
-
-        String meal4_str = programItem.getIkinciAraOgun();
+    
+        ArrayList<String> meal4_str = programItem.getIkinciAraOgun();
         String meal4_cal = programItem.getIkinciAraOgunCalory();
-
-        String meal5_str = programItem.getAksamYemegi();
+    
+        ArrayList<String> meal5_str = programItem.getAksamYemegi();
         String meal5_cal = programItem.getAksamYemegiCalory();
-
-        String meal6_str = programItem.getUcuncuAraOgun();
+    
+        ArrayList<String> meal6_str = programItem.getUcuncuAraOgun();
         String meal6_cal = programItem.getUcuncuAraOgunCalory();
+    
+        ArrayList<String> meal7_str = programItem.getAlternatif();
+        String meal7_cal = programItem.getAlternatifCalory();
 
         convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.daily_program_list_item_layout, parent, false);
 
@@ -69,6 +73,9 @@ public class ProgramDailyListAdapter extends ArrayAdapter {
 
         TextView meal6_title = convertView.findViewById(R.id.meal6_title);
         TextView meal6_content = convertView.findViewById(R.id.meal6_content);
+    
+        TextView meal7_title = convertView.findViewById(R.id.meal7_title);
+        TextView meal7_content = convertView.findViewById(R.id.meal7_content);
 
 
         day_title.setText(day_title.getText().toString().replace("1",String.valueOf(position +1)));
@@ -104,17 +111,59 @@ public class ProgramDailyListAdapter extends ArrayAdapter {
             String new_meal6_title = meal6_title.getText().toString().replace("0",meal6_cal);
             meal6_title.setText(new_meal6_title);
         }
+        if(meal7_cal != null) {
+        
+            String new_meal7_title = meal7_title.getText().toString().replace("0",meal7_cal);
+            meal7_title.setText(new_meal7_title);
+        }
         if(total_cal != null) {
             String totalCal = day_title.getText() + "  ("  + total_cal + " cal)";
             day_title.setText(totalCal);
         }
-
-        meal1_content.setText(meal1_str);
-        meal2_content.setText(meal2_str);
-        meal3_content.setText(meal3_str);
-        meal4_content.setText(meal4_str);
-        meal5_content.setText(meal5_str);
-        meal6_content.setText(meal6_str);
+    
+        String SabahKahvaltisi = "";
+        String BirinciAraOgun = "";
+        String OgleYemegi = "";
+        String IkinciAraOgun = "";
+        String AksamYemegi = "";
+        String UcuncuAraOgun = "";
+        String Alternatif = "";
+    
+        for(String str : programItem.getSabahKahvaltisi()){
+            SabahKahvaltisi = str + "\n" + SabahKahvaltisi;
+        }
+    
+        for(String str : programItem.getBirinciAraOgun()){
+            BirinciAraOgun = str + "\n" + BirinciAraOgun;
+        }
+    
+        for(String str : programItem.getOgleYemegi()){
+            OgleYemegi = str + "\n" + OgleYemegi;
+        }
+    
+        for(String str : programItem.getIkinciAraOgun()){
+            IkinciAraOgun = str + "\n" + IkinciAraOgun;
+        }
+    
+        for(String str : programItem.getAksamYemegi()){
+            AksamYemegi = str + "\n" + AksamYemegi;
+        }
+    
+        for(String str : programItem.getUcuncuAraOgun()){
+            UcuncuAraOgun = str + "\n" + UcuncuAraOgun;
+        }
+    
+        for(String str : programItem.getAlternatif()){
+            Alternatif = str + "\n" + Alternatif;
+        }
+    
+        meal1_content.setText(SabahKahvaltisi);
+        meal2_content.setText(BirinciAraOgun);
+        meal3_content.setText(OgleYemegi);
+        meal4_content.setText(IkinciAraOgun);
+        meal5_content.setText(AksamYemegi);
+        meal6_content.setText(UcuncuAraOgun);
+        meal7_content.setText(Alternatif);
 
         final ConstraintLayout day_frame = convertView.findViewById(R.id.day_frame);
 

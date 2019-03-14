@@ -503,6 +503,7 @@
     <string name="disconnet_con">cut off the communication</string>
     <string name="days">DAY 1</string>
     <string name="snack">SNACK (0 cal)</string>
+    <string name="alternative_0_cal">ALTERNATIVE (0 cal)</string>
     <string name="breakfast">BREAKFAST (0 cal)</string>
     <string name="lunch">LUNCH (0 cal)</string>
     <string name="dinner">DINNER (0 cal)</string>

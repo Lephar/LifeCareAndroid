@@ -27,6 +27,8 @@ public class ProgramGeneralActivity extends AppCompatActivity {
     private TextView meal5_content;
     private TextView meal6_title;
     private TextView meal6_content;
+    private TextView meal7_title;
+    private TextView meal7_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,10 @@ public class ProgramGeneralActivity extends AppCompatActivity {
         meal5_title = findViewById(R.id.meal5_title);
         meal6_content = findViewById(R.id.meal6_content);
         meal6_title = findViewById(R.id.meal6_title);
+        meal6_content = findViewById(R.id.meal6_content);
+        meal6_title = findViewById(R.id.meal6_title);
+        meal7_content = findViewById(R.id.meal7_content);
+        meal7_title = findViewById(R.id.meal7_title);
 
         ProgramItems programItem = (ProgramItems) getIntent().getSerializableExtra("ProgramItem");
         ProgramlarimData programlarimData = (ProgramlarimData) getIntent().getSerializableExtra("ProgramlarimData");
@@ -86,17 +92,59 @@ public class ProgramGeneralActivity extends AppCompatActivity {
             String new_meal6_title = meal6_title.getText().toString().replace("0",programlarimData.getUcuncuAraOgunCalory());
             meal6_title.setText(new_meal6_title);
         }
+        if(programlarimData.getAlternatifCalory() != null) {
+        
+            String new_meal7_title = meal7_title.getText().toString().replace("0",programlarimData.getAlternatifCalory());
+            meal7_title.setText(new_meal7_title);
+        }
         if(programlarimData.getToplamCalory() != null) {
             String totalCal = date.getText() + "\n("  +programlarimData.getToplamCalory() + " cal)";
             date.setText(totalCal);
         }
+        
+        String SabahKahvaltisi = "";
+        String BirinciAraOgun = "";
+        String OgleYemegi = "";
+        String IkinciAraOgun = "";
+        String AksamYemegi = "";
+        String UcuncuAraOgun = "";
+        String Alternatif = "";
+        
+        for(String str : programlarimData.getSabahKahvaltisi()){
+            SabahKahvaltisi = str + "\n" + SabahKahvaltisi;
+        }
+    
+        for(String str : programlarimData.getBirinciAraOgun()){
+            BirinciAraOgun = str + "\n" + BirinciAraOgun;
+        }
+    
+        for(String str : programlarimData.getOgleYemegi()){
+            OgleYemegi = str + "\n" + OgleYemegi;
+        }
+    
+        for(String str : programlarimData.getIkinciAraOgun()){
+            IkinciAraOgun = str + "\n" + IkinciAraOgun;
+        }
+    
+        for(String str : programlarimData.getAksamYemegi()){
+            AksamYemegi = str + "\n" + AksamYemegi;
+        }
+    
+        for(String str : programlarimData.getUcuncuAraOgun()){
+            UcuncuAraOgun = str + "\n" + UcuncuAraOgun;
+        }
+    
+        for(String str : programlarimData.getAlternatif()){
+            Alternatif = str + "\n" + Alternatif;
+        }
 
-        meal1_content.setText(programlarimData.getSabahKahvaltisi());
-        meal2_content.setText(programlarimData.getBirinciAraOgun());
-        meal3_content.setText(programlarimData.getOgleYemegi());
-        meal4_content.setText(programlarimData.getIkinciAraOgun());
-        meal5_content.setText(programlarimData.getAksamYemegi());
-        meal6_content.setText(programlarimData.getUcuncuAraOgun());
+        meal1_content.setText(SabahKahvaltisi);
+        meal2_content.setText(BirinciAraOgun);
+        meal3_content.setText(OgleYemegi);
+        meal4_content.setText(IkinciAraOgun);
+        meal5_content.setText(AksamYemegi);
+        meal6_content.setText(UcuncuAraOgun);
+        meal7_content.setText(Alternatif);
 
         initializeButtonListeners();
 
