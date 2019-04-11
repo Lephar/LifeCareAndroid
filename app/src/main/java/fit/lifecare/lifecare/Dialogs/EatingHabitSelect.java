@@ -54,6 +54,8 @@ public class EatingHabitSelect extends DialogFragment {
     
         View view = inflater.inflate(R.layout.dialog_select_eating_habit, container, false);
     
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+    
         //initialize layout views
         close_button = view.findViewById(R.id.close_button);
         habit1 = view.findViewById(R.id.habit1);

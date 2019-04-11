@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -349,35 +350,39 @@ public class DanismanimChatActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     
-                    //increment DietitianUnreadedMessages by one for each new message send.
-                    mChatDatabaseReference.child("DietitianUnreadedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.getValue() != null) {
-                                Long value = (Long) dataSnapshot.getValue();
-                                value += 1;
-                                dataSnapshot.getRef().setValue(value);
-                            } else {
-                                dataSnapshot.getRef().setValue(1);
+                    if( ! TextUtils.isEmpty( mMessageEditText.getText().toString().trim()) ) {
+    
+                        //increment DietitianUnreadedMessages by one for each new message send.
+                        mChatDatabaseReference.child("DietitianUnreadedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.getValue() != null) {
+                                    Long value = (Long) dataSnapshot.getValue();
+                                    value += 1;
+                                    dataSnapshot.getRef().setValue(value);
+                                } else {
+                                    dataSnapshot.getRef().setValue(1);
+                                }
                             }
-                        }
-                        
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        
-                        }
-                    });
+        
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+            
+                            }
+                        });
+    
+                        //save last message time to update GUI accordingly
+                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                        mChatDatabaseReference.child("last_message_time").setValue(timestamp.getTime());
+    
+                        //create messages object and push it to firebase database
+                        Messages messages = new Messages(mMessageEditText.getText().toString(), null, timestamp.getTime(), false);
+                        mChatDatabaseReference.child("messages").push().setValue(messages);
+    
+                        // Clear input box
+                        mMessageEditText.setText("");
+                    }
                     
-                    //save last message time to update GUI accordingly
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    mChatDatabaseReference.child("last_message_time").setValue(timestamp.getTime());
-                    
-                    //create messages object and push it to firebase database
-                    Messages messages = new Messages(mMessageEditText.getText().toString(), null, timestamp.getTime(), false);
-                    mChatDatabaseReference.child("messages").push().setValue(messages);
-                    
-                    // Clear input box
-                    mMessageEditText.setText("");
                 }
             });
         } else {

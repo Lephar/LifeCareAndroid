@@ -268,7 +268,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/vitamin_d"
+                android:text="@string/blood_lipids"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/right6"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"

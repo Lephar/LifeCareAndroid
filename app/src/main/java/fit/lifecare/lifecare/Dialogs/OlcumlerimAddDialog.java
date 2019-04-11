@@ -66,6 +66,7 @@ public class OlcumlerimAddDialog extends DialogFragment {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mOlcumlerimDatabaseReference;
+    private DatabaseReference mPersonalDatabaseReference;
     
     @Nullable
     @Override
@@ -112,6 +113,8 @@ public class OlcumlerimAddDialog extends DialogFragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mOlcumlerimDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Olcumlerim");
+        mPersonalDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
+                .child(currentUserId).child("PersonalInfo");
         
         //initialize onClick Listeners
         initOnClickListeners();
@@ -222,6 +225,7 @@ public class OlcumlerimAddDialog extends DialogFragment {
                             , mEdittext_row7.getText().toString());
                     //pushing olcumlerimData object to FirebaseDatabase
                     mOlcumlerimDatabaseReference.child(theDate).setValue(olcumlerimData);
+                    mPersonalDatabaseReference.child("weight").setValue(mEdittext_row1.getText().toString());
                     fab.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(42, 48, 127)));
                     dismiss();
                 }
