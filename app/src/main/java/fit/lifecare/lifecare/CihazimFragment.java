@@ -39,6 +39,8 @@ import fit.lifecare.lifecare.Bluetooth.DeviceScanActivity;
 import fit.lifecare.lifecare.DatabaseClasses.FormulaData;
 import fit.lifecare.lifecare.DatabaseClasses.OlcumlerimData;
 import fit.lifecare.lifecare.DatabaseClasses.PersonalInfoData;
+import fit.lifecare.lifecare.Dialogs.KisiselGenderSelect;
+import fit.lifecare.lifecare.Dialogs.WeightSelect;
 
 public class CihazimFragment extends Fragment {
     
@@ -101,20 +103,29 @@ public class CihazimFragment extends Fragment {
         
         initializeFirebaseListeners();
         
+        // initialize click listeners
+        initializeClickListeners();
         
+        return view;
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+    
         // Use this check to determine whether BLE is supported on the device. Then
         // you can selectively disable BLE-related features.
         if (!getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(getContext(), "ble not supported", Toast.LENGTH_SHORT).show();
         } else {
-            
+        
             Log.d(TAG, "everything good");
-            
+        
             // Initializes Bluetooth adapter.
             final BluetoothManager bluetoothManager =
                     (BluetoothManager) getContext().getSystemService(Context.BLUETOOTH_SERVICE);
             bluetoothAdapter = bluetoothManager.getAdapter();
-            
+        
             // Ensures Bluetooth is available on the device and it is enabled. If not,
             // displays a dialog requesting user permission to enable Bluetooth.
             if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
@@ -122,7 +133,7 @@ public class CihazimFragment extends Fragment {
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             } else {
                 // everything good so far, bluetooth is enabled and active
-                
+            
                 int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
                 if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -132,21 +143,23 @@ public class CihazimFragment extends Fragment {
                     }
                 } else {
                     // Toast.makeText(getContext(), "Location permissions already granted", Toast.LENGTH_SHORT).show();
-                    
+                
                     deviceScanActivity.scanLeDevice(true);
-                    
+                
                     getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-                    
-    
                     Log.d(TAG, "le scan started");
                 }
             }
         }
         
-        // initialize click listeners
-        initializeClickListeners();
-        
-        return view;
+    }
+    
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "heydiriil");
+        deviceScanActivity.scanLeDevice(false);
+        deviceScanActivity.disconnectDevice();
     }
     
     @Override
@@ -184,8 +197,9 @@ public class CihazimFragment extends Fragment {
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
-                Toast.makeText(getContext(), "3 saniye içinde Ölçüm başlayacak",Toast.LENGTH_SHORT).show();
+    
+                new WeightSelect().show(getChildFragmentManager(), "Select Weight");
+                deviceScanActivity.setStartClicked(true);
                 deviceScanActivity.WriteToDevice("re");
         
             }
@@ -203,29 +217,30 @@ public class CihazimFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (DeviceScanActivity.ACTION_GATT_CONNECTED.equals(action)) {
-//                mConnected = true;
-//                updateConnectionState(R.string.connected);
-//                invalidateOptionsMenu();
+                
                 Toast.makeText(getContext(),"Bluetooth connected with Lifecare", Toast.LENGTH_SHORT).show();
             } else if (DeviceScanActivity.ACTION_GATT_DISCONNECTED.equals(action)) {
-//                mConnected = false;
-//                updateConnectionState(R.string.disconnected);
-//                invalidateOptionsMenu();
-//                clearUI();
+                
                 Toast.makeText(getContext(),"Bluetooth disconnected with Lifecare", Toast.LENGTH_SHORT).show();
             } else if (DeviceScanActivity.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
-                // Show all the supported services and characteristics on the user interface.
-//                displayGattServices(mBluetoothLeService.getSupportedGattServices());
+                
                 Toast.makeText(getContext(),"Bluetooth services discovered", Toast.LENGTH_SHORT).show();
             } else if (DeviceScanActivity.ACTION_DATA_AVAILABLE.equals(action)) {
                 
                 String readed_value = intent.getStringExtra(DeviceScanActivity.EXTRA_DATA);
                 Float emp = Float.parseFloat(readed_value.substring(5));
-                Toast.makeText(getContext(),"Ölçüm bitti ", Toast.LENGTH_LONG).show();
-                emp_text.setText("emp: " + emp);
+                
+                if( emp < 10000) {
+                    Toast.makeText(getContext(),"Ölçüm bitti ", Toast.LENGTH_LONG).show();
+                    String text_toset = "emp: " + emp;
+                    emp_text.setText(text_toset);
     
-                // calculate with formula and put it to firebase database
-                CalculateFromBluetoothData(emp);
+                    // calculate with formula and put it to firebase database
+                    CalculateFromBluetoothData(emp);
+    
+                } else {
+                    Toast.makeText(getContext(),"Hatalı ölçüm tekrar ölçünüz ", Toast.LENGTH_LONG).show();
+                }
             
                 
                 
@@ -288,7 +303,6 @@ public class CihazimFragment extends Fragment {
         };
         mPersonalDatabaseReference.addValueEventListener(mValueEventListenerPersonal);
         
-        
     }
     
     private static IntentFilter makeGattUpdateIntentFilter() {
@@ -302,19 +316,17 @@ public class CihazimFragment extends Fragment {
     
     public void CalculateFromBluetoothData(Float emp) {
     
-    
-        Log.d("Bilgiler bilgiler", weight + "*" +  height + "*" + birthday + "*" + gender );
-        Log.d("Bilgiler bilgiler2",formulaDataErkek.getK() + "*" +  formulaDataErkek.getX());
-    
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         String current_date = formatter.format(date);
     
         int yil = 2019;
         
-        int boy = Integer.parseInt(height);
-        float kilo = Float.parseFloat(weight);
+        double boy = Double.parseDouble(height);
+        double kilo = Double.parseDouble(weight);
         int yas = yil - Integer.parseInt(birthday.substring(6));
+        
+        Log.d(TAG,yas + "**" + -yas);
         
         
         if(gender.equals("Erkek")) {
@@ -338,32 +350,40 @@ public class CihazimFragment extends Fragment {
             Log.d("SONN", yagYuzdesi + "****" + emp );
     
             //creating a olcumlerimData object and getting data from edittext views
-            OlcumlerimData olcumlerimData = new OlcumlerimData(
-                    Float.toString(kilo) , Double.toString(bmi) , Double.toString(yagYuzdesi ), Double.toString(suYuzdesi) ,
-                    Double.toString(kasYuzdesi) ,Double.toString(bazal), "0" );
+            OlcumlerimData olcumlerimData = new OlcumlerimData( String.valueOf(kilo) ,
+                    String.valueOf(bmi ) , String.valueOf(yagYuzdesi ), String.valueOf(suYuzdesi ) ,
+                    String.valueOf(kasYuzdesi ) ,String.valueOf(bazal ), "0" );
             //pushing olcumlerimData object to FirebaseDatabase
             mOlcumlerimDatabaseReference.child(current_date).setValue(olcumlerimData);
             
             
-        } else if(gender.equals("Kadın")) {
+        } else {
         
-            double fatfreeMass = formulaDataKadin.getK() + formulaDataKadin.getX() * ( boy*boy) / (emp + 100* formulaDataKadin.getY()) +
+            double fatfreeMass = formulaDataKadin.getK() + formulaDataKadin.getX() * ( boy*boy) / (emp + 100*formulaDataKadin.getY()) +
                     boy * formulaDataKadin.getL()  + formulaDataKadin.getZ()*(kilo + formulaDataKadin.getM()) +
                     formulaDataKadin.getT()*(-yas + formulaDataKadin.getN()) + 0 * formulaDataKadin.getO();
-        
+            
             double suKutlesi = fatfreeMass * 0.73;
             double suYuzdesi = (suKutlesi * 100) / kilo;
-        
+    
             double kasKutlesi = fatfreeMass - suKutlesi;
             double kasYuzdesi = (kasKutlesi * 100) / kilo;
-        
+    
             double yagKutlesi = kilo - fatfreeMass;
             double yagYuzdesi = (yagKutlesi* 100) / kilo;
     
             double bmi = kilo / (boy*boy);
-            double bazal = 447.593 + (3.098*boy) + 9.247*kilo - 4.330 * yas;
-        
+            double bazal = 88.362 + (4.799*boy) + 13.397*kilo - 5.677 * yas;
+    
             Log.d("SONN", yagYuzdesi + "****" + emp );
+    
+            //creating a olcumlerimData object and getting data from edittext views
+            OlcumlerimData olcumlerimData = new OlcumlerimData( String.valueOf(kilo) ,
+                    String.valueOf(bmi ) , String.valueOf(yagYuzdesi ), String.valueOf(suYuzdesi ) ,
+                    String.valueOf(kasYuzdesi ) ,String.valueOf(bazal ), "0" );
+            //pushing olcumlerimData object to FirebaseDatabase
+            mOlcumlerimDatabaseReference.child(current_date).setValue(olcumlerimData);
+    
         }
     
     }

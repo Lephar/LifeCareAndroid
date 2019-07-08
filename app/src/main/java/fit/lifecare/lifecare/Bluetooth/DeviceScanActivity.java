@@ -49,6 +49,8 @@ public class DeviceScanActivity extends ListActivity {
     
     public Boolean mScanning;
     private static final int SCAN_PERIOD = 10000;
+    private boolean start_clicked = false;
+    private boolean isConnected = false;
     
     private static final String TAG = "BluTutScan";
     
@@ -82,7 +84,7 @@ public class DeviceScanActivity extends ListActivity {
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
     
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.d(TAG, "haciii2");
+                
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
     
                 for (BluetoothGattService gattService : gatt.getServices()) {
@@ -133,24 +135,27 @@ public class DeviceScanActivity extends ListActivity {
                 readed_value = str;
     
                 Log.d(TAG, " changed2 " + str );
-                broadcastUpdate(ACTION_DATA_AVAILABLE, str);
+                if(start_clicked) {
+    
+                    broadcastUpdate(ACTION_DATA_AVAILABLE, str);
+                }
             }
         }
-        
-        
     };
     
     private ScanCallback mLeScanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
     
-            
-            
-            if(result.getDevice().getName() != null ){
+            if(!isConnected) {
     
-                Log.d(TAG ,"bu ne ola ki" + result.toString());
-                mBluetoothGatt = result.getDevice().connectGatt( mainAppActivity,false, mGattCallback);
+                if(result.getDevice().getAddress().equals("30:AE:A4:EA:BE:2E")){
+                    
+                    isConnected = true;
+                    mBluetoothGatt = result.getDevice().connectGatt( mainAppActivity,false, mGattCallback);
+                }
             }
+            
             super.onScanResult(callbackType, result);
          }
         
@@ -166,6 +171,16 @@ public class DeviceScanActivity extends ListActivity {
         }
     };
     
+    public void disconnectDevice() {
+    
+        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return;
+        }
+        isConnected = false;
+        mBluetoothGatt.disconnect();
+    }
+    
     public DeviceScanActivity(MainActivity mainActivity) {
         
         mainAppActivity = mainActivity;
@@ -173,7 +188,6 @@ public class DeviceScanActivity extends ListActivity {
         mBluetoothAdapter = bluetoothManager.getAdapter();
         
     }
-    
     
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
@@ -216,18 +230,26 @@ public class DeviceScanActivity extends ListActivity {
         }
     }
     
+    public void setStartClicked(Boolean isClicked) {
+        
+        this.start_clicked = isClicked;
+    }
+    
     public void WriteToDevice(String str) {
     
         UUID uid_service = UUID.fromString("ab0828b1-198e-4351-b779-901fa0e0371e");
         UUID uid_characteristic = UUID.fromString("4ac8a682-9736-4e5d-932b-e9b31405049c");
     
-        Log.d("sorun", "burada");
-        BluetoothGattCharacteristic characteristic = mBluetoothGatt.getService(uid_service).getCharacteristic(uid_characteristic);
-
-        byte[] b = str.getBytes();
-
-        characteristic.setValue(b); // call this BEFORE(!) you 'write' any stuff to the server
-        mBluetoothGatt.writeCharacteristic(characteristic);
-        
+        if(mBluetoothGatt != null) {
+    
+            Log.d("sorun", "burada");
+            BluetoothGattCharacteristic characteristic = mBluetoothGatt.getService(uid_service).getCharacteristic(uid_characteristic);
+    
+            byte[] b = str.getBytes();
+    
+            characteristic.setValue(b); // call this BEFORE(!) you 'write' any stuff to the server
+            mBluetoothGatt.writeCharacteristic(characteristic);
+    
+        }
     }
 }
