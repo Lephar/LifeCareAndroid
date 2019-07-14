@@ -9,11 +9,11 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -22,7 +22,6 @@ import com.google.firebase.messaging.RemoteMessage;
 import fit.lifecare.lifecare.MainActivity;
 import fit.lifecare.lifecare.R;
 
-import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_2_ID;
 import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_6_ID;
 import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_7_ID;
 

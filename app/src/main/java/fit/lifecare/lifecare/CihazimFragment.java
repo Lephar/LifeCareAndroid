@@ -10,11 +10,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,14 +33,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import fit.lifecare.lifecare.Bluetooth.DeviceScanActivity;
 import fit.lifecare.lifecare.DatabaseClasses.FormulaData;
 import fit.lifecare.lifecare.DatabaseClasses.OlcumlerimData;
 import fit.lifecare.lifecare.DatabaseClasses.PersonalInfoData;
-import fit.lifecare.lifecare.Dialogs.KisiselGenderSelect;
 import fit.lifecare.lifecare.Dialogs.WeightSelect;
 
 public class CihazimFragment extends Fragment {
