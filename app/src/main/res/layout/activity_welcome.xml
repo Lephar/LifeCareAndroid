@@ -48,40 +48,36 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
 
-    <ImageView
+    <Button
         android:id="@+id/login_button"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/buttonbackground"
+        android:enabled="false"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/login"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/signup_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/login"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/login_button"
-        app:layout_constraintEnd_toEndOf="@+id/login_button"
-        app:layout_constraintStart_toStartOf="@+id/login_button"
-        app:layout_constraintTop_toTopOf="@+id/login_button" />
-
-    <TextView
+    <Button
         android:id="@+id/signup_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="28dp"
+        android:background="@android:color/transparent"
+        android:enabled="false"
         android:fontFamily="@font/montserrat"
         android:padding="16dp"
         android:text="@string/sign_up"
+        android:textAllCaps="false"
         android:textColor="@color/ourOrange"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
