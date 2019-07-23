@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,11 +52,11 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     //Layout views
-    private ImageView back_button;
-    private ImageView signup_button;
+    private Button signup_button;
     private ImageView facebook_signup;
     private LoginButton facebook_real_login_button;
     private ImageView google_signup;
+    private TextView login_button;
     private TextView name_field;
     private TextView email_field;
     private TextView password_field;
@@ -81,11 +82,11 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         //initialize views
-        back_button = findViewById(R.id.back_button);
         signup_button = findViewById(R.id.signup_button);
         facebook_signup = findViewById(R.id.facebook_signup);
-        facebook_real_login_button = findViewById(R.id.login_button);
+        facebook_real_login_button = findViewById(R.id.facebook_real_login_button);
         google_signup = findViewById(R.id.google_signup);
+        login_button = findViewById(R.id.login_button);
         name_field = findViewById(R.id.name_field);
         email_field = findViewById(R.id.email_field);
         password_field = findViewById(R.id.password_field);
@@ -104,13 +105,6 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void initializeViewListeners() {
-
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
 
         signup_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +134,15 @@ public class SignupActivity extends AppCompatActivity {
                     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                     startActivityForResult(signInIntent, RC_SIGN_IN);
                 }
+            }
+        });
+
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

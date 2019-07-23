@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,25 +27,6 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        Button login_button = findViewById(R.id.login_button);
-        Button signup_button = findViewById(R.id.signup_button);
-
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        signup_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(WelcomeActivity.this, SignupActivity.class);
-                startActivity(intent);
-            }
-        });
-
         prepareLocale();
 
         if (checkConnection()) {
@@ -53,10 +35,26 @@ public class WelcomeActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
-            }
+            } else {
+                TextView login_button = findViewById(R.id.login_button);
+                Button signup_button = findViewById(R.id.signup_button);
 
-            login_button.setEnabled(true);
-            signup_button.setEnabled(true);
+                login_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                signup_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(WelcomeActivity.this, SignupActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
     }
 

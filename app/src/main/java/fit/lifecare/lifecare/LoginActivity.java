@@ -2,7 +2,6 @@ package fit.lifecare.lifecare;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,8 +9,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +44,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import fit.lifecare.lifecare.DatabaseClasses.PersonalInfoData;
-import fit.lifecare.lifecare.Dialogs.PasswordResetDialog;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -62,17 +61,10 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
 
     //Layout views
-    private ImageView app_user_button;
-    private TextView app_user_text;
-    private ImageView dietitian_button;
-    private TextView dietitian_text;
-    private ImageView sport_coach_button;
-    private TextView sport_coach_text;
-    private ImageView back_button;
-    private ImageView login_button;
-    private ImageView facebook_login;
+    private Button login_button;
+    private ImageButton facebook_login;
     private LoginButton facebook_real_login_button;
-    private ImageView google_login;
+    private ImageButton google_login;
     private TextView email_field;
     private TextView password_field;
     private TextView forgotten_password;
@@ -90,15 +82,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //initialize views
-        app_user_button = findViewById(R.id.app_user_button);
-        app_user_text = findViewById(R.id.app_user_text);
-        dietitian_button = findViewById(R.id.dietitian_button);
-        dietitian_button.setClickable(false);
-        dietitian_text = findViewById(R.id.dietitian_text);
-        sport_coach_button = findViewById(R.id.sport_coach_button);
-        sport_coach_button.setClickable(false);
-        sport_coach_text = findViewById(R.id.sport_coach_text);
-        back_button = findViewById(R.id.back_button);
         login_button = findViewById(R.id.login_button);
         facebook_login = findViewById(R.id.facebook_login);
         facebook_real_login_button = findViewById(R.id.facebook_real_login_button);
@@ -125,17 +108,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initializeViewListeners() {
 
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
         forgotten_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new PasswordResetDialog().show(getSupportFragmentManager(), "Code Adder");
+                Intent intent = new Intent(LoginActivity.this, ForgottenActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -373,31 +350,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void stateHandler() {
-
-        app_user_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (state == 1) {
-
-                    app_user_button.setBackgroundResource(R.drawable.buttonclicked);
-                    app_user_text.setTextColor(Color.WHITE);
-                    dietitian_button.setBackgroundResource(R.drawable.buttonnonclicked);
-                    dietitian_text.setTextColor(Color.parseColor("#2A307F"));
-                    sport_coach_button.setBackgroundResource(R.drawable.buttonnonclicked);
-                    sport_coach_text.setTextColor(Color.parseColor("#2A307F"));
-                    state = 0;
-                } else if (state == 2) {
-
-                    app_user_button.setBackgroundResource(R.drawable.buttonclicked);
-                    app_user_text.setTextColor(Color.WHITE);
-                    dietitian_button.setBackgroundResource(R.drawable.buttonnonclicked);
-                    dietitian_text.setTextColor(Color.parseColor("#2A307F"));
-                    sport_coach_button.setBackgroundResource(R.drawable.buttonnonclicked);
-                    sport_coach_text.setTextColor(Color.parseColor("#2A307F"));
-                    state = 0;
-                }
-            }
-        });
 /*
     this will be added as a feature later on
 

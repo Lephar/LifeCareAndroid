@@ -36,7 +36,6 @@ public class SelectPhotoActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     private static final int RC_PHOTO_PICKER = 2;
 
@@ -64,7 +63,6 @@ public class SelectPhotoActivity extends AppCompatActivity {
 
         //initialize shared preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        editor = preferences.edit();
 
         //get saved data from shared preferences
         gender = preferences.getString("gender", "N/A");
@@ -133,14 +131,19 @@ public class SelectPhotoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        //show cardview and make things touchable again
+        progressBar.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
         if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
+
             Uri selectedImageUri = data.getData();
 
             Glide.with(this)
                     .load(selectedImageUri)
                     .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().dontAnimate().dontTransform())
                     .into(photo_select);
-            //show cardview and make things touchable again
 
             final StorageReference photoReference = mStorageReference.child(selectedImageUri.getLastPathSegment());
             photoReference.putFile(selectedImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -163,11 +166,6 @@ public class SelectPhotoActivity extends AppCompatActivity {
                 });
 
             progressBar.setVisibility(View.GONE);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        } else if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_CANCELED) {
-            //show cardview and make things touchable again
-            progressBar.setVisibility(View.GONE);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
     }
 }

@@ -10,7 +10,6 @@
     <string name="action_settings">Settings</string>
 
     <string name="facebook_app_id">231935270813994</string>
-    <string name="fb_login_protocol_scheme">fb231935270813994</string>
 
     <string name="default_notification_channel_id">Messaging_channel</string>
     <string name="fcm_message_title">Lifecare</string>
@@ -367,7 +366,7 @@
     <string name="dietitian">Diyetisyen</string>
     <string name="sport_coach">Spor Koçu</string>
     <string name="password">Şifre</string>
-    <string name="forgotten_password">Şifremi unuttum</string>
+    <string name="forgotten_password">Şifrenizi mi unuttunuz?</string>
     <string name="login">Giriş</string>
     <string name="login_with_face">Facebook ile giriş</string>
     <string name="login_with_google">Gmail ile giriş</string>
@@ -533,4 +532,13 @@
     <string name="mediterranean_diet">Akdeniz diyeti</string>
     <string name="vegan">Vegan</string>
     <string name="drink_water_reminders">Su içmeyi unutmayın hatırlatmaları</string>
+    <string name="complete">Bitti!</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="have_account">"    Zaten hesabınız var mı?"</string>
+    <string name="login_instead">"  Giriş yapın"</string>
+    <string name="email">E-mail</string>
+    <string name="no_account">Hesabınız yok mu?</string>
+    <string name="signup_now">Şimdi oluşturun</string>
+    <string name="reset_password">Şifreyi Sıfırla</string>
+    <string name="reset_password_text">E-mail adresinizi girin ve size şifrenizi sıfırlamanız için bir link gönderelim</string>
 </resources>

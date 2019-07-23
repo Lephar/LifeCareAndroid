@@ -86,11 +86,11 @@
 
     <ImageView
         android:id="@+id/next_button"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/buttonbackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
