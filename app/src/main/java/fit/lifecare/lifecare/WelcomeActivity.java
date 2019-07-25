@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +30,25 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        Animation slide = AnimationUtils.loadAnimation(WelcomeActivity.this, R.anim.welcome_down);
+        Animation fade_in = AnimationUtils.loadAnimation(WelcomeActivity.this, R.anim.fade_in);
+        Animation fade_in_later = AnimationUtils.loadAnimation(WelcomeActivity.this, R.anim.fade_in_later);
+
+        TextView login_button = findViewById(R.id.login_button);
+        TextView welcome_text = findViewById(R.id.textView);
+        TextView login_text = findViewById(R.id.login_text);
+        ImageView logo = findViewById(R.id.small_logo);
+
+        Button signup_button = findViewById(R.id.signup_button);
+        ImageView welcome = findViewById(R.id.imageView);
+
+        welcome.startAnimation(slide);
+        signup_button.startAnimation(fade_in_later);
+        login_button.startAnimation(fade_in_later);
+        welcome_text.startAnimation(fade_in);
+        login_text.startAnimation(fade_in_later);
+        logo.startAnimation(fade_in);
+
         prepareLocale();
 
         if (checkConnection()) {
@@ -36,9 +58,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                TextView login_button = findViewById(R.id.login_button);
-                Button signup_button = findViewById(R.id.signup_button);
-
                 login_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

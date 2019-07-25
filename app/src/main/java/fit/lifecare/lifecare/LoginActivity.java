@@ -2,16 +2,21 @@ package fit.lifecare.lifecare;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,10 +66,12 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
 
     //Layout views
+    private ImageView logo;
     private Button login_button;
     private ImageButton facebook_login;
     private LoginButton facebook_real_login_button;
     private ImageButton google_login;
+    private TextView signupButton;
     private TextView email_field;
     private TextView password_field;
     private TextView forgotten_password;
@@ -81,7 +88,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(Color.WHITE);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
+        Animation slide = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.logo_in);
+
         //initialize views
+        logo = findViewById(R.id.lifecare_logo);
         login_button = findViewById(R.id.login_button);
         facebook_login = findViewById(R.id.facebook_login);
         facebook_real_login_button = findViewById(R.id.facebook_real_login_button);
@@ -89,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         email_field = findViewById(R.id.email_field);
         password_field = findViewById(R.id.password_field);
         forgotten_password = findViewById(R.id.forgotten_password);
+        signupButton = findViewById(R.id.signup_button);
 
         //initalize Firebase components
         mAuth = FirebaseAuth.getInstance();
@@ -99,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         stateHandler();
 
         //initialize button listeners
+        logo.startAnimation(slide);
         initializeViewListeners();
         initializeFacebookLogin();
         initializeGoogleLogin();
@@ -107,6 +124,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void initializeViewListeners() {
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         forgotten_password.setOnClickListener(new View.OnClickListener() {
             @Override

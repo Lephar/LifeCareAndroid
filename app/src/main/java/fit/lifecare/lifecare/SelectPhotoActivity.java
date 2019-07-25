@@ -2,7 +2,9 @@ package fit.lifecare.lifecare;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -30,8 +32,8 @@ import com.google.firebase.storage.UploadTask;
 public class SelectPhotoActivity extends AppCompatActivity {
 
     //Layout views
-    private ImageView back_button;
     private ImageView next_button;
+    private ImageView photo_icon;
     private ImageView photo_select;
     private ProgressBar progressBar;
 
@@ -55,9 +57,14 @@ public class SelectPhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_photo);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(Color.WHITE);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
         //initialize views
-        back_button = findViewById(R.id.back_button);
         next_button = findViewById(R.id.next_button);
+        photo_icon = findViewById(R.id.photo_icon);
         photo_select = findViewById(R.id.photo_select);
         progressBar = findViewById(R.id.progress_bar);
 
@@ -104,10 +111,10 @@ public class SelectPhotoActivity extends AppCompatActivity {
             }
         });
 
-        back_button.setOnClickListener(new View.OnClickListener() {
+        photo_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                photo_select.performClick();
             }
         });
 
@@ -142,7 +149,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
 
             Glide.with(this)
                     .load(selectedImageUri)
-                    .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().dontAnimate().dontTransform())
+                    .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).override(400, 400).centerCrop())
                     .into(photo_select);
 
             final StorageReference photoReference = mStorageReference.child(selectedImageUri.getLastPathSegment());

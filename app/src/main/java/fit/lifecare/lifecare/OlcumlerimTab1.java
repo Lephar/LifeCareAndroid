@@ -111,10 +111,12 @@ public class OlcumlerimTab1 extends Fragment{
         LineDataSet set;
 
         set = new LineDataSet(yValues1, "");
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setCubicIntensity(0.1f);
+        set.setDrawFilled(true);
+        set.setDrawCircles(false);
         set.setColor(Color.rgb(42, 48, 127));
-        set.setLineWidth(2);
-        set.setCircleRadius(4);
-        set.setCircleColor(Color.rgb(42, 48, 127));
+        set.setLineWidth(4);
 
         LineData data = new LineData(set);
 
@@ -153,10 +155,12 @@ public class OlcumlerimTab1 extends Fragment{
         LineDataSet set;
 
         set = new LineDataSet(yValues2, "");
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setCubicIntensity(0.1f);
         set.setColor(Color.rgb(42, 48, 127));
-        set.setLineWidth(2);
-        set.setCircleRadius(4);
-        set.setCircleColor(Color.rgb(42, 48, 127));
+        set.setLineWidth(4);
+        set.setDrawFilled(true);
+        set.setDrawCircles(false);
 
         LineData data = new LineData(set);
 

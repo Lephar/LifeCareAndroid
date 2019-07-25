@@ -1,11 +1,14 @@
 package fit.lifecare.lifecare;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +26,14 @@ public class ForgottenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotten);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(Color.WHITE);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
         TextView signupButton = findViewById(R.id.signup_button);
         Button resetButton = findViewById(R.id.reset_button);
+        ImageButton backButton = findViewById(R.id.back_button);
         final EditText emailField = findViewById(R.id.email_field);
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -58,6 +67,13 @@ public class ForgottenActivity extends AppCompatActivity {
                 Intent intent = new Intent(ForgottenActivity.this, SignupActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }

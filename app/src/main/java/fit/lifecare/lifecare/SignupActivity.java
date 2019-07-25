@@ -2,12 +2,16 @@ package fit.lifecare.lifecare;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -52,6 +56,7 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     //Layout views
+    private ImageView logo;
     private Button signup_button;
     private ImageView facebook_signup;
     private LoginButton facebook_real_login_button;
@@ -61,6 +66,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextView email_field;
     private TextView password_field;
     private CheckBox checkBox;
+    private TextView agreementText;
 
     private static final int RC_SIGN_IN = 9001;
     private String user_eMail;
@@ -81,7 +87,15 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(Color.WHITE);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
+        Animation slide = AnimationUtils.loadAnimation(SignupActivity.this, R.anim.logo_in);
+
         //initialize views
+        logo = findViewById(R.id.lifecare_logo);
         signup_button = findViewById(R.id.signup_button);
         facebook_signup = findViewById(R.id.facebook_signup);
         facebook_real_login_button = findViewById(R.id.facebook_real_login_button);
@@ -91,13 +105,14 @@ public class SignupActivity extends AppCompatActivity {
         email_field = findViewById(R.id.email_field);
         password_field = findViewById(R.id.password_field);
         checkBox = findViewById(R.id.checkBox);
-
+        agreementText = findViewById(R.id.agreement_text);
         //initalize Firebase components
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mUsersDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers");
 
         //initialize button listeners
+        logo.startAnimation(slide);
         initializeViewListeners();
         initializeFacebookLogin();
         initializeGoogleLogin();
@@ -105,6 +120,13 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void initializeViewListeners() {
+
+        agreementText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkBox.performClick();
+            }
+        });
 
         signup_button.setOnClickListener(new View.OnClickListener() {
             @Override

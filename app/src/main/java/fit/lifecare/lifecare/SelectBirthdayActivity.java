@@ -2,6 +2,8 @@ package fit.lifecare.lifecare;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -13,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SelectBirthdayActivity extends AppCompatActivity {
 
     //Layout views
-    private ImageView back_button;
     private ImageView next_button;
 
     private SharedPreferences preferences;
@@ -25,8 +26,12 @@ public class SelectBirthdayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_birthday);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(Color.WHITE);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
         //initialize views
-        back_button = findViewById(R.id.back_button);
         next_button = findViewById(R.id.next_button);
 
         //initialize shared preferences
@@ -65,13 +70,6 @@ public class SelectBirthdayActivity extends AppCompatActivity {
     }
 
     private void initializeViewListeners() {
-
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override

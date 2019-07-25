@@ -53,17 +53,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_field" />
 
-    <ImageView
-        android:id="@+id/lifecare_logo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="@+id/email_field"
-        app:layout_constraintStart_toStartOf="@+id/email_field"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lifecarelogo" />
-
     <EditText
         android:id="@+id/email_field"
         android:layout_width="wrap_content"
@@ -71,7 +60,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edittextbackground"
         android:ems="10"
         android:fontFamily="@font/montserratlight"
@@ -80,24 +69,50 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/reset_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintTop_toBottomOf="@+id/reset_text" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/reset_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/reset_password_text"
+        android:gravity="center"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/email_field"
         app:layout_constraintEnd_toEndOf="@+id/email_field"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/email_field"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/security_image"
         app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+        android:id="@+id/security_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/reset_text"
+        app:layout_constraintEnd_toEndOf="@+id/reset_text"
+        app:layout_constraintStart_toStartOf="@+id/reset_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/security_trans" />
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/actionModeCloseDrawable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
