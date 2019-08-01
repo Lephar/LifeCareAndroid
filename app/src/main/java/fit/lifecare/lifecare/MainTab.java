@@ -90,14 +90,15 @@ public class MainTab extends Fragment {
         // chart.spin(2000, 0, 360);
 
         Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setEnabled(false);
+        /*l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
-
+*/
 
         setData(3, 6);
     }
@@ -125,13 +126,14 @@ public class MainTab extends Fragment {
 
         ArrayList<Integer> colors = new ArrayList<>();
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+        /*for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
 
+        */
         for (int c : ColorTemplate.JOYFUL_COLORS)
             colors.add(c);
 
-        for (int c : ColorTemplate.COLORFUL_COLORS)
+        /*for (int c : ColorTemplate.COLORFUL_COLORS)
             colors.add(c);
 
         for (int c : ColorTemplate.LIBERTY_COLORS)
@@ -139,7 +141,7 @@ public class MainTab extends Fragment {
 
         for (int c : ColorTemplate.PASTEL_COLORS)
             colors.add(c);
-
+        */
         colors.add(ColorTemplate.getHoloBlue());
 
         dataSet.setColors(colors);

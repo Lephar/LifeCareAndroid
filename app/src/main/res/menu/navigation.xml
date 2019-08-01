@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_besinlerim"
-        android:icon="@drawable/lifecare_logo_small_white_orange"
+        android:icon="@drawable/besin_passive_icon"
         android:title="Besinlerim" />
 
     <item
         android:id="@+id/navigation_olcumlerim"
-        android:icon="@drawable/lifecare_logo_small_white_orange"
-        android:title="Olcumlerim" />
+        android:icon="@drawable/olcum_passive_icon"
+        android:title="Ölçümlerim" />
 
     <item
         android:id="@+id/navigation_sohbetler"
-        android:icon="@drawable/lifecare_logo_small_white_orange"
+        android:icon="@drawable/chat_passive_icon"
         android:title="Sohbetler" />
 
 </menu>

@@ -9,4 +9,5 @@
     <color name="colorGrayMid">#A0A0A0</color>
     <color name="ourPurple">#2A307F</color>
     <color name="ourOrange">#F5A623</color>
+    <color name="cardHeader">#707070</color>
 </resources>
