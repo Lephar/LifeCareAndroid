@@ -14,14 +14,13 @@
     <string name="default_notification_channel_id">Messaging_channel</string>
     <string name="fcm_message_title">Lifecare</string>
 
-
     <!-- collapsable calendar day strings -->
-    <string name="monday">P.TESİ</string>
-    <string name="tuesday">SALI</string>
+    <string name="monday">PTS</string>
+    <string name="tuesday">SAL</string>
     <string name="wednesday">ÇAR</string>
     <string name="thursday">PER</string>
     <string name="friday">CUMA</string>
-    <string name="saturday">C.TESİ</string>
+    <string name="saturday">CTS</string>
     <string name="sunday">PAZAR</string>
 
     <string name="january">Oca</string>

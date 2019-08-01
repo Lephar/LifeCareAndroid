@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DenemeActivity"></activity>
+        <activity android:name=".MainRevampActivity"></activity>
+        <activity android:name=".DenemeActivity" />
         <activity android:name=".ForgottenActivity" />
         <activity
             android:name=".ProgramDailyActivity"
@@ -72,7 +73,6 @@
         <activity
             android:name=".WelcomeActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
