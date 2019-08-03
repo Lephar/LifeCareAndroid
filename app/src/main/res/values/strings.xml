@@ -432,7 +432,7 @@
     <string name="phone">Phone</string>
     <string name="country">Country</string>
     <string name="City">City</string>
-    <string name="absent">no</string>
+    <string name="absent" translatable="false">no</string>
     <string name="exist">yes</string>
     <string name="enter_and_save">Type your comment here and save.</string>
     <string name="tab2_1">Your diagnosed disease</string>
@@ -531,7 +531,7 @@
     <string name="dairy_free">Dairy - free</string>
     <string name="mediterranean_diet">Mediterranean diet</string>
     <string name="vegan">Vegan</string>
-    <string name="drink_water_reminders">Drink Water Reminders</string>
+    <string name="drink_water_reminders">Hydration Reminders</string>
     <string name="complete">Done!</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="have_account">"    Already have an account?"</string>
@@ -541,4 +541,5 @@
     <string name="signup_now">Create now</string>
     <string name="reset_password">Reset Password</string>
     <string name="reset_password_text">Enter your email address and we\'ll send you link to reset your password</string>
+    <string name="change_picture">Profile Picture</string>
 </resources>

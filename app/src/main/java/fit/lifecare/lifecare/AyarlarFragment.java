@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import fit.lifecare.lifecare.Dialogs.ChangePasswordDialog;
 import fit.lifecare.lifecare.Dialogs.LanguageSelectDialog;
 
@@ -37,8 +38,11 @@ public class AyarlarFragment extends Fragment {
     private TextView language;
     private TextView password;
     private TextView hesap;
+    private static final int RC_PHOTO_PICKER = 2;
     private Switch mSwitch;
     private Switch mSwitch2;
+    private TextView hesap2;
+    private CircleImageView picChange;
     
     // Firebase instance variables
     private FirebaseUser user;
@@ -47,7 +51,7 @@ public class AyarlarFragment extends Fragment {
     
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-    
+    private TextView about;
     
     @Nullable
     @Override
@@ -61,8 +65,11 @@ public class AyarlarFragment extends Fragment {
         language = view.findViewById(R.id.lang);
         password = view.findViewById(R.id.password_field);
         hesap = view.findViewById(R.id.hesap);
+        hesap2 = view.findViewById(R.id.hesap2);
         mSwitch = view.findViewById(R.id.switch_view);
         mSwitch2 = view.findViewById(R.id.switch_view2);
+        picChange = view.findViewById(R.id.profile_pic);
+        about = view.findViewById(R.id.about);
         
         // initialize firebase components
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -130,7 +137,7 @@ public class AyarlarFragment extends Fragment {
                 new ChangePasswordDialog().show(getChildFragmentManager(), "Change Pass");
             }
         });
-        
+
         hesap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,7 +165,7 @@ public class AyarlarFragment extends Fragment {
                                                 }
                                             }
                                         });
-                                
+
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -166,7 +173,36 @@ public class AyarlarFragment extends Fragment {
                                 // do nothing
                             }
                         }).show();
-                
+
+            }
+        });
+
+        hesap2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //close the app
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        picChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, new HakkindaFragment()).commit();
             }
         });
     }

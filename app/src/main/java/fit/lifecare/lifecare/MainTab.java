@@ -1,12 +1,15 @@
 package fit.lifecare.lifecare;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +36,11 @@ public class MainTab extends Fragment {
             "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
             "Party Y", "Party Z"
     };
-    PieChart chart;
-    CollapsibleCalendar calendar;
+
+    private PieChart chart;
+    private CollapsibleCalendar calendar;
+    private ImageButton olcum;
+    private TextView olcumText;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,6 +64,24 @@ public class MainTab extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        olcum = getView().findViewById(R.id.imageButton2);
+        olcumText = getView().findViewById(R.id.textView22);
+
+        olcum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OlcumActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        olcumText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                olcum.performClick();
+            }
+        });
+
         calendar = getView().findViewById(R.id.calendarView);
         calendar.setExpandIconVisible(true);
 
@@ -71,7 +95,7 @@ public class MainTab extends Fragment {
         //chart.setCenterText(generateCenterSpannableText());
 
         chart.setDrawHoleEnabled(true);
-        chart.setHoleColor(Color.WHITE);
+        chart.setHoleColor(Color.TRANSPARENT);
 
         chart.setTransparentCircleColor(Color.WHITE);
         chart.setTransparentCircleAlpha(0);

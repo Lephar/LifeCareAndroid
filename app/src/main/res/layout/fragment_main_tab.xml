@@ -8,8 +8,9 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="380dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view22">
@@ -22,6 +23,7 @@
                 android:id="@+id/chart1"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +62,7 @@
                 android:layout_marginEnd="5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/details_card"
-                app:layout_constraintEnd_toEndOf="@+id/imageView22"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView22" />
 
@@ -94,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Ölçüm Yap"
+                android:text="Ölçüm Ekle"
                 android:textColor="@color/ourOrange"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -386,61 +388,11 @@
         android:id="@+id/imageView17"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/view21"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/background4" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_pic"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/profileicon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </de.hdodenhof.circleimageview.CircleImageView>
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="25dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/profil_karti"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_pic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/profile_pic" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Büşra"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView21"
-        app:layout_constraintStart_toEndOf="@+id/profile_pic"
-        app:layout_constraintTop_toTopOf="@+id/profile_pic"
-        app:layout_constraintVertical_chainStyle="spread" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:text="TextView"
-        android:textColor="@color/ourPurple"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_pic"
-        app:layout_constraintStart_toStartOf="@+id/textView20"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <View
         android:id="@+id/view21"
@@ -453,7 +405,7 @@
     <View
         android:id="@+id/view22"
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
+        android:layout_height="96dp"
         app:layout_constraintEnd_toEndOf="@+id/view21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/calendarView" />
@@ -468,7 +420,7 @@
         app:expandIconColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_pic"
+        app:layout_constraintTop_toTopOf="parent"
         app:primaryColor="@android:color/transparent"
         app:selectedItem_background="@drawable/circle_shape_purple"
         app:state="collapsed"
