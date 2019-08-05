@@ -10,4 +10,7 @@
     <color name="ourPurple">#2A307F</color>
     <color name="ourOrange">#F5A623</color>
     <color name="cardHeader">#707070</color>
+    <color name="fatColor">#F9D023</color>
+    <color name="muscleColor">#ED1E79</color>
+    <color name="waterColor">#29ABE2</color>
 </resources>

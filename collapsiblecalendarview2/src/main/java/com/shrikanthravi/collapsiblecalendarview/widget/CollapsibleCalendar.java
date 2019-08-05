@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -17,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.core.view.GestureDetectorCompat;
 
 import com.shrikanthravi.collapsiblecalendarview.R;
 import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter;
@@ -41,6 +44,7 @@ public class CollapsibleCalendar extends UICalendar {
     private boolean mIsWaitingForUpdate = false;
 
     private int mCurrentWeekIndex;
+    private GestureDetectorCompat gestureDetectorCompat;
 
     public CollapsibleCalendar(Context context) {
         super(context);
@@ -131,6 +135,20 @@ public class CollapsibleCalendar extends UICalendar {
                 collapseTo(mCurrentWeekIndex);
             }
         });
+
+        CalendarSwipeListener gestureListener = new CalendarSwipeListener(this);
+        gestureDetectorCompat = new GestureDetectorCompat(getContext(), gestureListener);
+    }
+
+    public boolean isCollapsed() {
+        return !expanded;
+    }
+
+    public boolean onTouchEvent(MotionEvent event) {
+        // Pass activity on touch event to the gesture detector.
+        gestureDetectorCompat.onTouchEvent(event);
+        // Return true to tell android OS that event has been consumed, do not pass it to other event listeners.
+        return true;
     }
 
     @Override

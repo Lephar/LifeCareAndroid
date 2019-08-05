@@ -37,8 +37,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class MainRevampActivity extends AppCompatActivity
-        implements MainTab.OnFragmentInteractionListener {
+public class MainRevampActivity extends AppCompatActivity implements MainTab.OnFragmentInteractionListener {
 
     private static final int RC_PHOTO_PICKER = 2;
     private FragmentManager fragmentManager;

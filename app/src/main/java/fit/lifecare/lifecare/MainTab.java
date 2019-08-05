@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -22,7 +24,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
@@ -31,10 +32,7 @@ import java.util.ArrayList;
 public class MainTab extends Fragment {
 
     protected final String[] parties = new String[]{
-            "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
-            "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
-            "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
-            "Party Y", "Party Z"
+            "Party A", "Party B", "Party C"
     };
 
     private PieChart chart;
@@ -42,10 +40,11 @@ public class MainTab extends Fragment {
     private ImageButton olcum;
     private TextView olcumText;
 
-    private OnFragmentInteractionListener mListener;
+    private ImageView yagAnalizi;
+    private ImageView kasAnalizi;
+    private ImageView suAnalizi;
 
-    public MainTab() {
-    }
+    private OnFragmentInteractionListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +62,33 @@ public class MainTab extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        yagAnalizi = getActivity().findViewById(R.id.imageView18);
+        yagAnalizi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), YagAnaliziActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        kasAnalizi = getActivity().findViewById(R.id.imageView22);
+        kasAnalizi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), KasAnaliziActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        suAnalizi = getActivity().findViewById(R.id.imageView23);
+        suAnalizi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SuAnaliziActivity.class);
+                startActivity(intent);
+            }
+        });
 
         olcum = getView().findViewById(R.id.imageButton2);
         olcumText = getView().findViewById(R.id.textView22);
@@ -105,7 +131,6 @@ public class MainTab extends Fragment {
 
         chart.setDrawCenterText(true);
 
-        chart.setRotationAngle(0);
         // enable rotation of the chart by touch
         chart.setRotationEnabled(false);
         chart.setHighlightPerTapEnabled(true);
@@ -132,11 +157,10 @@ public class MainTab extends Fragment {
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        for (int i = 0; i < count; i++) {
-            entries.add(new PieEntry((float) ((Math.random() * range) + range / 5),
-                    parties[i % parties.length],
-                    getResources().getDrawable(R.drawable.lifecare_logo_small_white_orange)));
-        }
+
+        entries.add(new PieEntry((float) 48, parties[0]));
+        entries.add(new PieEntry((float) 36, parties[1]));
+        entries.add(new PieEntry((float) 16, parties[2]));
 
         PieDataSet dataSet = new PieDataSet(entries, "Election Results");
 
@@ -153,11 +177,10 @@ public class MainTab extends Fragment {
         /*for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
 
-        */
         for (int c : ColorTemplate.JOYFUL_COLORS)
             colors.add(c);
 
-        /*for (int c : ColorTemplate.COLORFUL_COLORS)
+        for (int c : ColorTemplate.COLORFUL_COLORS)
             colors.add(c);
 
         for (int c : ColorTemplate.LIBERTY_COLORS)
@@ -166,9 +189,13 @@ public class MainTab extends Fragment {
         for (int c : ColorTemplate.PASTEL_COLORS)
             colors.add(c);
         */
-        colors.add(ColorTemplate.getHoloBlue());
+        //colors.add(ColorTemplate.getHoloBlue());
 
+        colors.add(ContextCompat.getColor(getContext(), R.color.waterColor));
+        colors.add(ContextCompat.getColor(getContext(), R.color.muscleColor));
+        colors.add(ContextCompat.getColor(getContext(), R.color.fatColor));
         dataSet.setColors(colors);
+        dataSet.setDrawValues(false);
         //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
@@ -176,7 +203,9 @@ public class MainTab extends Fragment {
         chart.setData(data);
 
         // undo all highlights
+        chart.setDrawEntryLabels(false);
         chart.highlightValues(null);
+        chart.setRotationAngle(270f);
 
         chart.invalidate();
     }

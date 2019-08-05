@@ -23,7 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OlcumActivity"></activity>
+        <activity android:name=".SuAnaliziActivity"></activity>
+        <activity android:name=".KasAnaliziActivity" />
+        <activity android:name=".YagAnaliziActivity" />
+        <activity
+            android:name=".OlcumActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainRevampActivity"
             android:screenOrientation="portrait" />
