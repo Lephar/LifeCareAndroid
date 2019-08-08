@@ -13,4 +13,6 @@
     <color name="fatColor">#F9D023</color>
     <color name="muscleColor">#ED1E79</color>
     <color name="waterColor">#29ABE2</color>
+    <color name="shadowColor">#BFBFBF</color>
+
 </resources>

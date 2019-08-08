@@ -432,7 +432,7 @@
     <string name="phone">Phone</string>
     <string name="country">Country</string>
     <string name="City">City</string>
-    <string name="absent" translatable="false">no</string>
+    <string name="absent">no</string>
     <string name="exist">yes</string>
     <string name="enter_and_save">Type your comment here and save.</string>
     <string name="tab2_1">Your diagnosed disease</string>

@@ -127,7 +127,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
                 mUserPersonalInfoDatabaseReference.child("birth_date").setValue(birthday_date);
                 mUserPersonalInfoDatabaseReference.child("height").setValue(height);
 
-                Intent intent = new Intent(SelectPhotoActivity.this, MainActivity.class);
+                Intent intent = new Intent(SelectPhotoActivity.this, MainRevampActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

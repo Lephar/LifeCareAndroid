@@ -48,6 +48,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
     private ImageView profile_picture;
     private DatabaseReference mUserPersonalInfoDatabaseReference;
     private StorageReference mStorageReference;
+    private int state;
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -66,6 +67,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_layout, new MainTab());
         fragmentTransaction.commit();
+        state = 0;
 
         bottom_tab.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -78,16 +80,19 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
                     fragmentTransaction.replace(R.id.fragment_layout, new ProgramFragment());
                     fragmentTransaction.commit();
                     current_tab.setText("Besin Programım");
+                    state = 0;
                 } else if (menuItem.getItemId() == R.id.navigation_olcumlerim) {
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_layout, new MainTab());
                     fragmentTransaction.commit();
                     current_tab.setText("Ölçümlerim");
+                    state = 0;
                 } else if (menuItem.getItemId() == R.id.navigation_sohbetler) {
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_layout, new DanismanimFragment());
                     fragmentTransaction.commit();
                     current_tab.setText("Sohbetlerim");
+                    state = 0;
                 }
 
                 return true;
@@ -128,18 +133,6 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         profile_picture = findViewById(R.id.profile_pic);
         user_name = findViewById(R.id.user_name);
 
-        /*profile_picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //close the app
-                FirebaseAuth.getInstance().signOut();
-                LoginManager.getInstance().logOut();
-                Intent intent = new Intent(MainRevampActivity.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });*/
-
         ImageButton settings = findViewById(R.id.settings_button);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +141,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
                 fragmentTransaction.replace(R.id.fragment_layout, new AyarlarFragment());
                 fragmentTransaction.commit();
                 current_tab.setText("Ayarlar");
+                state = 1;
             }
         });
 
@@ -159,11 +153,25 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
                 fragmentTransaction.replace(R.id.fragment_layout, new ProfilimMainFragment());
                 fragmentTransaction.commit();
                 current_tab.setText("Profil");
+                state = 1;
             }
         });
 
         initializeFirebaseListenersForPhoto();
         initializeFirebaseListenersForName();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (state == 1) {
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_layout, new MainTab());
+            fragmentTransaction.commit();
+            current_tab.setText("Ölçümlerim");
+            bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
+            state = 0;
+        } else
+            super.onBackPressed();
     }
 
     private void initializeFirebaseListenersForPhoto() {
@@ -189,7 +197,11 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.getValue(String.class);
-                user_name.setText(name);
+                int index = name.lastIndexOf(' ');
+                if (index == -1)
+                    user_name.setText(name);
+                else
+                    user_name.setText(name.substring(0, index));
             }
 
             @Override

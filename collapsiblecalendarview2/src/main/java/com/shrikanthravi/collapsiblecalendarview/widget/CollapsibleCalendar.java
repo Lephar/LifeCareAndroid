@@ -196,12 +196,6 @@ public class CollapsibleCalendar extends UICalendar {
                     txtDay.setTextColor(getTodayItemTextColor());
                 }
 
-                // set the selected item
-                if (isSelectedDay(day)) {
-                    txtDay.setBackgroundDrawable(getSelectedItemBackgroundDrawable());
-                    txtDay.setTextColor(getSelectedItemTextColor());
-                }
-
                 List<Event> mEventList = mAdapter.getEventList();
 
                 for (int j = 0; j < mEventList.size(); j++) {
@@ -210,7 +204,14 @@ public class CollapsibleCalendar extends UICalendar {
                             && day.getMonth() == event.getMonth()
                             && day.getDay() == event.getDay()) {
                         txtDay.setBackgroundDrawable(getEventItemBackgroundDrawable());
+                        txtDay.setTextColor(getEventItemTextColor());
                     }
+                }
+
+                // set the selected item
+                if (isSelectedDay(day)) {
+                    txtDay.setBackgroundDrawable(getSelectedItemBackgroundDrawable());
+                    txtDay.setTextColor(getSelectedItemTextColor());
                 }
             }
         }

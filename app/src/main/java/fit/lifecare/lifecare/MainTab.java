@@ -43,6 +43,7 @@ public class MainTab extends Fragment {
     private ImageView yagAnalizi;
     private ImageView kasAnalizi;
     private ImageView suAnalizi;
+    private ImageView bmiAnalizi;
 
     private OnFragmentInteractionListener mListener;
 
@@ -90,6 +91,15 @@ public class MainTab extends Fragment {
             }
         });
 
+        bmiAnalizi = getActivity().findViewById(R.id.imageView25);
+        bmiAnalizi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BMIActivity.class);
+                startActivity(intent);
+            }
+        });
+
         olcum = getView().findViewById(R.id.imageButton2);
         olcumText = getView().findViewById(R.id.textView22);
 
@@ -110,12 +120,17 @@ public class MainTab extends Fragment {
 
         calendar = getView().findViewById(R.id.calendarView);
         calendar.setExpandIconVisible(true);
+        calendar.addEventTag(2019, 7, 11);
+        calendar.addEventTag(2019, 7, 12);
+        calendar.addEventTag(2019, 7, 13);
+        calendar.addEventTag(2019, 7, 14);
+        calendar.addEventTag(2019, 7, 15);
+        calendar.addEventTag(2019, 7, 16);
+        calendar.addEventTag(2019, 7, 17);
 
         chart = getView().findViewById(R.id.chart1);
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
-
-        chart.setDragDecelerationFrictionCoef(0.95f);
 
         //chart.setCenterTextTypeface(tfLight);
         //chart.setCenterText(generateCenterSpannableText());
@@ -123,19 +138,20 @@ public class MainTab extends Fragment {
         chart.setDrawHoleEnabled(true);
         chart.setHoleColor(Color.TRANSPARENT);
 
-        chart.setTransparentCircleColor(Color.WHITE);
+        chart.setTransparentCircleColor(Color.TRANSPARENT);
         chart.setTransparentCircleAlpha(0);
 
         chart.setHoleRadius(60f);
         chart.setTransparentCircleRadius(60f);
 
-        chart.setDrawCenterText(true);
+        chart.setExtraBottomOffset(12);
 
         // enable rotation of the chart by touch
         chart.setRotationEnabled(false);
-        chart.setHighlightPerTapEnabled(true);
+        chart.setHighlightPerTapEnabled(false);
 
         chart.animateY(1500, Easing.EaseInOutSine);
+        chart.getRenderer().getPaintRender().setShadowLayer(12, 0, 8, ContextCompat.getColor(getContext(), R.color.shadowColor));
         // chart.spin(2000, 0, 360);
 
         Legend l = chart.getLegend();
@@ -149,10 +165,10 @@ public class MainTab extends Fragment {
         l.setYOffset(0f);
 */
 
-        setData(3, 6);
+        setData();
     }
 
-    private void setData(int count, float range) {
+    private void setData() {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
@@ -196,6 +212,7 @@ public class MainTab extends Fragment {
         colors.add(ContextCompat.getColor(getContext(), R.color.fatColor));
         dataSet.setColors(colors);
         dataSet.setDrawValues(false);
+
         //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);

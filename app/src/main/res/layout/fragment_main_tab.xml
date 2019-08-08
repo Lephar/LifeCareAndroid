@@ -22,7 +22,7 @@
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chart1"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -487,18 +487,16 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:selectedItem_textColor="@color/ourOrange"
         app:buttonLeft_drawableTintColor="@android:color/white"
         app:buttonRight_drawableTintColor="@android:color/white"
-        app:eventColor="@android:color/black"
         app:expandIconColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:primaryColor="@android:color/transparent"
-        app:selectedItem_background="@drawable/circle_shape_purple"
-        app:state="collapsed"
         app:textColor="@android:color/white"
-        app:todayItem_background="@drawable/circle_shape_orange"
+        app:state="collapsed"
         app:todayItem_textColor="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

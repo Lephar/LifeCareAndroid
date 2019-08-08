@@ -37,14 +37,14 @@ public class CalendarSwipeListener extends GestureDetector.SimpleOnGestureListen
         if ((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
             if (deltaX > 0) {
                 if (calendar.isCollapsed())
-                    calendar.prevWeek();
-                else
-                    calendar.prevMonth();
-            } else {
-                if (calendar.isCollapsed())
                     calendar.nextWeek();
                 else
                     calendar.nextMonth();
+            } else {
+                if (calendar.isCollapsed())
+                    calendar.prevWeek();
+                else
+                    calendar.prevMonth();
             }
         }
 
