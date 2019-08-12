@@ -56,7 +56,6 @@ public class MainTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_main_tab, container, false);
     }
 
@@ -64,7 +63,7 @@ public class MainTab extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        yagAnalizi = getActivity().findViewById(R.id.imageView18);
+        yagAnalizi = getView().findViewById(R.id.imageView18);
         yagAnalizi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +72,7 @@ public class MainTab extends Fragment {
             }
         });
 
-        kasAnalizi = getActivity().findViewById(R.id.imageView22);
+        kasAnalizi = getView().findViewById(R.id.imageView22);
         kasAnalizi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +81,7 @@ public class MainTab extends Fragment {
             }
         });
 
-        suAnalizi = getActivity().findViewById(R.id.imageView23);
+        suAnalizi = getView().findViewById(R.id.imageView23);
         suAnalizi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +90,7 @@ public class MainTab extends Fragment {
             }
         });
 
-        bmiAnalizi = getActivity().findViewById(R.id.imageView25);
+        bmiAnalizi = getView().findViewById(R.id.imageView25);
         bmiAnalizi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

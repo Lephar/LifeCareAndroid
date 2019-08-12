@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -41,14 +43,18 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
 
     private static final int RC_PHOTO_PICKER = 2;
     private FragmentManager fragmentManager;
+    private ViewPagerAdapter adapter;
+    private ViewPager viewPager;
     private FragmentTransaction fragmentTransaction;
+    private FrameLayout fragmentLayout;
     private BottomNavigationView bottom_tab;
-    private TextView current_tab;
+    private TextView current_tab_text;
     private TextView user_name;
     private ImageView profile_picture;
     private DatabaseReference mUserPersonalInfoDatabaseReference;
     private StorageReference mStorageReference;
-    private int state;
+    private String[] tabTexts;
+    private int prevTab = 1;
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -61,41 +67,71 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
 
         bottom_tab = findViewById(R.id.bottomNavigationView);
         bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
-        current_tab = findViewById(R.id.current_tab);
+        current_tab_text = findViewById(R.id.current_tab);
+        viewPager = findViewById(R.id.view_pager_main);
+        fragmentLayout = findViewById(R.id.fragment_layout);
+
+        tabTexts = new String[3];
+        tabTexts[0] = "Besin Programım";
+        tabTexts[1] = "Ölçümlerim";
+        tabTexts[2] = "Sohbetlerim";
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_layout, new MainTab());
         fragmentTransaction.commit();
-        state = 0;
+
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ProgramFragment(), "Besinlerim");
+        adapter.addFragment(new MainTab(), "Ölçümlerim");
+        adapter.addFragment(new DanismanimFragment(), "Sohbetler");
+
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1);
+        current_tab_text.setText(tabTexts[1]);
+        bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
 
         bottom_tab.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == bottom_tab.getSelectedItemId())
-                    return false;
-
-                else if (menuItem.getItemId() == R.id.navigation_besinlerim) {
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_layout, new ProgramFragment());
-                    fragmentTransaction.commit();
-                    current_tab.setText("Besin Programım");
-                    state = 0;
-                } else if (menuItem.getItemId() == R.id.navigation_olcumlerim) {
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_layout, new MainTab());
-                    fragmentTransaction.commit();
-                    current_tab.setText("Ölçümlerim");
-                    state = 0;
-                } else if (menuItem.getItemId() == R.id.navigation_sohbetler) {
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_layout, new DanismanimFragment());
-                    fragmentTransaction.commit();
-                    current_tab.setText("Sohbetlerim");
-                    state = 0;
+                if (viewPager.getVisibility() == View.GONE) {
+                    fragmentLayout.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.VISIBLE);
                 }
 
-                return true;
+                if (menuItem.getItemId() == R.id.navigation_besinlerim) {
+                    current_tab_text.setText(tabTexts[0]);
+                    viewPager.setCurrentItem(0);
+                } else if (menuItem.getItemId() == R.id.navigation_olcumlerim) {
+                    current_tab_text.setText(tabTexts[1]);
+                    viewPager.setCurrentItem(1);
+                } else if (menuItem.getItemId() == R.id.navigation_sohbetler) {
+                    current_tab_text.setText(tabTexts[2]);
+                    viewPager.setCurrentItem(2);
+                }
+
+                return false;
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottom_tab.getMenu().getItem(prevTab).setChecked(false);
+                bottom_tab.getMenu().getItem(position).setChecked(true);
+                current_tab_text.setText(tabTexts[position]);
+                prevTab = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
 
@@ -137,11 +173,12 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fragmentLayout.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.GONE);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_layout, new AyarlarFragment());
                 fragmentTransaction.commit();
-                current_tab.setText("Ayarlar");
-                state = 1;
+                current_tab_text.setText("Ayarlar");
             }
         });
 
@@ -149,11 +186,12 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fragmentLayout.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.GONE);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_layout, new ProfilimMainFragment());
                 fragmentTransaction.commit();
-                current_tab.setText("Profil");
-                state = 1;
+                current_tab_text.setText("Profil");
             }
         });
 
@@ -163,13 +201,12 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
 
     @Override
     public void onBackPressed() {
-        if (state == 1) {
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_layout, new MainTab());
-            fragmentTransaction.commit();
-            current_tab.setText("Ölçümlerim");
+        if (viewPager.getVisibility() == View.GONE) {
+            fragmentLayout.setVisibility(View.GONE);
+            viewPager.setVisibility(View.VISIBLE);
+            current_tab_text.setText(tabTexts[viewPager.getCurrentItem()]);
+        } else if (bottom_tab.getSelectedItemId() != R.id.navigation_olcumlerim) {
             bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
-            state = 0;
         } else
             super.onBackPressed();
     }

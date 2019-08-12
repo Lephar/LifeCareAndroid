@@ -131,6 +131,7 @@ public class SignupActivity extends AppCompatActivity {
         signup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signup_button.setEnabled(false);
                 createAccount(email_field.getText().toString(), password_field.getText().toString());
             }
         });
@@ -415,12 +416,13 @@ public class SignupActivity extends AppCompatActivity {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignupActivity.this, getString(R.string.email_in_use),
                                     Toast.LENGTH_SHORT).show();
-
+                            signup_button.setEnabled(true);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignupActivity.this, getString(R.string.enter_valid_email),
                                     Toast.LENGTH_SHORT).show();
+                            signup_button.setEnabled(true);
                         }
                     }
                 });

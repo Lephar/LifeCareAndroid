@@ -72,11 +72,16 @@ public class DanismanimFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //inflate the fragment layout
-        View view = inflater.inflate(R.layout.fragment_danismanim, container, false);
+        return inflater.inflate(R.layout.fragment_danismanim, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         //initialize layout views
-        mChatListView = view.findViewById(R.id.chat_list);
-        fab = view.findViewById(R.id.fab);
+        mChatListView = getView().findViewById(R.id.chat_list);
+        fab = getView().findViewById(R.id.fab);
 
         //initialize shared preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
@@ -93,18 +98,15 @@ public class DanismanimFragment extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mChatIDReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("PersonalInfo").child("ChatIDs");
-        
+
         // set new_message value to false to make disappear new message alert
         mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_message").setValue(false);
-        
+
         mChatDatabaseReference = mFirebaseDatabase.getReference().child("Chats");
-        
 
         attachPersonalDatabaseReadListener();
         initializeFabButtonListeners();
         initializeListviewListener();
-
-        return view;
     }
 
     private void initializeListviewListener() {

@@ -122,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     private void initializeViewListeners() {
 
         signupButton.setOnClickListener(new View.OnClickListener() {
@@ -308,6 +307,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // [START sign_in_with_email]
     private void LogIn(String email, String password) {
+        login_button.setEnabled(false);
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
@@ -328,6 +328,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, getString(R.string.pass_or_username_wrong),
                                     Toast.LENGTH_SHORT).show();
+                            login_button.setEnabled(true);
                         }
                     }
                 });

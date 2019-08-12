@@ -16,10 +16,10 @@ import com.google.android.material.tabs.TabLayout;
 public class OlcumActivity extends AppCompatActivity
         implements CihazOlcumFragment.OnFragmentInteractionListener, OlcumGirisFragment.OnFragmentInteractionListener {
 
-    ImageButton backButton;
-    TextView backText;
-    ViewPager viewPager;
-    TabLayout tabLayout;
+    private ImageButton backButton;
+    private TextView backText;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

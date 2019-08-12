@@ -52,35 +52,36 @@ public class ProgramFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         
         //inflate the fragment layout
-        View view = inflater.inflate(R.layout.fragment_program, container, false);
-        
+        return inflater.inflate(R.layout.fragment_program, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // initialize layout views
-        program_list = view.findViewById(R.id.program_list);
-        
+        program_list = getView().findViewById(R.id.program_list);
+
         // Initialize ListView and its adapter
         List<ProgramItems> program_items = new ArrayList<>();
         mProgramItemsAdapter = new ProgramListAdapter(getContext(), R.layout.program_list_item_layout, program_items);
         program_list.setAdapter(mProgramItemsAdapter);
-        
+
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        
+
         // set new_message value to false to make disappear new message alert
         mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_meal_schedule").setValue(false);
-        
+
         mProgramDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Programlar");
-        
-        
+
         attachProgramFirebaseListener();
-        
+
         initializeListviewListener();
-        
-        return view;
     }
-    
-    
+
     private void attachProgramFirebaseListener() {
         
         if (mValueEventListener == null) {
