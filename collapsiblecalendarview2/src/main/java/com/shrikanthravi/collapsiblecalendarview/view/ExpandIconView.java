@@ -29,6 +29,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -36,8 +37,11 @@ import androidx.annotation.FloatRange;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GestureDetectorCompat;
 
 import com.shrikanthravi.collapsiblecalendarview.R;
+import com.shrikanthravi.collapsiblecalendarview.widget.CalendarSwipeListener;
+import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -79,6 +83,8 @@ public class ExpandIconView extends View {
     private int padding;
     @Nullable
     private ValueAnimator arrowAnimator;
+
+    private GestureDetectorCompat gestureDetectorCompat;
 
     public ExpandIconView(@NonNull Context context) {
         this(context, null);
@@ -124,6 +130,18 @@ public class ExpandIconView extends View {
 
         animationSpeed = DELTA_ALPHA / animationDuration;
         setState(MORE, false);
+    }
+
+    public void enableSwipe(CollapsibleCalendar calendar) {
+        CalendarSwipeListener gestureListener = new CalendarSwipeListener(calendar);
+        gestureDetectorCompat = new GestureDetectorCompat(getContext(), gestureListener);
+    }
+
+    public boolean onTouchEvent(MotionEvent event) {
+        // Pass activity on touch event to the gesture detector.
+        gestureDetectorCompat.onTouchEvent(event);
+        // Return true to tell android OS that event has been consumed, do not pass it to other event listeners.
+        return true;
     }
 
     public void setColor(int color) {

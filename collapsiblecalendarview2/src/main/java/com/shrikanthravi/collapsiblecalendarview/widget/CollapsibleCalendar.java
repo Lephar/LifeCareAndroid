@@ -138,6 +138,8 @@ public class CollapsibleCalendar extends UICalendar {
 
         CalendarSwipeListener gestureListener = new CalendarSwipeListener(this);
         gestureDetectorCompat = new GestureDetectorCompat(getContext(), gestureListener);
+        expandIconView.enableSwipe(this);
+        mScrollViewBody.enableSwipe(this);
     }
 
     public boolean isCollapsed() {

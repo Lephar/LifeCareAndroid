@@ -116,7 +116,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageButton"
         app:srcCompat="@drawable/settings_icon" />
 
-    <androidx.viewpager.widget.ViewPager
+    <fit.lifecare.lifecare.ClickViewPager
         android:id="@+id/view_pager_main"
         android:layout_width="0dp"
         android:layout_height="0dp"
