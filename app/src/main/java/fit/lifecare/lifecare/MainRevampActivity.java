@@ -51,10 +51,11 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
     private TextView current_tab_text;
     private TextView user_name;
     private ImageView profile_picture;
-    private DatabaseReference mUserPersonalInfoDatabaseReference;
-    private StorageReference mStorageReference;
     private String[] tabTexts;
     private int prevTab = 1;
+
+    private DatabaseReference mUserPersonalInfoDatabaseReference;
+    private StorageReference mStorageReference;
 
     @Override
     public void onFragmentInteraction(Uri uri) {

@@ -61,7 +61,7 @@ public class OlcumlerimTab2 extends Fragment {
         //initialize layout views
         title1 = view.findViewById(R.id.textViewLeft1);
         value1 = view.findViewById(R.id.textViewRight1);
-        mChart1 = view.findViewById(R.id.chart1);
+        mChart1 = view.findViewById(R.id.olcumChart);
         title2 = view.findViewById(R.id.textViewLeft2);
         value2 = view.findViewById(R.id.textViewRight2);
         mChart2 = view.findViewById(R.id.chart2);

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,64 +20,386 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cart1"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22">
+
+                <ImageView
+                    android:id="@+id/imageView18"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/details_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/yag_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Yağ"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton3"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton3" />
+
+                <ImageButton
+                    android:id="@+id/imageButton10"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/yag_forward_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cart2"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cart1">
+
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/details_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton4"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/kas_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Kas"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton4"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+
+                <ImageButton
+                    android:id="@+id/imageButton11"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/kas_forward_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cart3"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cart2">
+
+                <ImageView
+                    android:id="@+id/imageView23"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/details_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton5"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/su_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Su"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton5"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton5" />
+
+                <ImageButton
+                    android:id="@+id/imageButton12"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/su_forward_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cart4"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cart3">
+
+                <ImageView
+                    android:id="@+id/imageView24"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/details_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton7"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/kilo_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Vücut Ağırlığı"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton7"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton7"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton7" />
+
+                <ImageButton
+                    android:id="@+id/imageButton13"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/kilo_forward_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cart5"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cart4">
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/details_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton8"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bmi_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="BKİ"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton8"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton8" />
+
+                <ImageButton
+                    android:id="@+id/imageButton14"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/bmi_forward_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cart6"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cart5">
+
+                <ImageView
+                    android:id="@+id/imageView26"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/details_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton9"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/meta_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Metabolizma Hızı"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton9"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton9" />
+
+                <ImageButton
+                    android:id="@+id/imageButton15"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/meta_forward_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/chart1"
+                android:id="@+id/mainChart"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView18"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/details_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
-
-            <ImageView
-                android:id="@+id/imageView22"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/details_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView18" />
-
-            <ImageView
-                android:id="@+id/imageView23"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/details_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView22" />
-
-            <ImageView
-                android:id="@+id/imageView24"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/details_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView23" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
@@ -86,7 +409,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/olcum_yap"
                 app:layout_constraintEnd_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@id/chart1" />
+                app:layout_constraintTop_toBottomOf="@id/mainChart" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -100,358 +423,46 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-                app:layout_constraintEnd_toEndOf="@+id/imageView18"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageButton2" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/yag_icon"
-                app:layout_constraintBottom_toTopOf="@+id/imageView22"
-                app:layout_constraintStart_toStartOf="@+id/imageView18"
-                app:layout_constraintTop_toTopOf="@+id/imageView18" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/kas_icon"
-                app:layout_constraintBottom_toTopOf="@+id/imageView23"
-                app:layout_constraintStart_toStartOf="@+id/imageView22"
-                app:layout_constraintTop_toTopOf="@+id/imageView22" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/su_icon"
-                app:layout_constraintBottom_toTopOf="@+id/imageView24"
-                app:layout_constraintStart_toStartOf="@+id/imageView23"
-                app:layout_constraintTop_toTopOf="@+id/imageView23" />
-
-            <ImageView
-                android:id="@+id/imageView25"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/details_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView24" />
-
-            <ImageView
-                android:id="@+id/imageView26"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/details_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView25" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/kilo_icon"
-                app:layout_constraintBottom_toTopOf="@+id/imageView25"
-                app:layout_constraintStart_toStartOf="@+id/imageView24"
-                app:layout_constraintTop_toTopOf="@+id/imageView24" />
-
-            <ImageButton
-                android:id="@+id/imageButton8"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="fitXY"
-                android:src="@drawable/bmi_icon"
-                app:layout_constraintBottom_toBottomOf="@id/imageView25"
-                app:layout_constraintStart_toStartOf="@+id/imageView25"
-                app:layout_constraintTop_toTopOf="@id/imageView25" />
-
-            <ImageButton
-                android:id="@+id/imageButton9"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="fitXY"
-                android:src="@drawable/meta_icon"
-                app:layout_constraintBottom_toBottomOf="@id/imageView26"
-                app:layout_constraintStart_toStartOf="@+id/imageView26"
-                app:layout_constraintTop_toTopOf="@id/imageView26" />
-
-            <ImageButton
-                android:id="@+id/imageButton10"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/yag_forward_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView18"
-                app:layout_constraintEnd_toEndOf="@+id/imageView18"
-                app:layout_constraintTop_toTopOf="@+id/imageView18" />
-
-            <ImageButton
-                android:id="@+id/imageButton11"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/kas_forward_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView22"
-                app:layout_constraintEnd_toEndOf="@+id/imageView22"
-                app:layout_constraintTop_toTopOf="@+id/imageView22" />
-
-            <ImageButton
-                android:id="@+id/imageButton12"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/su_forward_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView23"
-                app:layout_constraintEnd_toEndOf="@+id/imageView23"
-                app:layout_constraintTop_toTopOf="@+id/imageView23" />
-
-            <ImageButton
-                android:id="@+id/imageButton13"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/kilo_forward_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView24"
-                app:layout_constraintEnd_toEndOf="@+id/imageView24"
-                app:layout_constraintTop_toTopOf="@+id/imageView24" />
-
-            <ImageButton
-                android:id="@+id/imageButton14"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/bmi_forward_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView25"
-                app:layout_constraintEnd_toEndOf="@+id/imageView25"
-                app:layout_constraintTop_toTopOf="@+id/imageView25" />
-
-            <ImageButton
-                android:id="@+id/imageButton15"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/meta_forward_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView26"
-                app:layout_constraintEnd_toEndOf="@+id/imageView26"
-                app:layout_constraintTop_toTopOf="@+id/imageView26" />
-
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/montserrat"
-                android:text="Yağ"
-                android:textColor="@color/cardHeader"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
-                app:layout_constraintStart_toEndOf="@+id/imageButton3"
-                app:layout_constraintTop_toTopOf="@+id/imageButton3" />
-
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/montserrat"
-                android:text="Kas"
-                android:textColor="@color/cardHeader"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
-                app:layout_constraintStart_toEndOf="@+id/imageButton4"
-                app:layout_constraintTop_toTopOf="@+id/imageButton4" />
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/montserrat"
-                android:text="Su"
-                android:textColor="@color/cardHeader"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
-                app:layout_constraintStart_toEndOf="@+id/imageButton5"
-                app:layout_constraintTop_toTopOf="@+id/imageButton5" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/montserrat"
-                android:text="Vücut Ağırlığı"
-                android:textColor="@color/cardHeader"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton7"
-                app:layout_constraintStart_toEndOf="@+id/imageButton7"
-                app:layout_constraintTop_toTopOf="@+id/imageButton7" />
-
-            <TextView
-                android:id="@+id/textView27"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/montserrat"
-                android:text="BKİ"
-                android:textColor="@color/cardHeader"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
-                app:layout_constraintStart_toEndOf="@+id/imageButton8"
-                app:layout_constraintTop_toTopOf="@+id/imageButton8" />
-
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/montserrat"
-                android:text="Metabolizma Hızı"
-                android:textColor="@color/cardHeader"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
-                app:layout_constraintStart_toEndOf="@+id/imageButton9"
-                app:layout_constraintTop_toTopOf="@+id/imageButton9" />
 
             <TextView
                 android:id="@+id/textView35"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Yağ"
                 android:textColor="@color/fatColor"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton17"
-                app:layout_constraintStart_toEndOf="@+id/imageButton17"
-                app:layout_constraintTop_toTopOf="@+id/imageButton17" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mainChart" />
 
             <TextView
                 android:id="@+id/textView38"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Su"
                 android:textColor="@color/waterColor"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton20"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton10"
-                app:layout_constraintTop_toTopOf="@+id/imageButton20" />
+                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mainChart" />
 
             <TextView
                 android:id="@+id/textView39"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginBottom="24dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Kas"
                 android:textColor="@color/muscleColor"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton19"
-                app:layout_constraintStart_toEndOf="@+id/imageButton19"
-                app:layout_constraintTop_toTopOf="@+id/imageButton19" />
-
-            <ImageButton
-                android:id="@+id/imageButton17"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="16dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/yag_icon"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton3"
-                app:layout_constraintStart_toStartOf="@+id/imageButton3"
-                app:layout_constraintTop_toTopOf="@+id/chart1" />
-
-            <ImageButton
-                android:id="@+id/imageButton19"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginBottom="16dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/kas_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/chart1"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton17"
-                app:layout_constraintStart_toStartOf="@+id/imageButton17" />
-
-            <ImageButton
-                android:id="@+id/imageButton20"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="4dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/su_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/chart1"
-                app:layout_constraintEnd_toStartOf="@+id/textView38"
-                app:layout_constraintTop_toTopOf="@+id/chart1" />
+                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                app:layout_constraintStart_toStartOf="@+id/textView35" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -495,8 +506,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:primaryColor="@android:color/transparent"
-        app:textColor="@android:color/white"
         app:state="collapsed"
+        app:textColor="@android:color/white"
         app:todayItem_textColor="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

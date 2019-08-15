@@ -7,7 +7,7 @@
     tools:context=".BMIActivity">
 
     <ImageButton
-        android:id="@+id/imageButton21"
+        android:id="@+id/bmiBackButton"
         android:layout_width="20dp"
         android:layout_height="30dp"
         android:layout_marginStart="24dp"
@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/backbutton" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/bmiBackText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,12 +27,12 @@
         android:padding="8dp"
         android:text="Beden Kütle İndeksi"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton21"
-        app:layout_constraintStart_toEndOf="@+id/imageButton21"
-        app:layout_constraintTop_toTopOf="@+id/imageButton21" />
+        app:layout_constraintBottom_toBottomOf="@+id/bmiBackButton"
+        app:layout_constraintStart_toEndOf="@+id/bmiBackButton"
+        app:layout_constraintTop_toTopOf="@+id/bmiBackButton" />
 
     <ImageView
-        android:id="@+id/imageView30"
+        android:id="@+id/bmiIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -41,11 +41,11 @@
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        app:layout_constraintTop_toBottomOf="@+id/bmiBackText"
         app:srcCompat="@drawable/bmi_icon" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/bmiAmountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -53,23 +53,23 @@
         android:text="25 kg/m²"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView30"
-        app:layout_constraintStart_toStartOf="@+id/imageView30"
-        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+        app:layout_constraintEnd_toEndOf="@+id/bmiIcon"
+        app:layout_constraintStart_toStartOf="@+id/bmiIcon"
+        app:layout_constraintTop_toBottomOf="@+id/bmiIcon" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/bmiMeasurementDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
         android:text="05.05.2019"
-        app:layout_constraintEnd_toEndOf="@+id/textView41"
-        app:layout_constraintStart_toStartOf="@+id/textView41"
-        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+        app:layout_constraintEnd_toEndOf="@+id/bmiAmountText"
+        app:layout_constraintStart_toStartOf="@+id/bmiAmountText"
+        app:layout_constraintTop_toBottomOf="@+id/bmiAmountText" />
 
     <ImageView
-        android:id="@+id/imageView31"
+        android:id="@+id/detBmiIndicator"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="16dp"
@@ -78,31 +78,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView42"
+        app:layout_constraintTop_toBottomOf="@id/bmiMeasurementDate"
         app:srcCompat="@drawable/bmi_base" />
 
     <ImageView
-        android:id="@+id/imageView33"
+        android:id="@+id/detBmiValue"
         android:layout_width="wrap_content"
         android:layout_height="145dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView31"
-        app:layout_constraintEnd_toEndOf="@+id/imageView31"
+        app:layout_constraintBottom_toBottomOf="@+id/detBmiIndicator"
+        app:layout_constraintEnd_toEndOf="@+id/detBmiIndicator"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bmi_cubuk" />
 
     <ImageView
-        android:id="@+id/imageView32"
+        android:id="@+id/detBmiBase"
         android:layout_width="0dp"
         android:layout_height="90dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView31"
+        app:layout_constraintBottom_toBottomOf="@+id/detBmiIndicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bmi_alt" />
 
     <TextView
-        android:id="@+id/textView43"
+        android:id="@+id/bmiPastText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -112,7 +112,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView33" />
+        app:layout_constraintTop_toBottomOf="@+id/detBmiValue" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -122,7 +122,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView43">
+        app:layout_constraintTop_toBottomOf="@+id/bmiPastText">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

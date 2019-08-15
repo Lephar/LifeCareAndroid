@@ -192,13 +192,13 @@ public class CollapsibleCalendar extends UICalendar {
                 txtDay.setBackgroundColor(Color.TRANSPARENT);
                 txtDay.setTextColor(getTextColor());
 
+                List<Event> mEventList = mAdapter.getEventList();
+
                 // set today's item
                 if (isToady(day)) {
                     txtDay.setBackgroundDrawable(getTodayItemBackgroundDrawable());
                     txtDay.setTextColor(getTodayItemTextColor());
                 }
-
-                List<Event> mEventList = mAdapter.getEventList();
 
                 for (int j = 0; j < mEventList.size(); j++) {
                     Event event = mEventList.get(j);

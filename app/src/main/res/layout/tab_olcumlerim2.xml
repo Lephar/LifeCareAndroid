@@ -58,7 +58,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textViewLeft1" />
 
             <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart1"
+                android:id="@+id/olcum2Chart"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="12dp"

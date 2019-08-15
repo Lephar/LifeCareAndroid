@@ -6,5 +6,5 @@
         android:duration="@android:integer/config_longAnimTime"
         android:fromAlpha="0.0"
         android:startOffset="@android:integer/config_longAnimTime"
-        android:toAlpha="1.0"></alpha>
+        android:toAlpha="1.0" />
 </set>

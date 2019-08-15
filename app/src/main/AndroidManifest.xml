@@ -23,24 +23,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BMIActivity"></activity>
-        <activity android:name=".SuAnaliziActivity" />
-        <activity android:name=".KasAnaliziActivity" />
-        <activity android:name=".YagAnaliziActivity" />
-        <activity
-            android:name=".OlcumActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MainRevampActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".DenemeActivity" />
-        <activity android:name=".ForgottenActivity" />
-        <activity
-            android:name=".ProgramDailyActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ProgramGeneralActivity"
-            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -108,6 +90,24 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SelectPhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OlcumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainRevampActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgottenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProgramDailyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProgramGeneralActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"

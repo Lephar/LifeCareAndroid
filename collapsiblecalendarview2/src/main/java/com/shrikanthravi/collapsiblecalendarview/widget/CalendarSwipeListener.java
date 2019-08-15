@@ -34,13 +34,13 @@ public class CalendarSwipeListener extends GestureDetector.SimpleOnGestureListen
         float deltaYAbs = Math.abs(deltaY);
 
         // Only when swipe distance between minimal and maximal distance value then we treat it as effective swipe
-        if ((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
+        if ((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs >= deltaYAbs)) {
             if (deltaX > 0) {
                 if (calendar.isCollapsed())
                     calendar.nextWeek();
                 else
                     calendar.nextMonth();
-            } else {
+            } else if (deltaX < 0) {
                 if (calendar.isCollapsed())
                     calendar.prevWeek();
                 else
@@ -48,7 +48,7 @@ public class CalendarSwipeListener extends GestureDetector.SimpleOnGestureListen
             }
         }
 
-        if ((deltaYAbs >= MIN_SWIPE_DISTANCE_Y)) {
+        if ((deltaXAbs < deltaYAbs) && (deltaYAbs >= MIN_SWIPE_DISTANCE_Y)) {
             if (deltaY > 0 && !calendar.isCollapsed()) {
                 calendar.collapse(400);
             } else if (deltaY <= 0 && calendar.isCollapsed()) {

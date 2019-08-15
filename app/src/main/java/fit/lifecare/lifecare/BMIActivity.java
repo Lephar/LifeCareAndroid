@@ -24,8 +24,8 @@ public class BMIActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
-        backButton = findViewById(R.id.imageButton21);
-        backText = findViewById(R.id.textView40);
+        backButton = findViewById(R.id.detFatBackButton);
+        backText = findViewById(R.id.detFatBackText);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
