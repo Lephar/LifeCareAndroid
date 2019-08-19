@@ -14,7 +14,6 @@
     <string name="default_notification_channel_id">Messaging_channel</string>
     <string name="fcm_message_title">Lifecare</string>
 
-
     <!-- collapsable calendar day strings -->
     <string name="monday">MON</string>
     <string name="tuesday">TUE</string>

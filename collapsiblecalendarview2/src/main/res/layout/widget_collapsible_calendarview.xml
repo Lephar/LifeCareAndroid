@@ -106,6 +106,7 @@
         android:layout_height="3dp"
         android:layout_gravity="center"
         android:background="@drawable/down_arrow_icon"
+        android:gravity="center"
         android:visibility="visible"
         app:eiv_animationDuration="300"
         app:eiv_color="@android:color/transparent"
@@ -118,7 +119,7 @@
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="8dp" />
+        android:layout_height="4dp" />
 
 
 </LinearLayout>

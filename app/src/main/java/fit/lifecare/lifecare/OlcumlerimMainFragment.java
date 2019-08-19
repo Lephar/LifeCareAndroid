@@ -151,8 +151,6 @@ public class OlcumlerimMainFragment extends Fragment {
         collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
             @Override
             public void onDaySelect() {
-
-
                 Day day = collapsibleCalendar.getSelectedDay();
 
                 yy = day.getYear();

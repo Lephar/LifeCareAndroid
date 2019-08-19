@@ -54,10 +54,6 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class MainTab extends Fragment {
 
-    protected final String[] parties = new String[]{
-            "Party A", "Party B", "Party C"
-    };
-
     private PieChart chart;
     private ImageButton olcum;
     private TextView olcumText;
@@ -72,6 +68,7 @@ public class MainTab extends Fragment {
     ArrayList<Entry> yValues8 = new ArrayList<>();
     List<Calendar> selectable_dates = new ArrayList<>();
     List<String> selectable_dates_string = new ArrayList<>();
+
     private ConstraintLayout[] carts = new ConstraintLayout[6];
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -87,7 +84,10 @@ public class MainTab extends Fragment {
     private int mm;
     private int dd;
     private String selected_date;
+
     private String height;
+    private float fat, muscle, water, weight, bmi, meta;
+    private TextView fatValueText, muscleValueText, waterValueText, weightValueText, bmiValueText, metaValueText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -144,6 +144,13 @@ public class MainTab extends Fragment {
             }
         });
 
+        fatValueText = getView().findViewById(R.id.fatValueText);
+        muscleValueText = getView().findViewById(R.id.muscleValueText);
+        waterValueText = getView().findViewById(R.id.waterValueText);
+        weightValueText = getView().findViewById(R.id.weightValueText);
+        bmiValueText = getView().findViewById(R.id.bmiValueText);
+        metaValueText = getView().findViewById(R.id.metaValueText);
+
         chart = getView().findViewById(R.id.mainChart);
         collapsibleCalendar = getView().findViewById(R.id.calendarView);
         calendarBackground = getView().findViewById(R.id.imageView17);
@@ -168,6 +175,16 @@ public class MainTab extends Fragment {
             slideLeft[i].setStartOffset(i * 200 + 200);
             carts[i].startAnimation(slideLeft[i]);
         }
+
+        calendarBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (collapsibleCalendar.isCollapsed())
+                    collapsibleCalendar.expand(400);
+                else
+                    collapsibleCalendar.collapse(400);
+            }
+        });
 
         initializeCalendar();
         attachSelectableDatesListener();
@@ -200,11 +217,11 @@ public class MainTab extends Fragment {
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
 
-        entries.add(new PieEntry((float) 48, parties[0]));
-        entries.add(new PieEntry((float) 36, parties[1]));
-        entries.add(new PieEntry((float) 16, parties[2]));
+        entries.add(new PieEntry(water, "Water"));
+        entries.add(new PieEntry(muscle, "Muscle"));
+        entries.add(new PieEntry(fat, "Fat"));
 
-        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+        PieDataSet dataSet = new PieDataSet(entries, "Measurements");
 
         dataSet.setDrawIcons(false);
 
@@ -261,7 +278,6 @@ public class MainTab extends Fragment {
             @Override
             public void onDaySelect() {
 
-
                 Day day = collapsibleCalendar.getSelectedDay();
 
                 yy = day.getYear();
@@ -306,10 +322,30 @@ public class MainTab extends Fragment {
                             if (selected_date.equals(date)) {
                                 OlcumlerimData olcumlerimData = olcumlerimDataSnapshot.getValue(OlcumlerimData.class);
 
-                                //                               olcumlerimTab1.setSelectedValues(olcumlerimData.getVucut_agirligi(), olcumlerimData.getBeden_kutle_endeksi());
-                                //                             olcumlerimTab2.setSelectedValues(olcumlerimData.getYag_orani(), olcumlerimData.getSu_orani());
-                                //                           olcumlerimTab3.setSelectedValues(olcumlerimData.getKas_orani(), olcumlerimData.getKas_orani());
-                                //                         olcumlerimTab4.setSelectedValues(olcumlerimData.getBazal_metabolizma_hizi(), olcumlerimData.getMetabolizma_yasi());
+                                Log.d("Vucut_agirligi", olcumlerimData.getVucut_agirligi());
+                                Log.d("Beden_kutle_endeksi", olcumlerimData.getBeden_kutle_endeksi());
+                                Log.d("Yag_orani", olcumlerimData.getYag_orani());
+                                Log.d("Su_orani", olcumlerimData.getSu_orani());
+                                Log.d("Kas_orani", olcumlerimData.getKas_orani());
+                                Log.d("Bazal_metabolizma_hizi", olcumlerimData.getBazal_metabolizma_hizi());
+                                Log.d("Metabolizma_yasi", olcumlerimData.getMetabolizma_yasi());
+
+                                fat = Float.parseFloat(olcumlerimData.getYag_orani());
+                                muscle = Float.parseFloat(olcumlerimData.getKas_orani());
+                                water = Float.parseFloat(olcumlerimData.getSu_orani());
+                                weight = Float.parseFloat(olcumlerimData.getVucut_agirligi());
+                                bmi = Float.parseFloat(olcumlerimData.getBeden_kutle_endeksi());
+                                meta = Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi());
+
+                                initializeChart();
+
+                                fatValueText.setText((int) (fat) + " %, " + (int) (fat * weight / 100) + " kg");
+                                muscleValueText.setText((int) (muscle) + " %, " + (int) (muscle * weight / 100) + " kg");
+                                waterValueText.setText((int) (water) + " %, " + (int) (water * weight / 100) + " lt");
+                                weightValueText.setText((int) (weight) + " kg");
+                                String bmiString = "" + bmi * 10000, metaString = "" + meta;
+                                bmiValueText.setText(bmiString.substring(0, bmiString.indexOf('.') + 3));
+                                metaValueText.setText(metaString.substring(0, metaString.indexOf('.')));
                             }
                         }
                     }
@@ -368,7 +404,6 @@ public class MainTab extends Fragment {
                     Calendar date = transformStringtoDate(olcumlerimDataSnapshot.getKey());
                     long xvalue = TimeUnit.MILLISECONDS.toDays(date.getTimeInMillis() + 1000 * 60 * 60 * 24);
 
-
                     selectable_dates.add(date);
                     String str = olcumlerimDataSnapshot.getKey();
                     selectable_dates_string.add(str);
@@ -400,6 +435,8 @@ public class MainTab extends Fragment {
                     }
                 }
 
+                int lyy = -1, lmm = -1, ldd = -1;
+
                 for (String date_str : selectable_dates_string) {
                     Log.d("ooooo", date_str);
                     String[] parts = date_str.split("-");
@@ -408,8 +445,19 @@ public class MainTab extends Fragment {
                     dd = Integer.parseInt(parts[2]);
 
                     collapsibleCalendar.addEventTag(yy, mm - 1, dd);
+                    lyy = yy;
+                    lmm = mm;
+                    ldd = dd;
                 }
-/*
+
+                if (lyy != -1 && lmm != -1 && ldd != -1) {
+                    fat = -1;
+                    muscle = -1;
+                    water = -1;
+                    collapsibleCalendar.select(new Day(lyy, lmm - 1, ldd));
+                }
+
+                /*
                 if (once_loaded) {
                     olcumlerimTab1.setyValues(yValues1, yValues2);
                     olcumlerimTab1.setData1();
