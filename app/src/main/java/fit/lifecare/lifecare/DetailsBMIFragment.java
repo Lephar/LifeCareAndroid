@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,5 +51,20 @@ public class DetailsBMIFragment extends Fragment {
                 backButton.performClick();
             }
         });
+
+        AnimationSet animSet = new AnimationSet(true);
+        animSet.setInterpolator(new DecelerateInterpolator());
+        animSet.setFillAfter(true);
+        animSet.setFillEnabled(true);
+
+        final RotateAnimation animRotate = new RotateAnimation(0.0f, -90.0f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 1.0f);
+
+        animRotate.setDuration(1500);
+        animRotate.setFillAfter(true);
+        animSet.addAnimation(animRotate);
+
+        indicator.startAnimation(animSet);
     }
 }

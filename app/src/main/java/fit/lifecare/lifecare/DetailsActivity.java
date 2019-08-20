@@ -32,8 +32,8 @@ public class DetailsActivity extends AppCompatActivity {
         adapter.addFragment(new DetailsMuscleFragment());
         adapter.addFragment(new DetailsWaterFragment());
         adapter.addFragment(new DetailsWeightFragment());
-        adapter.addFragment(new DetailsBMIFragment());
         adapter.addFragment(new DetailsMetabolismFragment());
+        adapter.addFragment(new DetailsBMIFragment());
 
         pager = findViewById(R.id.detViewPager);
         pager.setAdapter(adapter);

@@ -541,4 +541,5 @@
     <string name="reset_password">Şifreyi Sıfırla</string>
     <string name="reset_password_text">E-mail adresinizi girin ve size şifrenizi sıfırlamanız için bir link gönderelim</string>
     <string name="change_picture">Profil Fotoğrafı</string>
+    <string name="measurement_date">Ölçüm Tarihi</string>
 </resources>

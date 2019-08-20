@@ -73,7 +73,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         fragmentLayout = findViewById(R.id.fragment_layout);
 
         tabTexts = new String[3];
-        tabTexts[0] = "Besin Programım";
+        tabTexts[0] = "Beslenme Programım";
         tabTexts[1] = "Ölçümlerim";
         tabTexts[2] = "Sohbetlerim";
 
@@ -169,6 +169,14 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
 
         profile_picture = findViewById(R.id.profile_pic);
         user_name = findViewById(R.id.user_name);
+
+        profile_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewPager.getCurrentItem() != 1)
+                    MainRevampActivity.this.onBackPressed();
+            }
+        });
 
         ImageButton settings = findViewById(R.id.settings_button);
         settings.setOnClickListener(new View.OnClickListener() {

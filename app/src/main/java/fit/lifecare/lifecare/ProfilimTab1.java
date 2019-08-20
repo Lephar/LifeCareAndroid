@@ -170,10 +170,10 @@ public class ProfilimTab1 extends Fragment {
         birthday_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new KisiselBirthdaySelect().show(getChildFragmentManager(), "Select Height Dialog");
+                new KisiselBirthdaySelect().show(getChildFragmentManager(), "Select Birthday Dialog");
             }
         });
-        
+
         height_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

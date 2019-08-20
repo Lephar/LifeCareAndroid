@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorGray100">#F5F5F5</color>
+    <color name="colorGray400">#BDBDBD</color>
+    <color name="headerColor">#808080</color>
+    <color name="colorGrayMid">#A0A0A0</color>
+    <color name="ourPurple">#2A307F</color>
+    <color name="ourOrange">#F5A623</color>
+    <color name="cardHeader">#707070</color>
+    <color name="shadowColor">#BFBFBF</color>
+    <color name="fatColor">#F9D023</color>
+    <color name="muscleColor">#ED1E79</color>
+    <color name="waterColor">#29ABE2</color>
+    <color name="weightColor">#096E38</color>
+    <color name="bmiColor">#705AB8</color>
+    <color name="metaColor">#FA5E39</color>
+</resources>

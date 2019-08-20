@@ -7,25 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".OlcumGirisFragment">
 
-    <EditText
-        android:id="@+id/editText18"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center_horizontal"
-        android:hint="kg"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText13"
-        app:layout_constraintEnd_toEndOf="@+id/editText12"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editText13"
-        app:layout_constraintTop_toTopOf="@+id/editText13" />
-
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/measSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -51,7 +34,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView30"
-        app:layout_constraintStart_toStartOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="@+id/measSaveButton"
         app:layout_constraintTop_toBottomOf="@+id/imageView37"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -122,7 +105,7 @@
         android:textColor="@color/ourPurple"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/measSaveButton"
         app:layout_constraintStart_toStartOf="@+id/textView36"
         app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
@@ -141,7 +124,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <EditText
-        android:id="@+id/editText11"
+        android:id="@+id/getWeightText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -149,63 +132,80 @@
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:hint="kg"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView30"
-        app:layout_constraintEnd_toEndOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@+id/measSaveButton"
         app:layout_constraintStart_toEndOf="@+id/textView34"
         app:layout_constraintTop_toTopOf="@+id/textView30" />
 
     <EditText
-        android:id="@+id/editText12"
+        android:id="@+id/getBmiText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView31"
-        app:layout_constraintEnd_toEndOf="@+id/editText11"
-        app:layout_constraintStart_toStartOf="@+id/editText11"
+        app:layout_constraintEnd_toEndOf="@+id/getWeightText"
+        app:layout_constraintStart_toStartOf="@+id/getWeightText"
         app:layout_constraintTop_toTopOf="@+id/textView31" />
 
     <EditText
-        android:id="@+id/editText13"
+        android:id="@+id/getFatMassText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center_horizontal"
+        android:hint="kg"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/getFatPercentText"
+        app:layout_constraintEnd_toEndOf="@+id/getBmiText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/getFatPercentText"
+        app:layout_constraintTop_toTopOf="@+id/getFatPercentText" />
+
+    <EditText
+        android:id="@+id/getFatPercentText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:hint="%"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView32"
-        app:layout_constraintEnd_toStartOf="@+id/editText18"
+        app:layout_constraintEnd_toStartOf="@+id/getFatMassText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView32"
-        app:layout_constraintStart_toStartOf="@+id/editText12"
+        app:layout_constraintStart_toStartOf="@+id/getBmiText"
         app:layout_constraintTop_toTopOf="@+id/textView32" />
 
     <EditText
-        android:id="@+id/editText14"
+        android:id="@+id/getMusclePercentText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:hint="%"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView33"
-        app:layout_constraintEnd_toStartOf="@+id/editText19"
+        app:layout_constraintEnd_toStartOf="@+id/getMuscleMassText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView33"
-        app:layout_constraintStart_toStartOf="@+id/editText13"
+        app:layout_constraintStart_toStartOf="@+id/getFatPercentText"
         app:layout_constraintTop_toTopOf="@+id/textView33" />
 
     <EditText
-        android:id="@+id/editText19"
+        android:id="@+id/getMuscleMassText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -213,33 +213,33 @@
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:hint="kg"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText14"
-        app:layout_constraintEnd_toEndOf="@+id/editText18"
+        app:layout_constraintBottom_toBottomOf="@+id/getMusclePercentText"
+        app:layout_constraintEnd_toEndOf="@+id/getFatMassText"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editText14"
-        app:layout_constraintTop_toTopOf="@+id/editText14" />
+        app:layout_constraintStart_toEndOf="@+id/getMusclePercentText"
+        app:layout_constraintTop_toTopOf="@+id/getMusclePercentText" />
 
     <EditText
-        android:id="@+id/editText15"
+        android:id="@+id/getWaterPercentText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:hint="%"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView36"
-        app:layout_constraintEnd_toStartOf="@+id/editText20"
+        app:layout_constraintEnd_toStartOf="@+id/getWaterMassText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintStart_toStartOf="@+id/editText14"
+        app:layout_constraintStart_toStartOf="@+id/getMusclePercentText"
         app:layout_constraintTop_toTopOf="@+id/textView36" />
 
     <EditText
-        android:id="@+id/editText20"
+        android:id="@+id/getWaterMassText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -247,39 +247,39 @@
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:hint="kg"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText15"
-        app:layout_constraintEnd_toEndOf="@+id/editText19"
+        app:layout_constraintBottom_toBottomOf="@+id/getWaterPercentText"
+        app:layout_constraintEnd_toEndOf="@+id/getMuscleMassText"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editText15"
-        app:layout_constraintTop_toTopOf="@+id/editText15" />
+        app:layout_constraintStart_toEndOf="@+id/getWaterPercentText"
+        app:layout_constraintTop_toTopOf="@+id/getWaterPercentText" />
 
     <EditText
-        android:id="@+id/editText16"
+        android:id="@+id/getMetaText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:hint="kcal"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView34"
-        app:layout_constraintEnd_toEndOf="@+id/editText20"
-        app:layout_constraintStart_toStartOf="@+id/editText15"
+        app:layout_constraintEnd_toEndOf="@+id/getWaterMassText"
+        app:layout_constraintStart_toStartOf="@+id/getWaterPercentText"
         app:layout_constraintTop_toTopOf="@+id/textView34" />
 
     <ImageButton
-        android:id="@+id/imageButton18"
+        android:id="@+id/measurementSelectDateButton"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:background="@null"
         android:scaleType="fitXY"
         android:src="@drawable/button_purple"
         app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintEnd_toEndOf="@+id/editText11"
-        app:layout_constraintStart_toStartOf="@+id/editText11"
+        app:layout_constraintEnd_toEndOf="@+id/getWeightText"
+        app:layout_constraintStart_toStartOf="@+id/getWeightText"
         app:layout_constraintTop_toTopOf="@+id/textView29" />
 
     <ImageView
@@ -291,12 +291,12 @@
         android:layout_marginBottom="4dp"
         android:scaleType="centerInside"
         android:src="@drawable/date_white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton18"
-        app:layout_constraintStart_toStartOf="@+id/imageButton18"
-        app:layout_constraintTop_toTopOf="@+id/imageButton18" />
+        app:layout_constraintBottom_toBottomOf="@+id/measurementSelectDateButton"
+        app:layout_constraintStart_toStartOf="@+id/measurementSelectDateButton"
+        app:layout_constraintTop_toTopOf="@+id/measurementSelectDateButton" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/measurementDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -304,10 +304,10 @@
         android:fontFamily="@font/montserrat"
         android:text="05.05.2019"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton18"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton18"
+        app:layout_constraintBottom_toBottomOf="@+id/measurementSelectDateButton"
+        app:layout_constraintEnd_toEndOf="@+id/measurementSelectDateButton"
         app:layout_constraintStart_toEndOf="@+id/imageView36"
-        app:layout_constraintTop_toTopOf="@+id/imageButton18" />
+        app:layout_constraintTop_toTopOf="@+id/measurementSelectDateButton" />
 
     <ImageView
         android:id="@+id/imageView37"

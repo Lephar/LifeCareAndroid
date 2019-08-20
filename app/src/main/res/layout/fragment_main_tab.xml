@@ -20,6 +20,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/lastMeasureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center_horizontal"
+                android:text="Son Ölçüm"
+                android:textColor="@color/colorGrayMid"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mainChart" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cart1"
                 android:layout_width="0dp"
@@ -325,7 +340,7 @@
                 android:layout_marginEnd="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart4">
+                app:layout_constraintTop_toBottomOf="@+id/cart6">
 
                 <ImageView
                     android:id="@+id/imageView25"
@@ -399,7 +414,7 @@
                 android:layout_marginEnd="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart5">
+                app:layout_constraintTop_toBottomOf="@+id/cart4">
 
                 <ImageView
                     android:id="@+id/imageView26"
@@ -499,42 +514,83 @@
                 app:layout_constraintTop_toTopOf="@+id/imageButton2" />
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/fatPercentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Yağ"
+                android:text="%0"
                 android:textColor="@color/fatColor"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/mainChart" />
 
             <TextView
-                android:id="@+id/textView38"
+                android:id="@+id/waterPercentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="24dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Su"
+                android:text="%0"
                 android:textColor="@color/waterColor"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/waterDescribeText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mainChart" />
+                app:layout_constraintTop_toTopOf="@+id/mainChart"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
-                android:id="@+id/textView39"
+                android:id="@+id/musclePercentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="%0"
+                android:textColor="@color/muscleColor"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/muscleDescribeText"
+                app:layout_constraintStart_toStartOf="@+id/fatPercentText" />
+
+            <TextView
+                android:id="@+id/fatDescribeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Yağ"
+                android:textColor="@color/colorGrayMid"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/fatPercentText"
+                app:layout_constraintStart_toStartOf="@+id/fatPercentText"
+                app:layout_constraintTop_toBottomOf="@+id/fatPercentText" />
+
+            <TextView
+                android:id="@+id/waterDescribeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Su"
+                android:textColor="@color/colorGrayMid"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                app:layout_constraintEnd_toEndOf="@+id/waterPercentText"
+                app:layout_constraintStart_toStartOf="@+id/waterPercentText"
+                app:layout_constraintTop_toBottomOf="@+id/waterPercentText" />
+
+            <TextView
+                android:id="@+id/muscleDescribeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Kas"
-                android:textColor="@color/muscleColor"
+                android:textColor="@color/colorGrayMid"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/mainChart"
-                app:layout_constraintStart_toStartOf="@+id/textView35" />
+                app:layout_constraintEnd_toEndOf="@+id/musclePercentText"
+                app:layout_constraintStart_toStartOf="@+id/musclePercentText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -570,7 +626,7 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:selectedItem_textColor="@color/ourOrange"
+        app:selectedItem_textColor="@android:color/white"
         app:buttonLeft_drawableTintColor="@android:color/white"
         app:buttonRight_drawableTintColor="@android:color/white"
         app:expandIconColor="@android:color/white"

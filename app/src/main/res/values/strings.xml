@@ -541,4 +541,5 @@
     <string name="reset_password">Reset Password</string>
     <string name="reset_password_text">Enter your email address and we\'ll send you link to reset your password</string>
     <string name="change_picture">Profile Picture</string>
+    <string name="measurement_date">Measurement Date</string>
 </resources>

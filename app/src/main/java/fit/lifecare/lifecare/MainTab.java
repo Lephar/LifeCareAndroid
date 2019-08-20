@@ -41,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.shrikanthravi.collapsiblecalendarview.data.Day;
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,6 +89,8 @@ public class MainTab extends Fragment {
     private String height;
     private float fat, muscle, water, weight, bmi, meta;
     private TextView fatValueText, muscleValueText, waterValueText, weightValueText, bmiValueText, metaValueText;
+    private TextView fatPercentText, musclePercentText, waterPercentText, fatDescribeText, muscleDescribeText, waterDescribeText;
+    private TextView lastMeasureText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,8 +129,49 @@ public class MainTab extends Fragment {
             });
         }
 
+        fatValueText = getView().findViewById(R.id.fatValueText);
+        muscleValueText = getView().findViewById(R.id.muscleValueText);
+        waterValueText = getView().findViewById(R.id.waterValueText);
+        weightValueText = getView().findViewById(R.id.weightValueText);
+        bmiValueText = getView().findViewById(R.id.bmiValueText);
+        metaValueText = getView().findViewById(R.id.metaValueText);
+
+        fatPercentText = getView().findViewById(R.id.fatPercentText);
+        musclePercentText = getView().findViewById(R.id.musclePercentText);
+        waterPercentText = getView().findViewById(R.id.waterPercentText);
+        fatDescribeText = getView().findViewById(R.id.fatDescribeText);
+        muscleDescribeText = getView().findViewById(R.id.muscleDescribeText);
+        waterDescribeText = getView().findViewById(R.id.waterDescribeText);
+
+        Animation textFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+        textFadeIn.setStartOffset(1000);
+        lastMeasureText = getView().findViewById(R.id.lastMeasureText);
+        lastMeasureText.startAnimation(textFadeIn);
+
+        Animation textLeft = AnimationUtils.loadAnimation(getActivity(), R.anim.text_left);
+        Animation textRight = AnimationUtils.loadAnimation(getActivity(), R.anim.text_right);
+        textLeft.setStartOffset(800);
+        textRight.setStartOffset(800);
+/*
+        fatPercentText.startAnimation(textRight);
+        fatDescribeText.startAnimation(textRight);
+        musclePercentText.startAnimation(textRight);
+        muscleDescribeText.startAnimation(textRight);
+        waterPercentText.startAnimation(textLeft);
+        waterDescribeText.startAnimation(textLeft);
+*/
+        fatPercentText.startAnimation(textFadeIn);
+        fatDescribeText.startAnimation(textFadeIn);
+        musclePercentText.startAnimation(textFadeIn);
+        muscleDescribeText.startAnimation(textFadeIn);
+        waterPercentText.startAnimation(textFadeIn);
+        waterDescribeText.startAnimation(textFadeIn);
+
         olcum = getView().findViewById(R.id.imageButton2);
         olcumText = getView().findViewById(R.id.textView22);
+
+        olcum.startAnimation(textFadeIn);
+        olcumText.startAnimation(textFadeIn);
 
         olcum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,13 +187,6 @@ public class MainTab extends Fragment {
                 olcum.performClick();
             }
         });
-
-        fatValueText = getView().findViewById(R.id.fatValueText);
-        muscleValueText = getView().findViewById(R.id.muscleValueText);
-        waterValueText = getView().findViewById(R.id.waterValueText);
-        weightValueText = getView().findViewById(R.id.weightValueText);
-        bmiValueText = getView().findViewById(R.id.bmiValueText);
-        metaValueText = getView().findViewById(R.id.metaValueText);
 
         chart = getView().findViewById(R.id.mainChart);
         collapsibleCalendar = getView().findViewById(R.id.calendarView);
@@ -338,14 +375,20 @@ public class MainTab extends Fragment {
                                 meta = Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi());
 
                                 initializeChart();
+                                collapsibleCalendar.collapse(400);
 
                                 fatValueText.setText((int) (fat) + " %, " + (int) (fat * weight / 100) + " kg");
                                 muscleValueText.setText((int) (muscle) + " %, " + (int) (muscle * weight / 100) + " kg");
                                 waterValueText.setText((int) (water) + " %, " + (int) (water * weight / 100) + " lt");
                                 weightValueText.setText((int) (weight) + " kg");
-                                String bmiString = "" + bmi * 10000, metaString = "" + meta;
-                                bmiValueText.setText(bmiString.substring(0, bmiString.indexOf('.') + 3));
-                                metaValueText.setText(metaString.substring(0, metaString.indexOf('.')));
+                                bmiValueText.setText(new DecimalFormat("#.00").format(bmi * 10000));
+                                metaValueText.setText(new DecimalFormat("#").format(meta));
+
+                                fatPercentText.setText("%" + (int) fat);
+                                musclePercentText.setText("%" + (int) muscle);
+                                waterPercentText.setText("%" + (int) water);
+
+                                lastMeasureText.setText("Son Ölçüm\n" + (dd < 10 ? "0" : "") + dd + (mm < 10 ? ".0" : ".") + mm + "." + yy);
                             }
                         }
                     }
@@ -455,6 +498,7 @@ public class MainTab extends Fragment {
                     muscle = -1;
                     water = -1;
                     collapsibleCalendar.select(new Day(lyy, lmm - 1, ldd));
+                    lastMeasureText.setText("Son Ölçüm\n" + dd + (mm >= 10 ? "." : ".0") + mm + "." + yy);
                 }
 
                 /*

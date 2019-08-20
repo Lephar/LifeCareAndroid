@@ -77,10 +77,10 @@ public class DetailsWeightFragment extends Fragment {
         set.setCubicIntensity(0.1f);
         set.setDrawFilled(false);
         set.setDrawCircles(true);
-        set.setCircleColor(ContextCompat.getColor(getContext(), R.color.waterColor));
+        set.setCircleColor(ContextCompat.getColor(getContext(), R.color.weightColor));
         set.setCircleRadius(4);
         set.setDrawValues(false);
-        set.setColor(ContextCompat.getColor(getContext(), R.color.waterColor));
+        set.setColor(ContextCompat.getColor(getContext(), R.color.weightColor));
         set.setLineWidth(4);
 
         LineData data = new LineData(set);
