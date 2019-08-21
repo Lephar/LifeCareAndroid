@@ -105,7 +105,6 @@ public class OlcumlerimMainFragment extends Fragment {
         mOlcumlerimDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Olcumlerim");
     
-    
         //initialize shared preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = preferences.edit();

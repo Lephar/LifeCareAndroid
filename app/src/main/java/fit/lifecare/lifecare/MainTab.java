@@ -351,7 +351,6 @@ public class MainTab extends Fragment {
 
                         for (DataSnapshot olcumlerimDataSnapshot : dataSnapshot.getChildren()) {
 
-
                             String date = olcumlerimDataSnapshot.getKey();
                             //change date format from ISO 8601 to 01-01-2018 format
                             date = date.substring(8) + "-" + date.substring(5, 7) + "-" + date.substring(0, 4);
@@ -367,12 +366,34 @@ public class MainTab extends Fragment {
                                 Log.d("Bazal_metabolizma_hizi", olcumlerimData.getBazal_metabolizma_hizi());
                                 Log.d("Metabolizma_yasi", olcumlerimData.getMetabolizma_yasi());
 
-                                fat = Float.parseFloat(olcumlerimData.getYag_orani());
-                                muscle = Float.parseFloat(olcumlerimData.getKas_orani());
-                                water = Float.parseFloat(olcumlerimData.getSu_orani());
-                                weight = Float.parseFloat(olcumlerimData.getVucut_agirligi());
-                                bmi = Float.parseFloat(olcumlerimData.getBeden_kutle_endeksi());
-                                meta = Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi());
+                                try {
+                                    fat = Float.parseFloat(olcumlerimData.getYag_orani());
+                                    muscle = Float.parseFloat(olcumlerimData.getKas_orani());
+                                    water = Float.parseFloat(olcumlerimData.getSu_orani());
+                                    weight = Float.parseFloat(olcumlerimData.getVucut_agirligi());
+                                    bmi = Float.parseFloat(olcumlerimData.getBeden_kutle_endeksi());
+                                    meta = Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi());
+                                } catch (Exception e) {
+                                    fat = 0;
+                                    muscle = 0;
+                                    water = 0;
+                                    weight = 0;
+                                    bmi = 0;
+                                    meta = 0;
+                                }
+
+                                if (fat != 0 || muscle != 0 || water != 0 || weight != 0) {
+                                    chart.setVisibility(View.VISIBLE);
+                                    lastMeasureText.setVisibility(View.VISIBLE);
+                                    fatPercentText.setVisibility(View.VISIBLE);
+                                    fatDescribeText.setVisibility(View.VISIBLE);
+                                    musclePercentText.setVisibility(View.VISIBLE);
+                                    muscleDescribeText.setVisibility(View.VISIBLE);
+                                    waterPercentText.setVisibility(View.VISIBLE);
+                                    waterDescribeText.setVisibility(View.VISIBLE);
+                                    ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) olcum.getLayoutParams();
+                                    params.topMargin = 0;
+                                }
 
                                 initializeChart();
                                 collapsibleCalendar.collapse(400);
@@ -381,14 +402,14 @@ public class MainTab extends Fragment {
                                 muscleValueText.setText((int) (muscle) + " %, " + (int) (muscle * weight / 100) + " kg");
                                 waterValueText.setText((int) (water) + " %, " + (int) (water * weight / 100) + " lt");
                                 weightValueText.setText((int) (weight) + " kg");
-                                bmiValueText.setText(new DecimalFormat("#.00").format(bmi * 10000));
-                                metaValueText.setText(new DecimalFormat("#").format(meta));
+                                bmiValueText.setText(new DecimalFormat("0.00").format(bmi) + " kg/m²");
+                                metaValueText.setText(new DecimalFormat("0").format(meta) + " kcal/gün");
 
                                 fatPercentText.setText("%" + (int) fat);
                                 musclePercentText.setText("%" + (int) muscle);
                                 waterPercentText.setText("%" + (int) water);
 
-                                lastMeasureText.setText("Son Ölçüm\n" + (dd < 10 ? "0" : "") + dd + (mm < 10 ? ".0" : ".") + mm + "." + yy);
+                                lastMeasureText.setText("Ölçüm Tarihi\n" + (dd < 10 ? "0" : "") + dd + (mm < 10 ? ".0" : ".") + mm + "." + yy);
                             }
                         }
                     }

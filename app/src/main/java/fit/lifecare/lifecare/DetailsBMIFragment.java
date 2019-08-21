@@ -4,26 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.RotateAnimation;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
-public class DetailsBMIFragment extends Fragment {
-
-    private ImageButton backButton;
-    private TextView backText;
-
-    private ImageView indicator;
-
-    public DetailsBMIFragment() {
-    }
+public class DetailsBMIFragment extends DetailsAbstractFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,6 +20,10 @@ public class DetailsBMIFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         indicator = getView().findViewById(R.id.detBmiValue);
+        layout = getView().findViewById(R.id.detBmiConstLayout);
+
+        topDateText = getView().findViewById(R.id.detBmiMeasurementDate);
+        topValueText = getView().findViewById(R.id.detBmiAmountText);
 
         backButton = getView().findViewById(R.id.detBmiBackButton);
         backText = getView().findViewById(R.id.detBmiBackText);
@@ -52,19 +41,17 @@ public class DetailsBMIFragment extends Fragment {
             }
         });
 
-        AnimationSet animSet = new AnimationSet(true);
-        animSet.setInterpolator(new DecelerateInterpolator());
-        animSet.setFillAfter(true);
-        animSet.setFillEnabled(true);
+        initialized = true;
+        draw();
+    }
 
-        final RotateAnimation animRotate = new RotateAnimation(0.0f, -90.0f,
-                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-                RotateAnimation.RELATIVE_TO_SELF, 1.0f);
+    void draw() {
 
-        animRotate.setDuration(1500);
-        animRotate.setFillAfter(true);
-        animSet.addAnimation(animRotate);
+        if (!initialized || !loaded || painted)
+            return;
 
-        indicator.startAnimation(animSet);
+        adjustIndicator(values.get(values.size() - 1).getY());
+        fillLayout("0.00", "kg/m²");
+        painted = true;
     }
 }

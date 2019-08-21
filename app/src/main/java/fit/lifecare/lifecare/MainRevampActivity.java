@@ -57,6 +57,10 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
     private DatabaseReference mUserPersonalInfoDatabaseReference;
     private StorageReference mStorageReference;
 
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private String height;
+
     @Override
     public void onFragmentInteraction(Uri uri) {
     }
@@ -147,6 +151,12 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
                 .child(currentUserId).child("PersonalInfo");
 
         mUserPersonalInfoDatabaseReference.getParent().keepSynced(true);
+
+        //initialize shared preferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = preferences.edit();
+
+        height = preferences.getString("height", "0");
 
         //firebase fcm token listener
         FirebaseInstanceId.getInstance().getInstanceId()

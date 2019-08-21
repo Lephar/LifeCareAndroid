@@ -20,21 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/lastMeasureText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="@font/montserrat"
-                android:gravity="center_horizontal"
-                android:text="Son Ölçüm"
-                android:textColor="@color/colorGrayMid"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mainChart" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cart1"
                 android:layout_width="0dp"
@@ -101,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton10"
@@ -175,7 +159,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton11"
@@ -249,7 +232,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton12"
@@ -323,7 +305,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton13"
@@ -332,7 +313,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cart5"
+                android:id="@+id/cart6"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="5dp"
@@ -340,7 +321,7 @@
                 android:layout_marginEnd="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart6">
+                app:layout_constraintTop_toBottomOf="@+id/cart5">
 
                 <ImageView
                     android:id="@+id/imageView25"
@@ -397,7 +378,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton14"
@@ -406,7 +386,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cart6"
+                android:id="@+id/cart5"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="5dp"
@@ -471,7 +451,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton15"
@@ -484,6 +463,7 @@
                 android:layout_width="0dp"
                 android:layout_height="250dp"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -492,11 +472,28 @@
                 android:id="@+id/imageButton2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="16dp"
                 android:background="@null"
                 android:scaleType="fitXY"
                 android:src="@drawable/olcum_yap"
                 app:layout_constraintEnd_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@id/mainChart" />
+
+            <TextView
+                android:id="@+id/lastMeasureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center_horizontal"
+                android:text="Ölçüm Tarihi"
+                android:textColor="@color/colorGrayMid"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mainChart" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -509,6 +506,7 @@
                 android:textColor="@color/ourOrange"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageButton2" />
@@ -524,6 +522,7 @@
                 android:textColor="@color/fatColor"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/mainChart" />
 
@@ -537,6 +536,7 @@
                 android:textColor="@color/waterColor"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/waterDescribeText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/mainChart"
@@ -551,6 +551,7 @@
                 android:textColor="@color/muscleColor"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/muscleDescribeText"
                 app:layout_constraintStart_toStartOf="@+id/fatPercentText" />
 
@@ -562,6 +563,7 @@
                 android:text="Yağ"
                 android:textColor="@color/colorGrayMid"
                 android:textSize="15sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/fatPercentText"
                 app:layout_constraintStart_toStartOf="@+id/fatPercentText"
                 app:layout_constraintTop_toBottomOf="@+id/fatPercentText" />
@@ -574,6 +576,7 @@
                 android:text="Su"
                 android:textColor="@color/colorGrayMid"
                 android:textSize="15sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/mainChart"
                 app:layout_constraintEnd_toEndOf="@+id/waterPercentText"
                 app:layout_constraintStart_toStartOf="@+id/waterPercentText"
@@ -588,6 +591,7 @@
                 android:text="Kas"
                 android:textColor="@color/colorGrayMid"
                 android:textSize="15sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/mainChart"
                 app:layout_constraintEnd_toEndOf="@+id/musclePercentText"
                 app:layout_constraintStart_toStartOf="@+id/musclePercentText" />

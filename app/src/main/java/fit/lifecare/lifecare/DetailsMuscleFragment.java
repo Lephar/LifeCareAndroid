@@ -4,32 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
-import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-
-import java.util.ArrayList;
-
-public class DetailsMuscleFragment extends Fragment {
-
-    private ImageButton backButton;
-    private TextView backText;
-
-    private LineChart chart;
-
-    public DetailsMuscleFragment() {
-    }
+public class DetailsMuscleFragment extends DetailsAbstractFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +20,10 @@ public class DetailsMuscleFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         chart = getView().findViewById(R.id.detMusChart);
+        layout = getView().findViewById(R.id.detMusConstLayout);
+
+        topDateText = getView().findViewById(R.id.detMusMeasurementDate);
+        topValueText = getView().findViewById(R.id.detMusAmountText);
 
         backButton = getView().findViewById(R.id.detMusBackButton);
         backText = getView().findViewById(R.id.detMusBackText);
@@ -58,52 +41,17 @@ public class DetailsMuscleFragment extends Fragment {
             }
         });
 
-        setData();
+        initialized = true;
+        draw();
     }
 
-    public void setData() {
-        ArrayList<Entry> yValues1 = new ArrayList<>();
-        yValues1.add(new Entry(1, 44));
-        yValues1.add(new Entry(2, 42));
-        yValues1.add(new Entry(3, 38));
-        yValues1.add(new Entry(4, 40));
-        yValues1.add(new Entry(5, 36));
-        yValues1.add(new Entry(6, 40));
-        yValues1.add(new Entry(7, 44));
+    void draw() {
 
-        LineDataSet set;
-        set = new LineDataSet(yValues1, "");
-        set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-        set.setCubicIntensity(0.1f);
-        set.setDrawFilled(false);
-        set.setDrawCircles(true);
-        set.setCircleColor(ContextCompat.getColor(getContext(), R.color.muscleColor));
-        set.setCircleRadius(4);
-        set.setDrawValues(false);
-        set.setColor(ContextCompat.getColor(getContext(), R.color.muscleColor));
-        set.setLineWidth(4);
+        if (!initialized || !loaded || painted)
+            return;
 
-        LineData data = new LineData(set);
-
-        chart.setTouchEnabled(true);
-        chart.setDragDecelerationFrictionCoef(0.9f);
-        chart.setDragEnabled(true);
-        chart.setScaleEnabled(true);
-        chart.setDrawGridBackground(false);
-        chart.setHighlightPerTapEnabled(true);
-        chart.setScaleEnabled(false);
-
-        XAxis chart1_Xaxis = chart.getXAxis();
-        chart1_Xaxis.setEnabled(false);
-        chart1_Xaxis.setGranularity(1f);
-
-        chart.setViewPortOffsets(0f, 0f, 0f, 0f);
-        chart.setDescription(null);
-        chart.getLegend().setEnabled(false);
-        chart.getAxisRight().setEnabled(false);
-        chart.getAxisLeft().setEnabled(false);
-        chart.getAxisLeft().setDrawGridLines(false);
-        chart.animateX(1000, Easing.Linear);
-        chart.setData(data);
+        fillChart(R.color.muscleColor);
+        fillLayout("0.#", "kg");
+        painted = true;
     }
 }
