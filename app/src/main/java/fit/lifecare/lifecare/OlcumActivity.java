@@ -1,9 +1,11 @@
 package fit.lifecare.lifecare;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,6 +17,10 @@ import com.google.android.material.tabs.TabLayout;
 
 public class OlcumActivity extends AppCompatActivity
         implements CihazOlcumFragment.OnFragmentInteractionListener, OlcumGirisFragment.OnFragmentInteractionListener {
+
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private String height;
 
     private ImageButton backButton;
     private TextView backText;
@@ -49,9 +55,14 @@ public class OlcumActivity extends AppCompatActivity
             }
         });
 
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = preferences.edit();
+        height = preferences.getString("height", "0");
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CihazOlcumFragment(), "Ölç");
-        adapter.addFragment(new OlcumGirisFragment(), "Yaz");
+        adapter.addFragment(new CihazOlcumFragment(viewPager), "Ölç");
+        adapter.addFragment(new OlcumGirisFragment(height), "Yaz");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

@@ -70,7 +70,7 @@ public class MainTab extends Fragment {
     List<Calendar> selectable_dates = new ArrayList<>();
     List<String> selectable_dates_string = new ArrayList<>();
 
-    private ConstraintLayout[] carts = new ConstraintLayout[6];
+    private ConstraintLayout[] carts = new ConstraintLayout[7];
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mOlcumlerimDatabaseReference;
@@ -87,8 +87,8 @@ public class MainTab extends Fragment {
     private String selected_date;
 
     private String height;
-    private float fat, muscle, water, weight, bmi, meta;
-    private TextView fatValueText, muscleValueText, waterValueText, weightValueText, bmiValueText, metaValueText;
+    private float fat, muscle, water, weight, bmi, meta, emp;
+    private TextView fatValueText, muscleValueText, waterValueText, weightValueText, bmiValueText, metaValueText, empValueText;
     private TextView fatPercentText, musclePercentText, waterPercentText, fatDescribeText, muscleDescribeText, waterDescribeText;
     private TextView lastMeasureText;
 
@@ -116,6 +116,7 @@ public class MainTab extends Fragment {
         carts[3] = getView().findViewById(R.id.cart4);
         carts[4] = getView().findViewById(R.id.cart5);
         carts[5] = getView().findViewById(R.id.cart6);
+        carts[6] = getView().findViewById(R.id.cart7);
 
         for (int i = 0; i < carts.length; i++) {
             final int index = i;
@@ -135,6 +136,7 @@ public class MainTab extends Fragment {
         weightValueText = getView().findViewById(R.id.weightValueText);
         bmiValueText = getView().findViewById(R.id.bmiValueText);
         metaValueText = getView().findViewById(R.id.metaValueText);
+        empValueText = getView().findViewById(R.id.empValueText);
 
         fatPercentText = getView().findViewById(R.id.fatPercentText);
         musclePercentText = getView().findViewById(R.id.musclePercentText);
@@ -206,7 +208,7 @@ public class MainTab extends Fragment {
         calendarBackground.startAnimation(slideDown);
         collapsibleCalendar.startAnimation(slideDown);
 
-        Animation slideLeft[] = new Animation[6];
+        Animation slideLeft[] = new Animation[carts.length];
         for (int i = 0; i < carts.length; i++) {
             slideLeft[i] = AnimationUtils.loadAnimation(getActivity(), R.anim.cart_left);
             slideLeft[i].setStartOffset(i * 200 + 200);
@@ -244,7 +246,9 @@ public class MainTab extends Fragment {
 
         chart.setExtraBottomOffset(12);
         chart.setHighlightPerTapEnabled(true);
-        chart.getRenderer().getPaintRender().setShadowLayer(12, 0, 8, ContextCompat.getColor(getContext(), R.color.shadowColor));
+        Context context = getContext();
+        if (context != null)
+            chart.getRenderer().getPaintRender().setShadowLayer(12, 0, 8, ContextCompat.getColor(context, R.color.shadowColor));
 
         Legend l = chart.getLegend();
         l.setEnabled(false);
@@ -373,6 +377,7 @@ public class MainTab extends Fragment {
                                     weight = Float.parseFloat(olcumlerimData.getVucut_agirligi());
                                     bmi = Float.parseFloat(olcumlerimData.getBeden_kutle_endeksi());
                                     meta = Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi());
+                                    emp = Float.parseFloat(olcumlerimData.getEmpedans());
                                 } catch (Exception e) {
                                     fat = 0;
                                     muscle = 0;
@@ -380,6 +385,7 @@ public class MainTab extends Fragment {
                                     weight = 0;
                                     bmi = 0;
                                     meta = 0;
+                                    emp = 0;
                                 }
 
                                 if (fat != 0 || muscle != 0 || water != 0 || weight != 0) {
@@ -398,16 +404,17 @@ public class MainTab extends Fragment {
                                 initializeChart();
                                 collapsibleCalendar.collapse(400);
 
-                                fatValueText.setText((int) (fat) + " %, " + (int) (fat * weight / 100) + " kg");
-                                muscleValueText.setText((int) (muscle) + " %, " + (int) (muscle * weight / 100) + " kg");
-                                waterValueText.setText((int) (water) + " %, " + (int) (water * weight / 100) + " lt");
-                                weightValueText.setText((int) (weight) + " kg");
+                                fatValueText.setText(new DecimalFormat("0.00").format(fat) + " %, " + new DecimalFormat("0.0").format(fat * weight / 100) + " kg");
+                                muscleValueText.setText(new DecimalFormat("0.00").format(muscle) + " %, " + new DecimalFormat("0.0").format(muscle * weight / 100) + " kg");
+                                waterValueText.setText(new DecimalFormat("0.00").format(water) + " %, " + new DecimalFormat("0.0").format(water * weight / 100) + " lt");
+                                weightValueText.setText(new DecimalFormat("0.0").format(weight) + " kg");
                                 bmiValueText.setText(new DecimalFormat("0.00").format(bmi) + " kg/m²");
+                                empValueText.setText(new DecimalFormat("0").format(emp) + " Ω");
                                 metaValueText.setText(new DecimalFormat("0").format(meta) + " kcal/gün");
 
-                                fatPercentText.setText("%" + (int) fat);
-                                musclePercentText.setText("%" + (int) muscle);
-                                waterPercentText.setText("%" + (int) water);
+                                fatPercentText.setText(new DecimalFormat("0.#").format(fat) + "%");
+                                musclePercentText.setText(new DecimalFormat("0.#").format(muscle) + "%");
+                                waterPercentText.setText(new DecimalFormat("0.#").format(water) + "%");
 
                                 lastMeasureText.setText("Ölçüm Tarihi\n" + (dd < 10 ? "0" : "") + dd + (mm < 10 ? ".0" : ".") + mm + "." + yy);
                             }
@@ -488,8 +495,8 @@ public class MainTab extends Fragment {
                     if (olcumlerimData.getKas_orani().length() > 0) {
                         yValues5.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getKas_orani())));
                     }
-                    if (olcumlerimData.getKas_orani().length() > 0) {
-                        yValues6.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getKas_orani())));
+                    if (olcumlerimData.getEmpedans() != null && olcumlerimData.getEmpedans().length() > 0) {
+                        yValues6.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getEmpedans())));
                     }
                     if (olcumlerimData.getBazal_metabolizma_hizi().length() > 0) {
                         yValues7.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi())));

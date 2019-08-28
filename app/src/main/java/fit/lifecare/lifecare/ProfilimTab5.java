@@ -107,7 +107,7 @@ public class ProfilimTab5 extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String gender = dataSnapshot.getValue().toString();
-                if (gender.equals("Erkek")) {
+                if (gender.equals("Erkek") && getContext() != null) {
                     body_img.setImageDrawable(getResources().getDrawable(R.drawable.boy_measurement));
                 }
             }
@@ -126,7 +126,7 @@ public class ProfilimTab5 extends Fragment {
         mValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
+                if (dataSnapshot.exists() && getContext() != null) {
                     String date;
                     dates.clear();
                     

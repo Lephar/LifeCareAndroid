@@ -15,7 +15,8 @@
     <color name="muscleColor">#ED1E79</color>
     <color name="waterColor">#29ABE2</color>
     <color name="weightColor">#096E38</color>
-    <color name="bmiColor">#705AB8</color>
     <color name="metaColor">#FA5E39</color>
+    <color name="empColor">#BBD400</color>
+    <color name="bmiColor">#705AB8</color>
 
 </resources>

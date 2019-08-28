@@ -1,5 +1,6 @@
 package fit.lifecare.lifecare.Bluetooth;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGatt;
@@ -17,20 +18,15 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
-
-import java.security.spec.ECField;
 import java.util.List;
 import java.util.UUID;
 
-import fit.lifecare.lifecare.MainActivity;
-
 public class DeviceScanActivity extends ListActivity {
-    
-    private MainActivity mainAppActivity;
+
+    private Activity mainAppActivity;
     
     private String readed_value;
-    
-    
+
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
     private String mBluetoothDeviceAddress;
@@ -180,8 +176,8 @@ public class DeviceScanActivity extends ListActivity {
         isConnected = false;
         mBluetoothGatt.disconnect();
     }
-    
-    public DeviceScanActivity(MainActivity mainActivity) {
+
+    public DeviceScanActivity(Activity mainActivity) {
         
         mainAppActivity = mainActivity;
         BluetoothManager bluetoothManager = (BluetoothManager) mainActivity.getSystemService(Context.BLUETOOTH_SERVICE);

@@ -137,7 +137,7 @@ public class ProfilimTab2 extends Fragment {
         mValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
+                if (dataSnapshot.exists() && getContext() != null) {
                     ProfilimSaglikData profilimSaglikData = dataSnapshot.getValue(ProfilimSaglikData.class);
                     editText1.setText(profilimSaglikData.getProfilimSaglikRow1());
                     if (editText1.getText().toString().equals("yok")) {

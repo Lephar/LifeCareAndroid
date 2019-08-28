@@ -60,8 +60,13 @@ public class ProfilimTab1 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.profilim_tab1, container, false);
-        
+        return inflater.inflate(R.layout.profilim_tab1, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         //initialize layout views
         gender_textview = view.findViewById(R.id.textView1);
         gender_select = view.findViewById(R.id.textView2);
@@ -75,14 +80,14 @@ public class ProfilimTab1 extends Fragment {
         country_edit = view.findViewById(R.id.textView10);
         city_textview = view.findViewById(R.id.textView11);
         city_edit = view.findViewById(R.id.textView12);
-        
+
         // initialize firebase components
         mAuth = FirebaseAuth.getInstance();
         String currentUserId = mAuth.getCurrentUser().getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mProfilimKisiselDatabaseReference = mFirebaseDatabase.getReference()
                 .child("AppUsers").child(currentUserId).child("PersonalInfo");
-        
+
         //initialize Listeners
         initializeButtonListeners();
         initializeFirebaseListeners();
@@ -90,10 +95,8 @@ public class ProfilimTab1 extends Fragment {
         initializeAutoCompleters();
         //handle edittext views actions
         editTextsActions();
-        
-        return view;
     }
-    
+
     private void editTextsActions() {
         //set listener to keyboard done button to save text to firebase database
         phone_edit.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -237,10 +240,10 @@ public class ProfilimTab1 extends Fragment {
         mValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                
+
                 PersonalInfoData personalInfoData = dataSnapshot.getValue(PersonalInfoData.class);
-                
-                if (personalInfoData != null) {
+
+                if (personalInfoData != null && getContext() != null) {
                     
                     String gender = personalInfoData.getGender();
                     if(gender.equals("Erkek")) {

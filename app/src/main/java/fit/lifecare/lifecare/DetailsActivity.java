@@ -48,6 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
     private DetailsWaterFragment waterFragment;
     private DetailsWeightFragment weightFragment;
     private DetailsMetabolismFragment metabolismFragment;
+    private DetailsEmpedansFragment empedansFragment;
     private DetailsBMIFragment bmiFragment;
     //firebase instance variables
     private FirebaseAuth mAuth;
@@ -80,6 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
         waterFragment = new DetailsWaterFragment();
         weightFragment = new DetailsWeightFragment();
         metabolismFragment = new DetailsMetabolismFragment();
+        empedansFragment = new DetailsEmpedansFragment();
         bmiFragment = new DetailsBMIFragment();
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -88,12 +90,13 @@ public class DetailsActivity extends AppCompatActivity {
         adapter.addFragment(waterFragment);
         adapter.addFragment(weightFragment);
         adapter.addFragment(metabolismFragment);
+        adapter.addFragment(empedansFragment);
         adapter.addFragment(bmiFragment);
 
         pager = findViewById(R.id.detViewPager);
         pager.setAdapter(adapter);
         pager.setCurrentItem(index);
-        pager.setOffscreenPageLimit(6);
+        pager.setOffscreenPageLimit(7);
 
         //initialize shared preferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -108,7 +111,6 @@ public class DetailsActivity extends AppCompatActivity {
         //initialize shared preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = preferences.edit();
-
         height = preferences.getString("height", "0");
 
         attachSelectableDatesListener();
@@ -153,8 +155,8 @@ public class DetailsActivity extends AppCompatActivity {
                     if (olcumlerimData.getKas_orani().length() > 0) {
                         yValues5.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getKas_orani())));
                     }
-                    if (olcumlerimData.getKas_orani().length() > 0) {
-                        yValues6.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getKas_orani())));
+                    if (olcumlerimData.getEmpedans() != null && olcumlerimData.getEmpedans().length() > 0) {
+                        yValues6.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getEmpedans())));
                     }
                     if (olcumlerimData.getBazal_metabolizma_hizi().length() > 0) {
                         yValues7.add(new Entry(xvalue, Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi())));
@@ -165,21 +167,21 @@ public class DetailsActivity extends AppCompatActivity {
                 }
 
                 for (int i = yValues1.size(); i < 2; i++)
-                    yValues1.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues1.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
                 for (int i = yValues2.size(); i < 2; i++)
-                    yValues2.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues2.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
                 for (int i = yValues3.size(); i < 2; i++)
-                    yValues3.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues3.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
                 for (int i = yValues4.size(); i < 2; i++)
-                    yValues4.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues4.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
                 for (int i = yValues5.size(); i < 2; i++)
-                    yValues5.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues5.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
                 for (int i = yValues6.size(); i < 2; i++)
-                    yValues6.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues6.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
                 for (int i = yValues7.size(); i < 2; i++)
-                    yValues7.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues7.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
                 for (int i = yValues8.size(); i < 2; i++)
-                    yValues8.add(new Entry(i * 1000 * 60 * 60 * 24, 0));
+                    yValues8.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
 
                 fatFragment.setData(yValues3);
                 fatFragment.draw();
@@ -191,6 +193,8 @@ public class DetailsActivity extends AppCompatActivity {
                 weightFragment.draw();
                 metabolismFragment.setData(yValues7);
                 metabolismFragment.draw();
+                empedansFragment.setData(yValues6);
+                empedansFragment.draw();
                 bmiFragment.setData(yValues2);
                 bmiFragment.draw();
             }

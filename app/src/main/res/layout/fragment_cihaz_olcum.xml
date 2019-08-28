@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bluetoothButton"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -49,5 +49,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/empedansText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emp: 0"
+        app:layout_constraintBottom_toTopOf="@+id/bluetoothButton"
+        app:layout_constraintStart_toStartOf="@+id/imageView28"
+        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

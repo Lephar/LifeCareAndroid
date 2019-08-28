@@ -21,20 +21,21 @@ public class ProfilimMainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         //inflate the fragment layout
-        View view = inflater.inflate(R.layout.fragment_profilim, container, false);
+        return inflater.inflate(R.layout.fragment_profilim, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         //initialize viewPager
-        viewPager = view.findViewById(R.id.viewPager);
+        viewPager = getView().findViewById(R.id.viewPager);
         setupViewPager(viewPager);
 
         //initialize tablayout
-        tabLayout = view.findViewById(R.id.tabs);
+        tabLayout = getView().findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-        return view;
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -42,13 +43,9 @@ public class ProfilimMainFragment extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
         adapter.addFragment(new ProfilimTab1(),getString(R.string.personal));
-
         adapter.addFragment(new ProfilimTab2(),getString(R.string.health));
-
         adapter.addFragment(new ProfilimTab3(),getString(R.string.meal));
-
         adapter.addFragment(new ProfilimTab4(),getString(R.string.blood));
-
         adapter.addFragment(new ProfilimTab5(),getString(R.string.measure));
 
         viewPager.setAdapter(adapter);

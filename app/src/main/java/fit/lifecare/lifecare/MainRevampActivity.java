@@ -100,8 +100,9 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         bottom_tab.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (viewPager.getVisibility() == View.GONE) {
-                    fragmentLayout.setVisibility(View.GONE);
+                if (viewPager.getVisibility() == View.INVISIBLE) {
+                    fragmentLayout.removeAllViews();
+                    fragmentLayout.setVisibility(View.INVISIBLE);
                     viewPager.setVisibility(View.VISIBLE);
                 }
 
@@ -193,7 +194,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
             @Override
             public void onClick(View view) {
                 fragmentLayout.setVisibility(View.VISIBLE);
-                viewPager.setVisibility(View.GONE);
+                viewPager.setVisibility(View.INVISIBLE);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_layout, new AyarlarFragment());
                 fragmentTransaction.commit();
@@ -206,7 +207,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
             @Override
             public void onClick(View view) {
                 fragmentLayout.setVisibility(View.VISIBLE);
-                viewPager.setVisibility(View.GONE);
+                viewPager.setVisibility(View.INVISIBLE);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_layout, new ProfilimMainFragment());
                 fragmentTransaction.commit();
@@ -220,8 +221,9 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
 
     @Override
     public void onBackPressed() {
-        if (viewPager.getVisibility() == View.GONE) {
-            fragmentLayout.setVisibility(View.GONE);
+        if (viewPager.getVisibility() == View.INVISIBLE) {
+            fragmentLayout.removeAllViews();
+            fragmentLayout.setVisibility(View.INVISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             current_tab_text.setText(tabTexts[viewPager.getCurrentItem()]);
         } else if (bottom_tab.getSelectedItemId() != R.id.navigation_olcumlerim) {

@@ -8,25 +8,25 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class DetailsMuscleFragment extends DetailsAbstractFragment {
+public class DetailsEmpedansFragment extends DetailsAbstractFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_details_muscle, container, false);
+        return inflater.inflate(R.layout.fragment_details_empedans, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        chart = getView().findViewById(R.id.detMusChart);
-        layout = getView().findViewById(R.id.detMusConstLayout);
+        chart = getView().findViewById(R.id.detEmpChart);
+        layout = getView().findViewById(R.id.detEmpConstLayout);
 
-        topDateText = getView().findViewById(R.id.detMusMeasurementDate);
-        topValueText = getView().findViewById(R.id.detMusAmountText);
+        topDateText = getView().findViewById(R.id.detEmpMeasurementDate);
+        topValueText = getView().findViewById(R.id.detEmpAmountText);
 
-        backButton = getView().findViewById(R.id.detMusBackButton);
-        backText = getView().findViewById(R.id.detMusBackText);
+        backButton = getView().findViewById(R.id.detEmpBackButton);
+        backText = getView().findViewById(R.id.detEmpBackText);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,8 +50,8 @@ public class DetailsMuscleFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        fillChart(R.color.muscleColor);
-        fillLayout("0.#", "%");
+        fillChart(R.color.empColor);
+        fillLayout("0", "Ω");
         painted = true;
     }
 }

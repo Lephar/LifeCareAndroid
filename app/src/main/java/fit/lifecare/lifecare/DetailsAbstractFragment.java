@@ -1,5 +1,6 @@
 package fit.lifecare.lifecare;
 
+import android.content.Context;
 import android.view.View;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
@@ -87,13 +88,17 @@ public abstract class DetailsAbstractFragment extends Fragment {
         set.setCubicIntensity(0.1f);
         set.setDrawFilled(false);
         set.setDrawCircles(true);
-        set.setCircleColor(ContextCompat.getColor(getContext(), color));
+        Context context = getContext();
+        if (context != null) {
+            set.setCircleColor(ContextCompat.getColor(context, color));
+            set.setColor(ContextCompat.getColor(context, color));
+        }
         set.setCircleRadius(4);
         set.setDrawValues(false);
-        set.setColor(ContextCompat.getColor(getContext(), color));
         set.setLineWidth(4);
         LineData data = new LineData(set);
         chart.setData(data);
+        chart.setVisibleXRangeMaximum(30);
 
         chart.setDragDecelerationFrictionCoef(0.9f);
         chart.setDragEnabled(true);
@@ -111,6 +116,7 @@ public abstract class DetailsAbstractFragment extends Fragment {
         chart.getAxisLeft().setEnabled(false);
         chart.getAxisLeft().setDrawGridLines(false);
         chart.animateX(1000, Easing.Linear);
+        chart.moveViewToX(values.get(values.size() - 1).getX());
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -129,7 +135,10 @@ public abstract class DetailsAbstractFragment extends Fragment {
         this.unit = unit;
         this.pattern = pattern;
 
-        update(values.get(values.size() - 1));
+        if (values.size() == 2)
+            update(values.get(0));
+        else
+            update(values.get(values.size() - 1));
 
         ConstraintSet set = new ConstraintSet();
         View lastView = layout;
@@ -139,6 +148,9 @@ public abstract class DetailsAbstractFragment extends Fragment {
 
             final int index = i;
             final Entry value = values.get(index);
+
+            if (value.getY() < 0)
+                continue;
 
             ImageView separator = new ImageView(getContext());
             separator.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -232,11 +244,13 @@ public abstract class DetailsAbstractFragment extends Fragment {
     }
 
     void update(Entry e) {
-        if (e.getY() < EPSILON)
+        if (e.getY() < EPSILON) {
             topValueText.setText("-");
-        else
+            topDateText.setText("-");
+        } else {
             topValueText.setText(new DecimalFormat(pattern).format(e.getY()) + " " + unit);
-        topDateText.setText(date(e.getX()));
+            topDateText.setText(date(e.getX()));
+        }
     }
 
     int dp(int dp) {

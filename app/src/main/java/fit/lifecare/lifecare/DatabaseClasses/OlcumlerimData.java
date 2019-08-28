@@ -10,12 +10,13 @@ public class OlcumlerimData {
     private String su_orani;
     private String metabolizma_yasi;
     private String bazal_metabolizma_hizi;
+    private String empedans;
 
 
     public OlcumlerimData() {
     }
 
-    public OlcumlerimData(String vucut_agirligi, String beden_kutle_endeksi, String yag_orani, String su_orani, String kas_orani, String bazal_metabolizma_hizi, String metabolizma_yasi) {
+    public OlcumlerimData(String vucut_agirligi, String beden_kutle_endeksi, String yag_orani, String su_orani, String kas_orani, String bazal_metabolizma_hizi, String metabolizma_yasi, String empedans) {
         this.vucut_agirligi = vucut_agirligi;
         this.beden_kutle_endeksi = beden_kutle_endeksi;
         this.yag_orani = yag_orani;
@@ -23,6 +24,7 @@ public class OlcumlerimData {
         this.kas_orani = kas_orani;
         this.bazal_metabolizma_hizi = bazal_metabolizma_hizi;
         this.metabolizma_yasi = metabolizma_yasi;;
+        this.empedans = empedans;
     }
 
     public String getVucut_agirligi() {
@@ -79,5 +81,13 @@ public class OlcumlerimData {
 
     public void setBazal_metabolizma_hizi(String bazal_metabolizma_hizi) {
         this.bazal_metabolizma_hizi = bazal_metabolizma_hizi;
+    }
+
+    public String getEmpedans() {
+        return empedans;
+    }
+
+    public void setEmpedans(String empedans) {
+        this.empedans = empedans;
     }
 }

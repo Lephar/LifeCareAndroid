@@ -47,6 +47,10 @@ public class OlcumGirisFragment extends Fragment {
     public OlcumGirisFragment() {
     }
 
+    public OlcumGirisFragment(String val) {
+        height = Integer.parseInt(val);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_olcum_giris, container, false);
@@ -92,7 +96,7 @@ public class OlcumGirisFragment extends Fragment {
                         watPText.getText().toString().replaceAll(",", "."),
                         musPText.getText().toString().replaceAll(",", "."),
                         metaText.getText().toString().replaceAll(",", "."),
-                        "");
+                        "", "");
 
                 mOlcumlerimDatabaseReference.child(year + (month < 9 ? "-0" : "-") + (month + 1) + (day < 10 ? "-0" : "-") + day).setValue(olcumlerimData);
                 mPersonalDatabaseReference.child("weight").setValue(weightText.getText().toString());
@@ -108,7 +112,6 @@ public class OlcumGirisFragment extends Fragment {
         dateText = getView().findViewById(R.id.measurementDateText);
         dateText.setText((day < 10 ? "0" : "") + day + (month < 9 ? ".0" : ".") + (month + 1) + "." + year);
         weight = 0;
-        height = 175;
         epsilon = 0.0001f;
 
         weightText = getView().findViewById(R.id.getWeightText);

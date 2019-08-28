@@ -223,7 +223,7 @@ public class OlcumlerimAddDialog extends DialogFragment {
                             mEdittext_row1.getText().toString(), mEdittext_row2.getText().toString()
                             , mEdittext_row3.getText().toString(), mEdittext_row4.getText().toString()
                             , mEdittext_row5.getText().toString(), mEdittext_row6.getText().toString()
-                            , mEdittext_row7.getText().toString());
+                            , mEdittext_row7.getText().toString(), "0");
                     //pushing olcumlerimData object to FirebaseDatabase
                     mOlcumlerimDatabaseReference.child(theDate).setValue(olcumlerimData);
                     mPersonalDatabaseReference.child("weight").setValue(mEdittext_row1.getText().toString());

@@ -16,10 +16,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import fit.lifecare.lifecare.Bluetooth.DeviceScanActivity;
 import fit.lifecare.lifecare.R;
 
 public class WeightSelect extends DialogFragment {
 
+    private DeviceScanActivity deviceScanActivity;
     //Layout views
     private ImageView close_button;
     private ImageView tamam_button;
@@ -29,6 +31,10 @@ public class WeightSelect extends DialogFragment {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mProfilimKisiselDatabaseReference;
+
+    public WeightSelect(DeviceScanActivity deviceScanActivity) {
+        this.deviceScanActivity = deviceScanActivity;
+    }
 
     @Nullable
     @Override
@@ -71,6 +77,8 @@ public class WeightSelect extends DialogFragment {
                 
                 mProfilimKisiselDatabaseReference.setValue(weight_select.getText().toString());
                 Toast.makeText(getContext(), "3 saniye içinde Ölçüm başlayacak",Toast.LENGTH_SHORT).show();
+                deviceScanActivity.setStartClicked(true);
+                deviceScanActivity.WriteToDevice("re");
                 dismiss();
             }
         });

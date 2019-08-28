@@ -99,7 +99,7 @@ public class ProfilimTab4 extends Fragment {
         mValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
+                if (dataSnapshot.exists() && getContext() != null) {
 
                     String date;
                     dates.clear();
