@@ -51,7 +51,7 @@ public class DetailsWeightFragment extends DetailsAbstractFragment {
             return;
 
         fillChart(R.color.weightColor);
-        fillLayout("0.#", "kg");
+        fillLayout("0.#", "kg", R.color.weightColor);
         painted = true;
     }
 }

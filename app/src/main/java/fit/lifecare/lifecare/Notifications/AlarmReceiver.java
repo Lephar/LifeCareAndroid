@@ -14,7 +14,7 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
-import fit.lifecare.lifecare.MainActivity;
+import fit.lifecare.lifecare.MainRevampActivity;
 import fit.lifecare.lifecare.R;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -56,8 +56,8 @@ public class AlarmReceiver extends BroadcastReceiver {
             if (type.equals("su")) {
                 
                 if (showNotificationWater) {
-                    
-                    Intent notificationIntent = new Intent(context, MainActivity.class);
+
+                    Intent notificationIntent = new Intent(context, MainRevampActivity.class);
                     notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     
                     notificationIntent.putExtra("start_where", "main_screen");
@@ -69,8 +69,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 
                 
             } else if (type.equals("breakfast")) {
-                
-                Intent notificationIntent = new Intent(context, MainActivity.class);
+
+                Intent notificationIntent = new Intent(context, MainRevampActivity.class);
                 notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 
                 notificationIntent.putExtra("start_where", "meal_schedule");
@@ -81,8 +81,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 sendNotify(pendingIntent, context, CHANNEL_3_ID, context.getString(R.string.breakfast_reminder), 3);
                 
             } else if (type.equals("lunch")) {
-                
-                Intent notificationIntent = new Intent(context, MainActivity.class);
+
+                Intent notificationIntent = new Intent(context, MainRevampActivity.class);
                 notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 
                 notificationIntent.putExtra("start_where", "meal_schedule");
@@ -93,8 +93,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 sendNotify(pendingIntent, context, CHANNEL_4_ID, context.getString(R.string.lunch_reminder), 4);
                 
             } else if (type.equals("dinner")) {
-                
-                Intent notificationIntent = new Intent(context, MainActivity.class);
+
+                Intent notificationIntent = new Intent(context, MainRevampActivity.class);
                 notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 
                 notificationIntent.putExtra("start_where", "meal_schedule");
@@ -105,8 +105,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 sendNotify(pendingIntent, context, CHANNEL_5_ID, context.getString(R.string.dinner_reminder), 5);
                 
             } else {
-                
-                Intent notificationIntent = new Intent(context, MainActivity.class);
+
+                Intent notificationIntent = new Intent(context, MainRevampActivity.class);
                 notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 
                 notificationIntent.putExtra("start_where", "profile");

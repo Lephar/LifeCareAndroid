@@ -383,7 +383,7 @@
     <string name="profile_picture">Profile Picture</string>
     <string name="next">Next</string>
     <string name="name_surname">Name - Surname</string>
-    <string name="agreement">I confirm that I have read and accepted the privacy policy and registration terms.</string>
+    <string name="agreement">I confirm that I have read and accepted the <font color='@android:color/holo_blue_dark'>privacy policy</font> and <font color='@android:color/holo_blue_dark'>registration terms</font>.</string>
     <string name="sign_up">Sign Up</string>
     <string name="signup_with_face">Sign Up with Facebook</string>
     <string name="Sign_Up_with_Gmail">Sign Up with Gmail</string>
@@ -413,10 +413,10 @@
     <string name="new_pass_again">New Password(again)</string>
     <string name="enter_email">Please enter your e-mail address</string>
     <string name="activity_level">Activity Frequency</string>
-    <string name="sadanter_activity">Sedentary Physical Activity</string>
-    <string name="mild_activity">Mild Physical Activity</string>
-    <string name="moderate_activity">Moderate Physical Activity</string>
-    <string name="heavy_activity">Heavy Physical Activity</string>
+    <string name="sadanter_activity">Sedentary</string>
+    <string name="mild_activity">Mild (1~3 days/week)</string>
+    <string name="moderate_activity">Moderate (3~5 days/week)</string>
+    <string name="heavy_activity">Heavy (7 days/week)</string>
     <string name="girl">Woman</string>
     <string name="boy">Man</string>
     <string name="language">Language</string>
@@ -471,7 +471,7 @@
     <string name="delete">Delete</string>
     <string name="sure_delete">Are you sure you want to delete your data?</string>
     <string name="saved">Saved</string>
-    <string name="enter_weight">enter your weight</string>
+    <string name="enter_weight">Enter Your Weight</string>
     <string name="email_sent">E-mail sent.</string>
     <string name="no_such_mail">The email address you entered is not in our database.</string>
     <string name="sedanter">Sedentary</string>
@@ -542,4 +542,5 @@
     <string name="reset_password_text">Enter your email address and we\'ll send you link to reset your password</string>
     <string name="change_picture">Profile Picture</string>
     <string name="measurement_date">Measurement Date</string>
+    <string name="privacy_policy_full_text">Privacy Policy Burda Olacak</string>
 </resources>

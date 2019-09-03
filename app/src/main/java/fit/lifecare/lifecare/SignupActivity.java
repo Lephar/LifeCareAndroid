@@ -124,7 +124,8 @@ public class SignupActivity extends AppCompatActivity {
         agreementText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkBox.performClick();
+                Intent intent = new Intent(SignupActivity.this, AgreementActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -264,7 +265,7 @@ public class SignupActivity extends AppCompatActivity {
                         Intent intent = new Intent(SignupActivity.this, WelcomeAfterSignup.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                        Intent intent = new Intent(SignupActivity.this, MainRevampActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
@@ -294,7 +295,7 @@ public class SignupActivity extends AppCompatActivity {
                         Intent intent = new Intent(SignupActivity.this, WelcomeAfterSignup.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                        Intent intent = new Intent(SignupActivity.this, MainRevampActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }

@@ -1,6 +1,8 @@
 package fit.lifecare.lifecare.Dialogs;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import fit.lifecare.lifecare.Bluetooth.DeviceScanActivity;
+import fit.lifecare.lifecare.CihazOlcumFragment;
 import fit.lifecare.lifecare.R;
 
 public class WeightSelect extends DialogFragment {
 
+    private CihazOlcumFragment cihazOlcumFragment;
     private DeviceScanActivity deviceScanActivity;
     //Layout views
     private ImageView close_button;
@@ -32,7 +36,8 @@ public class WeightSelect extends DialogFragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mProfilimKisiselDatabaseReference;
 
-    public WeightSelect(DeviceScanActivity deviceScanActivity) {
+    public WeightSelect(CihazOlcumFragment cihazOlcumFragment, DeviceScanActivity deviceScanActivity) {
+        this.cihazOlcumFragment = cihazOlcumFragment;
         this.deviceScanActivity = deviceScanActivity;
     }
 
@@ -76,9 +81,18 @@ public class WeightSelect extends DialogFragment {
             public void onClick(View view) {
                 
                 mProfilimKisiselDatabaseReference.setValue(weight_select.getText().toString());
-                Toast.makeText(getContext(), "3 saniye içinde Ölçüm başlayacak",Toast.LENGTH_SHORT).show();
-                deviceScanActivity.setStartClicked(true);
-                deviceScanActivity.WriteToDevice("re");
+                final Context context = getContext();
+                Toast.makeText(context, "3 saniye içinde Ölçüm başlayacak", Toast.LENGTH_SHORT).show();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        deviceScanActivity.setStartClicked(true);
+                        deviceScanActivity.WriteToDevice("re");
+                        cihazOlcumFragment.getView().findViewById(R.id.olcum_progress_bar).setVisibility(View.VISIBLE);
+                        Toast.makeText(context, "Ölçüm başladı", Toast.LENGTH_SHORT).show();
+                    }
+                }, 3000);
                 dismiss();
             }
         });

@@ -120,7 +120,6 @@ public class DanismanimChatActivity extends AppCompatActivity {
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().dontAnimate().dontTransform())
                 .into(PersonPhoto);
         
-        
         // initialize firebase components
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();

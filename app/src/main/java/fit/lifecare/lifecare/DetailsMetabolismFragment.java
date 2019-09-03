@@ -51,7 +51,7 @@ public class DetailsMetabolismFragment extends DetailsAbstractFragment {
             return;
 
         fillChart(R.color.metaColor);
-        fillLayout("0", "kcal/gün");
+        fillLayout("0", "kcal/gün", R.color.metaColor);
         painted = true;
     }
 }

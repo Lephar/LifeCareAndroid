@@ -64,6 +64,16 @@ public class CalendarAdapter {
         mEventList.add(event);
     }
 
+    public boolean contains(Day day) {
+        for (Event event : mEventList) {
+            if (event.getDay() == day.getDay() && event.getMonth() == day.getMonth() && event.getYear() == day.getYear()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void refresh() {
         // clear data
         mItemList.clear();

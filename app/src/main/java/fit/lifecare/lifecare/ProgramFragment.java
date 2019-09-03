@@ -72,7 +72,7 @@ public class ProgramFragment extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         // set new_message value to false to make disappear new message alert
-        mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_meal_schedule").setValue(false);
+        //mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_meal_schedule").setValue(false);
 
         mProgramDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("Programlar");

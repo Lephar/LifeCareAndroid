@@ -1,10 +1,13 @@
 package fit.lifecare.lifecare;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -90,7 +93,7 @@ public class MainTab extends Fragment {
     private float fat, muscle, water, weight, bmi, meta, emp;
     private TextView fatValueText, muscleValueText, waterValueText, weightValueText, bmiValueText, metaValueText, empValueText;
     private TextView fatPercentText, musclePercentText, waterPercentText, fatDescribeText, muscleDescribeText, waterDescribeText;
-    private TextView lastMeasureText;
+    private TextView lastMeasureText, lastMeasureDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,7 +106,6 @@ public class MainTab extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_tab, container, false);
     }
-
     private OnFragmentInteractionListener mListener;
 
     @Override
@@ -149,19 +151,14 @@ public class MainTab extends Fragment {
         textFadeIn.setStartOffset(1000);
         lastMeasureText = getView().findViewById(R.id.lastMeasureText);
         lastMeasureText.startAnimation(textFadeIn);
+        lastMeasureDate = getView().findViewById(R.id.lastMeasurementDate);
+        lastMeasureDate.startAnimation(textFadeIn);
 
         Animation textLeft = AnimationUtils.loadAnimation(getActivity(), R.anim.text_left);
         Animation textRight = AnimationUtils.loadAnimation(getActivity(), R.anim.text_right);
         textLeft.setStartOffset(800);
         textRight.setStartOffset(800);
-/*
-        fatPercentText.startAnimation(textRight);
-        fatDescribeText.startAnimation(textRight);
-        musclePercentText.startAnimation(textRight);
-        muscleDescribeText.startAnimation(textRight);
-        waterPercentText.startAnimation(textLeft);
-        waterDescribeText.startAnimation(textLeft);
-*/
+
         fatPercentText.startAnimation(textFadeIn);
         fatDescribeText.startAnimation(textFadeIn);
         musclePercentText.startAnimation(textFadeIn);
@@ -169,7 +166,7 @@ public class MainTab extends Fragment {
         waterPercentText.startAnimation(textFadeIn);
         waterDescribeText.startAnimation(textFadeIn);
 
-        olcum = getView().findViewById(R.id.imageButton2);
+        olcum = getView().findViewById(R.id.mainOlcumYapButton);
         olcumText = getView().findViewById(R.id.textView22);
 
         olcum.startAnimation(textFadeIn);
@@ -193,6 +190,7 @@ public class MainTab extends Fragment {
         chart = getView().findViewById(R.id.mainChart);
         collapsibleCalendar = getView().findViewById(R.id.calendarView);
         calendarBackground = getView().findViewById(R.id.imageView17);
+        deleteButton = view.findViewById(R.id.mainDeleteButton);
 
         mAuth = FirebaseAuth.getInstance();
         String currentUserId = mAuth.getCurrentUser().getUid();
@@ -211,7 +209,7 @@ public class MainTab extends Fragment {
         Animation slideLeft[] = new Animation[carts.length];
         for (int i = 0; i < carts.length; i++) {
             slideLeft[i] = AnimationUtils.loadAnimation(getActivity(), R.anim.cart_left);
-            slideLeft[i].setStartOffset(i * 200 + 200);
+            slideLeft[i].setStartOffset(i * 200 + 400);
             carts[i].startAnimation(slideLeft[i]);
         }
 
@@ -227,6 +225,7 @@ public class MainTab extends Fragment {
 
         initializeCalendar();
         attachSelectableDatesListener();
+        initializeButtonClickListener();
         initializeChart();
     }
 
@@ -296,157 +295,34 @@ public class MainTab extends Fragment {
         chart.invalidate();
     }
 
-    private void initializeCalendar() {
+    private void initializeButtonClickListener() {
 
-        //get the current date as default date
-        Calendar calendar = Calendar.getInstance();
-        yy = calendar.get(Calendar.YEAR);
-        mm = calendar.get(Calendar.MONTH) + 1;
-        dd = calendar.get(Calendar.DAY_OF_MONTH);
-        //this code block for getting 01-01-2018 date format
-        if (dd < 10 && mm < 10) {
-            selected_date = ("0" + dd + "-" + "0" + mm + "-" + yy);
-        } else if (dd < 10) {
-            selected_date = ("0" + dd + "-" + mm + "-" + yy);
-        } else if (mm < 10) {
-            selected_date = (dd + "-" + "0" + mm + "-" + yy);
-        } else {
-            selected_date = (dd + "-" + mm + "-" + yy);
-        }
-        //this code block for getting 01-01-2018 date format
-
-        collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDaySelect() {
-
-                Day day = collapsibleCalendar.getSelectedDay();
-
-                yy = day.getYear();
-                mm = day.getMonth() + 1;
-                dd = day.getDay();
-
-                //this code block for getting 01-01-2018 date format
-                if (dd < 10 && mm < 10) {
-                    selected_date = ("0" + dd + "-" + "0" + mm + "-" + yy);
-                } else if (dd < 10) {
-                    selected_date = ("0" + dd + "-" + mm + "-" + yy);
-                } else if (mm < 10) {
-                    selected_date = (dd + "-" + "0" + mm + "-" + yy);
-                } else {
-                    selected_date = (dd + "-" + mm + "-" + yy);
-                }
-                //this code block for getting 01-01-2018 date format
-
+            public void onClick(View view) {
                 //change date format from 01-01-2018  to ISO 8601 date format
                 final String deleting_date = selected_date.substring(6) + "-" + selected_date.substring(3, 5) + "-" + selected_date.substring(0, 2);
 
-/*                if (selectable_dates_string.contains(deleting_date)) {
-                    deleteButton.setImageResource(R.drawable.delete_clicked);
-                    deleteButton.setClickable(true);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
                 } else {
-                    deleteButton.setClickable(false);
-                    deleteButton.setImageResource(R.drawable.delete_nonclicked);
+                    builder = new AlertDialog.Builder(getActivity());
                 }
-*/
-                //listening firebase database for updating ui to show selected date's data
-                mSingleValueEventListener = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot olcumlerimDataSnapshot : dataSnapshot.getChildren()) {
-
-                            String date = olcumlerimDataSnapshot.getKey();
-                            //change date format from ISO 8601 to 01-01-2018 format
-                            date = date.substring(8) + "-" + date.substring(5, 7) + "-" + date.substring(0, 4);
-
-                            if (selected_date.equals(date)) {
-                                OlcumlerimData olcumlerimData = olcumlerimDataSnapshot.getValue(OlcumlerimData.class);
-
-                                Log.d("Vucut_agirligi", olcumlerimData.getVucut_agirligi());
-                                Log.d("Beden_kutle_endeksi", olcumlerimData.getBeden_kutle_endeksi());
-                                Log.d("Yag_orani", olcumlerimData.getYag_orani());
-                                Log.d("Su_orani", olcumlerimData.getSu_orani());
-                                Log.d("Kas_orani", olcumlerimData.getKas_orani());
-                                Log.d("Bazal_metabolizma_hizi", olcumlerimData.getBazal_metabolizma_hizi());
-                                Log.d("Metabolizma_yasi", olcumlerimData.getMetabolizma_yasi());
-
-                                try {
-                                    fat = Float.parseFloat(olcumlerimData.getYag_orani());
-                                    muscle = Float.parseFloat(olcumlerimData.getKas_orani());
-                                    water = Float.parseFloat(olcumlerimData.getSu_orani());
-                                    weight = Float.parseFloat(olcumlerimData.getVucut_agirligi());
-                                    bmi = Float.parseFloat(olcumlerimData.getBeden_kutle_endeksi());
-                                    meta = Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi());
-                                    emp = Float.parseFloat(olcumlerimData.getEmpedans());
-                                } catch (Exception e) {
-                                    fat = 0;
-                                    muscle = 0;
-                                    water = 0;
-                                    weight = 0;
-                                    bmi = 0;
-                                    meta = 0;
-                                    emp = 0;
-                                }
-
-                                if (fat != 0 || muscle != 0 || water != 0 || weight != 0) {
-                                    chart.setVisibility(View.VISIBLE);
-                                    lastMeasureText.setVisibility(View.VISIBLE);
-                                    fatPercentText.setVisibility(View.VISIBLE);
-                                    fatDescribeText.setVisibility(View.VISIBLE);
-                                    musclePercentText.setVisibility(View.VISIBLE);
-                                    muscleDescribeText.setVisibility(View.VISIBLE);
-                                    waterPercentText.setVisibility(View.VISIBLE);
-                                    waterDescribeText.setVisibility(View.VISIBLE);
-                                    ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) olcum.getLayoutParams();
-                                    params.topMargin = 0;
-                                }
-
-                                initializeChart();
-                                collapsibleCalendar.collapse(400);
-
-                                fatValueText.setText(new DecimalFormat("0.00").format(fat) + " %, " + new DecimalFormat("0.0").format(fat * weight / 100) + " kg");
-                                muscleValueText.setText(new DecimalFormat("0.00").format(muscle) + " %, " + new DecimalFormat("0.0").format(muscle * weight / 100) + " kg");
-                                waterValueText.setText(new DecimalFormat("0.00").format(water) + " %, " + new DecimalFormat("0.0").format(water * weight / 100) + " lt");
-                                weightValueText.setText(new DecimalFormat("0.0").format(weight) + " kg");
-                                bmiValueText.setText(new DecimalFormat("0.00").format(bmi) + " kg/m²");
-                                empValueText.setText(new DecimalFormat("0").format(emp) + " Ω");
-                                metaValueText.setText(new DecimalFormat("0").format(meta) + " kcal/gün");
-
-                                fatPercentText.setText(new DecimalFormat("0.#").format(fat) + "%");
-                                musclePercentText.setText(new DecimalFormat("0.#").format(muscle) + "%");
-                                waterPercentText.setText(new DecimalFormat("0.#").format(water) + "%");
-
-                                lastMeasureText.setText("Ölçüm Tarihi\n" + (dd < 10 ? "0" : "") + dd + (mm < 10 ? ".0" : ".") + mm + "." + yy);
+                builder.setMessage(getString(R.string.sure_delete))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                                deleteButton.setClickable(false);
+                                deleteButton.setImageResource(R.drawable.delete_nonclicked);
+                                mOlcumlerimDatabaseReference.child(deleting_date).removeValue();
                             }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                };
-                mOlcumlerimDatabaseReference.addListenerForSingleValueEvent(mSingleValueEventListener);
-            }
-
-            @Override
-            public void onItemClick(View view) {
-
-            }
-
-            @Override
-            public void onDataUpdate() {
-
-            }
-
-            @Override
-            public void onMonthChange() {
-
-            }
-
-            @Override
-            public void onWeekChange(int i) {
-
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        }).show();
             }
         });
     }
@@ -528,24 +404,6 @@ public class MainTab extends Fragment {
                     collapsibleCalendar.select(new Day(lyy, lmm - 1, ldd));
                     lastMeasureText.setText("Son Ölçüm\n" + dd + (mm >= 10 ? "." : ".0") + mm + "." + yy);
                 }
-
-                /*
-                if (once_loaded) {
-                    olcumlerimTab1.setyValues(yValues1, yValues2);
-                    olcumlerimTab1.setData1();
-                    olcumlerimTab1.setData2();
-                    olcumlerimTab2.setyValues(yValues3, yValues4);
-                    olcumlerimTab2.setData1();
-                    olcumlerimTab2.setData2();
-                    olcumlerimTab3.setyValues(yValues5, yValues6);
-                    olcumlerimTab3.setData1();
-                    olcumlerimTab4.setyValues(yValues7, yValues8);
-                    olcumlerimTab4.setData1();
-                    olcumlerimTab4.setData2();
-                } else {
-                    LoadingCompleted();
-                    once_loaded = true;
-                }*/
             }
 
             @Override
@@ -589,16 +447,180 @@ public class MainTab extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    private void initializeCalendar() {
+
+        //get the current date as default date
+        Calendar calendar = Calendar.getInstance();
+        yy = calendar.get(Calendar.YEAR);
+        mm = calendar.get(Calendar.MONTH) + 1;
+        dd = calendar.get(Calendar.DAY_OF_MONTH);
+        //this code block for getting 01-01-2018 date format
+        if (dd < 10 && mm < 10) {
+            selected_date = ("0" + dd + "-" + "0" + mm + "-" + yy);
+        } else if (dd < 10) {
+            selected_date = ("0" + dd + "-" + mm + "-" + yy);
+        } else if (mm < 10) {
+            selected_date = (dd + "-" + "0" + mm + "-" + yy);
+        } else {
+            selected_date = (dd + "-" + mm + "-" + yy);
+        }
+        //this code block for getting 01-01-2018 date format
+
+        collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
+            @Override
+            public void onDaySelect() {
+
+                Day day = collapsibleCalendar.getSelectedDay();
+
+                yy = day.getYear();
+                mm = day.getMonth() + 1;
+                dd = day.getDay();
+
+                //this code block for getting 01-01-2018 date format
+                if (dd < 10 && mm < 10) {
+                    selected_date = ("0" + dd + "-" + "0" + mm + "-" + yy);
+                } else if (dd < 10) {
+                    selected_date = ("0" + dd + "-" + mm + "-" + yy);
+                } else if (mm < 10) {
+                    selected_date = (dd + "-" + "0" + mm + "-" + yy);
+                } else {
+                    selected_date = (dd + "-" + mm + "-" + yy);
+                }
+                //this code block for getting 01-01-2018 date format
+
+                //change date format from 01-01-2018  to ISO 8601 date format
+                final String deleting_date = selected_date.substring(6) + "-" + selected_date.substring(3, 5) + "-" + selected_date.substring(0, 2);
+
+                if (selectable_dates_string.contains(deleting_date)) {
+                    deleteButton.setImageResource(R.drawable.delete_clicked);
+                    deleteButton.setClickable(true);
+                    chart.clear();
+
+                } else {
+                    deleteButton.setClickable(false);
+                    deleteButton.setImageResource(R.drawable.delete_nonclicked);
+                }
+
+                //listening firebase database for updating ui to show selected date's data
+                mSingleValueEventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot olcumlerimDataSnapshot : dataSnapshot.getChildren()) {
+
+                            String date = olcumlerimDataSnapshot.getKey();
+                            //change date format from ISO 8601 to 01-01-2018 format
+                            date = date.substring(8) + "-" + date.substring(5, 7) + "-" + date.substring(0, 4);
+
+                            if (selected_date.equals(date)) {
+                                OlcumlerimData olcumlerimData = olcumlerimDataSnapshot.getValue(OlcumlerimData.class);
+
+                                Log.d("Vucut_agirligi", olcumlerimData.getVucut_agirligi());
+                                Log.d("Beden_kutle_endeksi", olcumlerimData.getBeden_kutle_endeksi());
+                                Log.d("Yag_orani", olcumlerimData.getYag_orani());
+                                Log.d("Su_orani", olcumlerimData.getSu_orani());
+                                Log.d("Kas_orani", olcumlerimData.getKas_orani());
+                                Log.d("Bazal_metabolizma_hizi", olcumlerimData.getBazal_metabolizma_hizi());
+                                Log.d("Metabolizma_yasi", olcumlerimData.getMetabolizma_yasi());
+
+                                try {
+                                    fat = Float.parseFloat(olcumlerimData.getYag_orani());
+                                } catch (Exception e) {
+                                    fat = 0;
+                                }
+                                try {
+                                    muscle = Float.parseFloat(olcumlerimData.getKas_orani());
+                                } catch (Exception e) {
+                                    muscle = 0;
+                                }
+                                try {
+                                    water = Float.parseFloat(olcumlerimData.getSu_orani());
+                                } catch (Exception e) {
+                                    water = 0;
+                                }
+                                try {
+                                    weight = Float.parseFloat(olcumlerimData.getVucut_agirligi());
+                                } catch (Exception e) {
+                                    weight = 0;
+                                }
+                                try {
+                                    bmi = Float.parseFloat(olcumlerimData.getBeden_kutle_endeksi());
+                                } catch (Exception e) {
+                                    bmi = 0;
+                                }
+                                try {
+                                    meta = Float.parseFloat(olcumlerimData.getBazal_metabolizma_hizi());
+                                } catch (Exception e) {
+                                    meta = 0;
+                                }
+                                try {
+                                    emp = Float.parseFloat(olcumlerimData.getEmpedans());
+                                } catch (Exception e) {
+                                    emp = 0;
+                                }
+
+                                if (fat != 0 || muscle != 0 || water != 0 || weight != 0) {
+                                    chart.setVisibility(View.VISIBLE);
+                                    deleteButton.setVisibility(View.VISIBLE);
+                                    lastMeasureText.setVisibility(View.VISIBLE);
+                                    lastMeasureDate.setVisibility(View.VISIBLE);
+                                    fatPercentText.setVisibility(View.VISIBLE);
+                                    fatDescribeText.setVisibility(View.VISIBLE);
+                                    musclePercentText.setVisibility(View.VISIBLE);
+                                    muscleDescribeText.setVisibility(View.VISIBLE);
+                                    waterPercentText.setVisibility(View.VISIBLE);
+                                    waterDescribeText.setVisibility(View.VISIBLE);
+                                    ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) olcum.getLayoutParams();
+                                    params.topMargin = 0;
+                                }
+
+                                initializeChart();
+                                collapsibleCalendar.collapse(400);
+
+                                fatValueText.setText(new DecimalFormat("0.00").format(fat) + " %, " + new DecimalFormat("0.0").format(fat * weight / 100) + " kg");
+                                muscleValueText.setText(new DecimalFormat("0.00").format(muscle) + " %, " + new DecimalFormat("0.0").format(muscle * weight / 100) + " kg");
+                                waterValueText.setText(new DecimalFormat("0.00").format(water) + " %, " + new DecimalFormat("0.0").format(water * weight / 100) + " lt");
+                                weightValueText.setText(new DecimalFormat("0.0").format(weight) + " kg");
+                                bmiValueText.setText(new DecimalFormat("0.00").format(bmi) + " kg/m²");
+                                empValueText.setText(new DecimalFormat("0").format(emp) + " Ω");
+                                metaValueText.setText(new DecimalFormat("0").format(meta) + " kcal/gün");
+
+                                fatPercentText.setText(new DecimalFormat("0.#").format(fat) + "%");
+                                musclePercentText.setText(new DecimalFormat("0.#").format(muscle) + "%");
+                                waterPercentText.setText(new DecimalFormat("0.#").format(water) + "%");
+
+                                lastMeasureText.setText("Ölçüm Tarihi");
+                                lastMeasureDate.setText((dd < 10 ? "0" : "") + dd + (mm < 10 ? ".0" : ".") + mm + "." + yy);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                };
+                mOlcumlerimDatabaseReference.addListenerForSingleValueEvent(mSingleValueEventListener);
+            }
+
+            @Override
+            public void onItemClick(View view) {
+            }
+
+            @Override
+            public void onDataUpdate() {
+            }
+
+            @Override
+            public void onMonthChange() {
+            }
+
+            @Override
+            public void onWeekChange(int i) {
+            }
+        });
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

@@ -49,11 +49,9 @@ public class KanSelectDateDialog extends DialogFragment {
     private TextView textView10;
     private TextView textView11;
 
-
     private String selected_date;
     private ArrayList<String> arraylist_dates = new ArrayList<>();
     private String[] mydates = {};
-
 
     //firebase instance variables
     private FirebaseAuth mAuth;
@@ -84,7 +82,7 @@ public class KanSelectDateDialog extends DialogFragment {
 
         //get parent view
         Activity parentview = getActivity();
-        datePicker = parentview.findViewById(R.id.date);
+        datePicker = parentview.findViewById(R.id.blood_date);
 
         //initialize textviews
         date = parentview.findViewById(R.id.right0);

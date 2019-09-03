@@ -386,79 +386,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cart7"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart6">
-
-                <ImageView
-                    android:id="@+id/imageView25"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/details_card"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/imageButton8"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="24dp"
-                    android:background="@null"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/bmi_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView27"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="BKİ"
-                    android:textColor="@color/cardHeader"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
-                    app:layout_constraintStart_toEndOf="@+id/imageButton8"
-                    app:layout_constraintTop_toTopOf="@+id/imageButton8" />
-
-                <ImageButton
-                    android:id="@+id/imageButton14"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@null"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/bmi_forward_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/bmiValueText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageButton14"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cart6"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -531,6 +458,79 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cart7"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cart6">
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/details_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton8"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bmi_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="BKİ"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton8"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton8" />
+
+                <ImageButton
+                    android:id="@+id/imageButton14"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/bmi_forward_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bmiValueText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton14"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/mainChart"
                 android:layout_width="0dp"
@@ -539,10 +539,23 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.github.mikephil.charting.charts.PieChart>
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/mainDeleteButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:background="@null"
+                android:src="@drawable/delete_nonclicked"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/mainChart"
+                app:layout_constraintTop_toTopOf="@+id/mainChart" />
+
+            <ImageButton
+                android:id="@+id/mainOlcumYapButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
@@ -556,17 +569,34 @@
                 android:id="@+id/lastMeasureText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
                 android:fontFamily="@font/montserrat"
                 android:gravity="center_horizontal"
                 android:text="Ölçüm Tarihi"
                 android:textColor="@color/colorGrayMid"
                 android:textSize="14sp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                app:layout_constraintBottom_toTopOf="@+id/lastMeasurementDate"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mainChart" />
+                app:layout_constraintTop_toTopOf="@+id/mainChart"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/lastMeasurementDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/montserrat"
+                android:text="TextView"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/mainChart"
+                app:layout_constraintEnd_toEndOf="@+id/lastMeasureText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/lastMeasureText"
+                app:layout_constraintTop_toBottomOf="@+id/lastMeasureText" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -580,9 +610,9 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+                app:layout_constraintBottom_toBottomOf="@+id/mainOlcumYapButton"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+                app:layout_constraintTop_toTopOf="@+id/mainOlcumYapButton" />
 
             <TextView
                 android:id="@+id/fatPercentText"
@@ -686,7 +716,7 @@
     <View
         android:id="@+id/view21"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="34dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
@@ -703,7 +733,6 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:selectedItem_textColor="@android:color/white"
         app:buttonLeft_drawableTintColor="@android:color/white"
         app:buttonRight_drawableTintColor="@android:color/white"
         app:expandIconColor="@android:color/white"
@@ -711,8 +740,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:primaryColor="@android:color/transparent"
+        app:selectedItem_textColor="@android:color/white"
         app:state="collapsed"
         app:textColor="@android:color/white"
-        app:todayItem_textColor="@android:color/white" />
+        app:todayItem_textColor="@android:color/white"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@ public class DetailsWaterFragment extends DetailsAbstractFragment {
             return;
 
         fillChart(R.color.waterColor);
-        fillLayout("0.#", "%");
+        fillLayout("0.#", "lt", R.color.waterColor);
         painted = true;
     }
 }

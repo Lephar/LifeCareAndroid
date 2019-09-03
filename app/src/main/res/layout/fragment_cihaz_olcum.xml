@@ -50,13 +50,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/empedansText"
+    <ProgressBar
+        android:id="@+id/olcum_progress_bar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Emp: 0"
-        app:layout_constraintBottom_toTopOf="@+id/bluetoothButton"
-        app:layout_constraintStart_toStartOf="@+id/imageView28"
-        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView28"
+        app:layout_constraintEnd_toEndOf="@+id/imageView28" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -377,13 +377,13 @@
     <string name="settings">Ayarlar</string>
     <string name="about">Lifecare Hakkında</string>
     <string name="logout">Çıkış Yap</string>
-    <string name="birthday_date">Doğum Tarihin</string>
-    <string name="gender">Cinsiyetin</string>
-    <string name="height">Boyun</string>
+    <string name="birthday_date">Doğum Tarih</string>
+    <string name="gender">Cinsiyet</string>
+    <string name="height">Boy</string>
     <string name="profile_picture">Profil Fotoğrafın</string>
     <string name="next">İleri</string>
     <string name="name_surname">Ad - Soyad</string>
-    <string name="agreement">Gizlilik ilkesi ve kayıt şartlarını okuyup   kabul ettiğimi onaylıyorum.</string>
+    <string name="agreement"><font color='#0000FF'>Gizlilik ilkesi</font> ve <font color='#0000FF'>kayıt şartlarını</font> okuyup kabul ettiğimi onaylıyorum.</string>
     <string name="sign_up">Kayıt Ol</string>
     <string name="signup_with_face">Facebook ile kayıt</string>
     <string name="Sign_Up_with_Gmail">Gmail ile kayıt</string>
@@ -413,10 +413,10 @@
     <string name="new_pass_again">Yeni şifre(tekrar)</string>
     <string name="enter_email">Lütfen E-mail adresinizi giriniz</string>
     <string name="activity_level">Aktivite Seviyesi</string>
-    <string name="sadanter_activity">Sedanter fiziksel aktivite</string>
-    <string name="mild_activity">Hafif düzeyde fiziksel aktivite</string>
-    <string name="moderate_activity">Orta düzeyde fiziksel aktivite</string>
-    <string name="heavy_activity">İleri düzeyde fiziksel aktivite</string>
+    <string name="sadanter_activity">Sedanter</string>
+    <string name="mild_activity">Hafif (1~3 gün/hafta)</string>
+    <string name="moderate_activity">Orta (3~5 gün/hafta)</string>
+    <string name="heavy_activity">İleri (7 gün/hafta)</string>
     <string name="girl">Kadın</string>
     <string name="boy">Erkek</string>
     <string name="language">Dil</string>
@@ -471,7 +471,7 @@
     <string name="delete">Sil</string>
     <string name="sure_delete">Verinizi silmek istediğinize emin misiniz?</string>
     <string name="saved">Kaydedildi</string>
-    <string name="enter_weight">kilonuzu giriniz</string>
+    <string name="enter_weight">Kilonuzu Giriniz</string>
     <string name="email_sent">E-mail gönderildi.</string>
     <string name="no_such_mail">Girdiğiniz mail adresi kayıtlı bulunmamaktadır.</string>
     <string name="sedanter">Sedanter</string>
@@ -542,4 +542,5 @@
     <string name="reset_password_text">E-mail adresinizi girin ve size şifrenizi sıfırlamanız için bir link gönderelim</string>
     <string name="change_picture">Profil Fotoğrafı</string>
     <string name="measurement_date">Ölçüm Tarihi</string>
+    <string name="privacy_policy_full_text">Privacy Policy Burda Olacak</string>
 </resources>

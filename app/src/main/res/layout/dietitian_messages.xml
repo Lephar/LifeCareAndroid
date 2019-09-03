@@ -37,8 +37,8 @@
             android:elevation="2dp"
             android:padding="10dp"
             android:text="00:00"
-            android:textColor="#fff"
-            android:textSize="12sp"
+            android:textColor="#6f6f6e"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -55,14 +55,14 @@
         <TextView
             android:id="@+id/messageText"
             android:layout_width="0dp"
-            android:layout_weight="15"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:layout_weight="15"
             android:elevation="2dp"
             android:padding="10dp"
             android:text="Dietitian Message"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textColor="#6f6f6e"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/messageClock"
@@ -72,8 +72,8 @@
             android:elevation="2dp"
             android:padding="10dp"
             android:text="00:00"
-            android:textColor="#fff"
-            android:textSize="12sp" />
+            android:textColor="#6f6f6e"
+            android:textSize="10sp" />
 
     </LinearLayout>
 

@@ -238,7 +238,7 @@ public class CihazimFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                new WeightSelect(deviceScanActivity).show(getChildFragmentManager(), "Select Weight");
+                new WeightSelect(new CihazOlcumFragment(), deviceScanActivity).show(getChildFragmentManager(), "Select Weight");
                 deviceScanActivity.setStartClicked(true);
                 deviceScanActivity.WriteToDevice("re");
 

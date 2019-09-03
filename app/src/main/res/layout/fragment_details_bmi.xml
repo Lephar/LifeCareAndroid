@@ -64,6 +64,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
         android:text="05.05.2019"
+        android:textColor="@color/bmiColor"
         app:layout_constraintEnd_toEndOf="@+id/detBmiAmountText"
         app:layout_constraintStart_toStartOf="@+id/detBmiAmountText"
         app:layout_constraintTop_toBottomOf="@+id/detBmiAmountText" />

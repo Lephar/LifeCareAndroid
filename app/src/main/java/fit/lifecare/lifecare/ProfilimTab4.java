@@ -65,7 +65,7 @@ public class ProfilimTab4 extends Fragment {
 
         //initialize layout views
         fab = view.findViewById(R.id.fab);
-        date_picker = view.findViewById(R.id.date);
+        date_picker = view.findViewById(R.id.blood_date);
         shown_date = view.findViewById(R.id.right0);
         textView1 = view.findViewById(R.id.right1);
         textView2 = view.findViewById(R.id.right2);

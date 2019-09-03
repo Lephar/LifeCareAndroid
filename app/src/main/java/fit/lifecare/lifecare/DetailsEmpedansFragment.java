@@ -51,7 +51,7 @@ public class DetailsEmpedansFragment extends DetailsAbstractFragment {
             return;
 
         fillChart(R.color.empColor);
-        fillLayout("0", "Ω");
+        fillLayout("0", "Ω", R.color.empColor);
         painted = true;
     }
 }

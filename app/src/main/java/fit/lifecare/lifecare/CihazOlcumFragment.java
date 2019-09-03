@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,7 +50,6 @@ public class CihazOlcumFragment extends Fragment {
     DeviceScanActivity deviceScanActivity;
     private ViewPager viewPager;
     private Button start_button;
-    private TextView emp_text;
     //firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -91,18 +89,18 @@ public class CihazOlcumFragment extends Fragment {
 
                 if (emp < 10000) {
                     Toast.makeText(getContext(), "Ölçüm bitti ", Toast.LENGTH_LONG).show();
-                    String text_toset = "Emp: " + emp;
-                    emp_text.setText(text_toset);
+                    getView().findViewById(R.id.olcum_progress_bar).setVisibility(View.GONE);
 
                     // calculate with formula and put it to firebase database
                     CalculateFromBluetoothData(emp);
+                    deviceScanActivity.setStartClicked(false);
+                    deviceScanActivity = null;
                     getActivity().finish();
 
                 } else {
                     Toast.makeText(getContext(), "Hatalı ölçüm tekrar ölçünüz ", Toast.LENGTH_LONG).show();
+                    getView().findViewById(R.id.olcum_progress_bar).setVisibility(View.GONE);
                 }
-
-
             }
         }
     };
@@ -138,7 +136,6 @@ public class CihazOlcumFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         start_button = getView().findViewById(R.id.bluetoothButton);
-        emp_text = view.findViewById(R.id.empedansText);
 
         // initialize firebase components
         mAuth = FirebaseAuth.getInstance();
@@ -158,6 +155,12 @@ public class CihazOlcumFragment extends Fragment {
 
         // initialize click listeners
         initializeClickListeners();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        deviceScanActivity = null;
     }
 
     @Override
@@ -235,7 +238,7 @@ public class CihazOlcumFragment extends Fragment {
                 }
 
                 if (authorized) {
-                    new WeightSelect(deviceScanActivity).show(getChildFragmentManager(), "Select Weight");
+                    new WeightSelect(CihazOlcumFragment.this, deviceScanActivity).show(getChildFragmentManager(), "Select Weight");
 
                 }
             }

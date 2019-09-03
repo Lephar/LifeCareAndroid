@@ -50,8 +50,11 @@ public class DetailsBMIFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        adjustIndicator(values.get(values.size() - 1).getY());
-        fillLayout("0.00", "kg/m²");
+        if (values.size() == 2)
+            adjustIndicator(values.get(0).getY());
+        else
+            adjustIndicator(values.get(values.size() - 1).getY());
+        fillLayout("0.00", "kg/m²", R.color.bmiColor);
         painted = true;
     }
 }

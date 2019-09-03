@@ -48,6 +48,8 @@
             android:id="@+id/close_button"
             android:layout_width="0dp"
             android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:padding="8dp"
             android:src="@drawable/close_white"
             app:layout_constraintDimensionRatio="w,1:1"

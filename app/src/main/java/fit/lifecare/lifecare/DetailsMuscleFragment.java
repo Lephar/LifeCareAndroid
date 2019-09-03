@@ -51,7 +51,7 @@ public class DetailsMuscleFragment extends DetailsAbstractFragment {
             return;
 
         fillChart(R.color.muscleColor);
-        fillLayout("0.#", "%");
+        fillLayout("0.#", "kg", R.color.muscleColor);
         painted = true;
     }
 }

@@ -63,7 +63,7 @@ public class ProfilimTab5 extends Fragment {
         View view = inflater.inflate(R.layout.profilim_tab5, container, false);
         
         //initialize layout views
-        mDatePicker = view.findViewById(R.id.date);
+        mDatePicker = view.findViewById(R.id.measure_date);
         body_img = view.findViewById(R.id.imageView);
         date_text = view.findViewById(R.id.date_text);
         fab = view.findViewById(R.id.fab);

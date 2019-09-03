@@ -51,7 +51,7 @@ public class DetailsFatFragment extends DetailsAbstractFragment {
             return;
 
         fillChart(R.color.fatColor);
-        fillLayout("0.#", "%");
+        fillLayout("0.#", "kg", R.color.fatColor);
         painted = true;
     }
 }

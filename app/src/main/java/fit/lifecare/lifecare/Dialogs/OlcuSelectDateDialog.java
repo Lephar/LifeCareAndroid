@@ -82,7 +82,7 @@ public class OlcuSelectDateDialog extends DialogFragment {
 
         //get parent view
         Activity parentview = getActivity();
-        datePicker = parentview.findViewById(R.id.date);
+        datePicker = parentview.findViewById(R.id.measure_date);
 
         //initialize textviews
         editText1 = parentview.findViewById(R.id.editText1);

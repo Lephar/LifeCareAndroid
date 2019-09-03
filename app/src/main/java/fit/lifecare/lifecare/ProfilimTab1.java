@@ -1,7 +1,9 @@
 package fit.lifecare.lifecare;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,8 @@ import fit.lifecare.lifecare.Dialogs.KisiselBirthdaySelect;
 import fit.lifecare.lifecare.Dialogs.KisiselGenderSelect;
 import fit.lifecare.lifecare.Dialogs.KisiselHeightSelect;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class ProfilimTab1 extends Fragment {
     
     //global arrays
@@ -56,6 +60,7 @@ public class ProfilimTab1 extends Fragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mProfilimKisiselDatabaseReference;
     private ValueEventListener mValueEventListener;
+    private SharedPreferences preferences;
     
     @Nullable
     @Override
@@ -87,6 +92,8 @@ public class ProfilimTab1 extends Fragment {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mProfilimKisiselDatabaseReference = mFirebaseDatabase.getReference()
                 .child("AppUsers").child(currentUserId).child("PersonalInfo");
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         //initialize Listeners
         initializeButtonListeners();
@@ -248,8 +255,10 @@ public class ProfilimTab1 extends Fragment {
                     String gender = personalInfoData.getGender();
                     if(gender.equals("Erkek")) {
                         gender_select.setText(getString(R.string.boy));
+                        preferences.edit().putString("gender", gender).apply();
                     } else {
                         gender_select.setText(getString(R.string.girl));
+                        preferences.edit().putString("gender", gender).apply();
                     }
                     birthday_select.setText(personalInfoData.getBirth_date());
                     height_select.setText(personalInfoData.getHeight());

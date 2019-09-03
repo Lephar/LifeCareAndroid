@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.facebook.login.LoginManager;
@@ -59,8 +61,13 @@ public class AyarlarFragment extends Fragment {
         
         
         // inflate the fragment layout
-        View view = inflater.inflate(R.layout.fragment_ayarlar, container, false);
-        
+        return inflater.inflate(R.layout.fragment_ayarlar, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // initialize Layout Views
         language = view.findViewById(R.id.lang);
         password = view.findViewById(R.id.password_field);
@@ -70,21 +77,22 @@ public class AyarlarFragment extends Fragment {
         mSwitch2 = view.findViewById(R.id.switch_view2);
         picChange = view.findViewById(R.id.profile_pic);
         about = view.findViewById(R.id.about);
-        
+
         // initialize firebase components
         user = FirebaseAuth.getInstance().getCurrentUser();
         String userID = user.getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers").child(userID);
-        
+
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        editor = preferences.edit();
-        
+        String gender = preferences.getString("gender", "N/A");
+        Log.d("fddfsfdsgdfg", "onViewCreated: " + gender);
+        if (!gender.equals("Erkek"))
+            picChange.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.girlphotoselect));
+
         initializeViewListeners();
-        
-        return view;
     }
-    
+
     private void initializeViewListeners() {
     
         boolean showNotification = preferences.getBoolean("SHOW_NOTIFICATION", true);
@@ -195,7 +203,7 @@ public class AyarlarFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
+                getActivity().startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
             }
         });
 

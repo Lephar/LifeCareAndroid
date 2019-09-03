@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import fit.lifecare.lifecare.MainActivity;
+import fit.lifecare.lifecare.MainRevampActivity;
 import fit.lifecare.lifecare.R;
 
 import static fit.lifecare.lifecare.Notifications.NotificationChannels.CHANNEL_6_ID;
@@ -163,7 +163,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainRevampActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -199,8 +199,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         FirebaseAuth mAuth;
         FirebaseDatabase mFirebaseDatabase;
         DatabaseReference mUserPersonalInfoDatabaseReference;
-        
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+
+        Intent notificationIntent = new Intent(this, MainRevampActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         
         notificationIntent.putExtra("start_where", "chat");
@@ -239,8 +239,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         FirebaseAuth mAuth;
         FirebaseDatabase mFirebaseDatabase;
         DatabaseReference mUserPersonalInfoDatabaseReference;
-        
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+
+        Intent notificationIntent = new Intent(this, MainRevampActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         
         notificationIntent.putExtra("start_where", "meal_schedule");

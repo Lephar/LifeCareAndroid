@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorGray100">#F5F5F5</color>
+    <color name="dietitiachat">#F0F1F8</color>
+    <color name="userchat">#4E62AA</color>
     <color name="colorGray400">#BDBDBD</color>
     <color name="headerColor">#808080</color>
     <color name="colorGrayMid">#A0A0A0</color>

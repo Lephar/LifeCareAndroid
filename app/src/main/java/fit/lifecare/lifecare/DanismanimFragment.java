@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -100,7 +101,7 @@ public class DanismanimFragment extends Fragment {
                 .child(currentUserId).child("PersonalInfo").child("ChatIDs");
 
         // set new_message value to false to make disappear new message alert
-        mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_message").setValue(false);
+        //mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_message").setValue(false);
 
         mChatDatabaseReference = mFirebaseDatabase.getReference().child("Chats");
 
@@ -222,7 +223,6 @@ public class DanismanimFragment extends Fragment {
 
                         ChatListMembers chatListMember = new ChatListMembers(dietitianPhotoUrl,"Dyt. " + dietitianName, chat_id, dietitianID, unreaded_messages);
                         mChatAdapter.add(chatListMember);
-
                     }
 
                 }
@@ -260,7 +260,7 @@ public class DanismanimFragment extends Fragment {
             case R.id.delete:
                 AlertDialog.Builder builder;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                    builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
                 } else {
                     builder = new AlertDialog.Builder(getActivity());
                 }
@@ -269,6 +269,7 @@ public class DanismanimFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete
                                 mChatClickedDatabaseReference.child("connection_status").setValue("passive");
+                                Toast.makeText(getActivity(), "İletişiminiz başarıyla koparılmıştır", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,25 +83,28 @@ public class OlcumGirisFragment extends Fragment {
             public void onClick(View view) {
                 //creating a olcumlerimData object and getting data from edittext views
 
-                if (weightText.getText().toString().isEmpty()) weightText.setText("0");
-                if (bmiText.getText().toString().isEmpty()) bmiText.setText("0");
-                if (fatPText.getText().toString().isEmpty()) fatPText.setText("0");
-                if (musPText.getText().toString().isEmpty()) musPText.setText("0");
-                if (watPText.getText().toString().isEmpty()) watPText.setText("0");
-                if (metaText.getText().toString().isEmpty()) metaText.setText("0");
+                if (!fatPText.getText().toString().isEmpty() || !musPText.getText().toString().isEmpty() || !watPText.getText().toString().isEmpty()) {
+                    if (weightText.getText().toString().isEmpty()) weightText.setText("0");
+                    if (bmiText.getText().toString().isEmpty()) bmiText.setText("0");
+                    if (fatPText.getText().toString().isEmpty()) fatPText.setText("0");
+                    if (musPText.getText().toString().isEmpty()) musPText.setText("0");
+                    if (watPText.getText().toString().isEmpty()) watPText.setText("0");
+                    if (metaText.getText().toString().isEmpty()) metaText.setText("0");
 
-                OlcumlerimData olcumlerimData = new OlcumlerimData(
-                        weightText.getText().toString().replaceAll(",", "."),
-                        bmiText.getText().toString().replaceAll(",", "."),
-                        fatPText.getText().toString().replaceAll(",", "."),
-                        watPText.getText().toString().replaceAll(",", "."),
-                        musPText.getText().toString().replaceAll(",", "."),
-                        metaText.getText().toString().replaceAll(",", "."),
-                        "", "");
+                    OlcumlerimData olcumlerimData = new OlcumlerimData(
+                            weightText.getText().toString().replaceAll(",", "."),
+                            bmiText.getText().toString().replaceAll(",", "."),
+                            fatPText.getText().toString().replaceAll(",", "."),
+                            watPText.getText().toString().replaceAll(",", "."),
+                            musPText.getText().toString().replaceAll(",", "."),
+                            metaText.getText().toString().replaceAll(",", "."),
+                            "", "");
 
-                mOlcumlerimDatabaseReference.child(year + (month < 9 ? "-0" : "-") + (month + 1) + (day < 10 ? "-0" : "-") + day).setValue(olcumlerimData);
-                mPersonalDatabaseReference.child("weight").setValue(weightText.getText().toString());
-                getActivity().finish();
+                    mOlcumlerimDatabaseReference.child(year + (month < 9 ? "-0" : "-") + (month + 1) + (day < 10 ? "-0" : "-") + day).setValue(olcumlerimData);
+                    mPersonalDatabaseReference.child("weight").setValue(weightText.getText().toString());
+                    getActivity().finish();
+                } else
+                    Toast.makeText(getActivity(), "En az bir veri girmeniz gerekli", Toast.LENGTH_SHORT).show();
             }
         });
 

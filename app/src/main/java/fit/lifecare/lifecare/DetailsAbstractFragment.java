@@ -34,7 +34,7 @@ public abstract class DetailsAbstractFragment extends Fragment {
     ImageView indicator = null;
     ImageButton backButton;
     TextView backText, topDateText, topValueText;
-    ArrayList<Entry> values;
+    ArrayList<Entry> values, weights = null;
     ConstraintLayout layout;
     boolean initialized = false, loaded = false, painted = false;
     String unit, pattern;
@@ -44,6 +44,13 @@ public abstract class DetailsAbstractFragment extends Fragment {
 
     public void setData(ArrayList<Entry> list) {
         values = list;
+        painted = false;
+        loaded = true;
+    }
+
+    public void setData(ArrayList<Entry> list, ArrayList<Entry> list2) {
+        values = list;
+        weights = list2;
         painted = false;
         loaded = true;
     }
@@ -112,6 +119,8 @@ public abstract class DetailsAbstractFragment extends Fragment {
         chart.getLegend().setEnabled(false);
         chart.getXAxis().setEnabled(false);
         chart.getXAxis().setGranularity(1f);
+        chart.getXAxis().setAxisMinimum(values.get(0).getX() - 1);
+        chart.getXAxis().setAxisMaximum(values.get(values.size() - 1).getX() + 4);
         chart.getAxisRight().setEnabled(false);
         chart.getAxisLeft().setEnabled(false);
         chart.getAxisLeft().setDrawGridLines(false);
@@ -132,6 +141,10 @@ public abstract class DetailsAbstractFragment extends Fragment {
     }
 
     void fillLayout(String pattern, String unit) {
+        fillLayout(pattern, unit, R.color.colorGray400);
+    }
+
+    void fillLayout(String pattern, String unit, int color) {
         this.unit = unit;
         this.pattern = pattern;
 
@@ -160,10 +173,13 @@ public abstract class DetailsAbstractFragment extends Fragment {
             MontserratTextView dateText = new MontserratTextView(getContext());
             dateText.setText(date(value.getX()));
             dateText.setId(View.generateViewId());
+            //dateText.setTextColor(getResources().getColor(color));
 
             MontserratTextView valueText = new MontserratTextView(getContext());
-            if (value.getY() > EPSILON)
-                valueText.setText(new DecimalFormat(pattern).format(value.getY()) + " " + unit);
+            if (value.getY() > EPSILON && (weights == null || weights.get(i).getY() < EPSILON))
+                valueText.setText(new DecimalFormat(pattern).format(value.getY()) + " %");
+            else if (value.getY() > EPSILON)
+                valueText.setText(new DecimalFormat(pattern).format(value.getY()) + " %" + ", " + new DecimalFormat(pattern).format(100 * value.getY() / weights.get(i).getY()) + " " + unit);
             valueText.setId(View.generateViewId());
 
             final View placeholder = new View(getContext());

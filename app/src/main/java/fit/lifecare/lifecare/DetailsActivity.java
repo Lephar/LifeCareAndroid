@@ -183,11 +183,11 @@ public class DetailsActivity extends AppCompatActivity {
                 for (int i = yValues8.size(); i < 2; i++)
                     yValues8.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
 
-                fatFragment.setData(yValues3);
+                fatFragment.setData(yValues3, yValues1);
                 fatFragment.draw();
-                muscleFragment.setData(yValues5);
+                muscleFragment.setData(yValues5, yValues1);
                 muscleFragment.draw();
-                waterFragment.setData(yValues4);
+                waterFragment.setData(yValues4, yValues1);
                 waterFragment.draw();
                 weightFragment.setData(yValues1);
                 weightFragment.draw();

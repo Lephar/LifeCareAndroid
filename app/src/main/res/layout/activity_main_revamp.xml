@@ -64,38 +64,6 @@
         app:layout_constraintStart_toStartOf="@+id/user_name"
         app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
-    <FrameLayout
-        android:id="@+id/fragment_layout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view23" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:itemBackground="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/navigation" />
-
-    <ImageView
-        android:id="@+id/imageView27"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="40dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/shadow" />
-
     <View
         android:id="@+id/view23"
         android:layout_width="0dp"
@@ -121,6 +89,68 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view23" />
+
+    <ImageView
+        android:id="@+id/imageView27"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/shadow"
+        tools:visibility="visible" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:itemBackground="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation"
+        tools:visibility="visible">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <ImageView
+        android:id="@+id/messageAlert"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintVertical_bias="0.07"
+        app:srcCompat="@drawable/message_alert"
+        tools:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/scheduleAlert"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintStart_toStartOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintVertical_bias="0.07"
+        app:srcCompat="@drawable/program_alert"
+        tools:visibility="invisible" />
+
+    <FrameLayout
+        android:id="@+id/fragment_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view23" />

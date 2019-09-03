@@ -181,7 +181,6 @@ public abstract class UICalendar extends LinearLayout {
         setButtonLeftDrawableTintColor(attrs.getColor(R.styleable.UICalendar_buttonLeft_drawableTintColor, mButtonLeftDrawableTintColor));
         setButtonRightDrawableTintColor(attrs.getColor(R.styleable.UICalendar_buttonRight_drawableTintColor, mButtonRightDrawableTintColor));
         setExpandIconColor(attrs.getColor(R.styleable.UICalendar_expandIconColor, mExpandIconColor));
-        Day selectedItem = null;
     }
 
     public void setButtonLeftDrawableTintColor(int color) {

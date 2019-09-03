@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/view34"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorGray100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hesap" />
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -216,7 +227,7 @@
         android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view30" />
+        app:layout_constraintTop_toBottomOf="@+id/view34" />
 
     <TextView
         android:id="@+id/password_field"
@@ -252,7 +263,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hesap" />
+        app:layout_constraintTop_toBottomOf="@+id/about" />
 
     <TextView
         android:id="@+id/hesap"
@@ -260,10 +271,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:enabled="false"
         android:fontFamily="@font/montserrat"
         android:text="@string/delete_account"
-        android:textColor="@android:color/holo_red_light"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view5" />
@@ -273,13 +282,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
-        android:padding="8dp"
         android:text="@string/logout"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton6"
-        app:layout_constraintStart_toEndOf="@+id/imageButton6"
-        app:layout_constraintTop_toTopOf="@+id/imageButton6" />
+        app:layout_constraintStart_toEndOf="@+id/imageView15"
+        app:layout_constraintTop_toBottomOf="@+id/view30" />
 
     <View
         android:id="@+id/view26"
@@ -290,16 +298,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton6"
+    <ImageView
+        android:id="@+id/imageView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="32dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/hesap2"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hesap2"
         app:srcCompat="@drawable/exit_icon" />
+
+    <View
+        android:id="@+id/view35"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hesap2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

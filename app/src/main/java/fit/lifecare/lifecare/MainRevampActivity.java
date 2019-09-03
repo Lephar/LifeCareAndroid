@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,16 +44,24 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
     private static final int RC_PHOTO_PICKER = 2;
     private FragmentManager fragmentManager;
     private ViewPagerAdapter adapter;
-    private ViewPager viewPager;
+    private ClickViewPager viewPager;
     private FragmentTransaction fragmentTransaction;
     private FrameLayout fragmentLayout;
     private BottomNavigationView bottom_tab;
     private TextView current_tab_text;
     private TextView user_name;
     private ImageView profile_picture;
+    private ImageView message_alert;
+    private ImageView schedule_alert;
+    private int schedule_state;
+    private int message_state;
     private String[] tabTexts;
     private int prevTab = 1;
 
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private String currentUserId;
+    private DatabaseReference mChatIDReference;
     private DatabaseReference mUserPersonalInfoDatabaseReference;
     private StorageReference mStorageReference;
 
@@ -62,19 +70,18 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
     private String height;
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_revamp);
 
         bottom_tab = findViewById(R.id.bottomNavigationView);
-        bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
         current_tab_text = findViewById(R.id.current_tab);
         viewPager = findViewById(R.id.view_pager_main);
         fragmentLayout = findViewById(R.id.fragment_layout);
+        message_alert = findViewById(R.id.messageAlert);
+        schedule_alert = findViewById(R.id.scheduleAlert);
+        profile_picture = findViewById(R.id.profile_pic);
+        user_name = findViewById(R.id.user_name);
 
         tabTexts = new String[3];
         tabTexts[0] = "Beslenme Programım";
@@ -82,9 +89,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         tabTexts[2] = "Sohbetlerim";
 
         fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_layout, new MainTab());
-        fragmentTransaction.commit();
+        String tab = getIntent().getStringExtra("start_where");
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ProgramFragment(), "Besinlerim");
@@ -93,71 +98,16 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
 
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(1);
-        current_tab_text.setText(tabTexts[1]);
-        bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
-
-        bottom_tab.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (viewPager.getVisibility() == View.INVISIBLE) {
-                    fragmentLayout.removeAllViews();
-                    fragmentLayout.setVisibility(View.INVISIBLE);
-                    viewPager.setVisibility(View.VISIBLE);
-                }
-
-                if (menuItem.getItemId() == R.id.navigation_besinlerim) {
-                    current_tab_text.setText(tabTexts[0]);
-                    viewPager.setCurrentItem(0);
-                } else if (menuItem.getItemId() == R.id.navigation_olcumlerim) {
-                    current_tab_text.setText(tabTexts[1]);
-                    viewPager.setCurrentItem(1);
-                } else if (menuItem.getItemId() == R.id.navigation_sohbetler) {
-                    current_tab_text.setText(tabTexts[2]);
-                    viewPager.setCurrentItem(2);
-                }
-
-                return false;
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                bottom_tab.getMenu().getItem(prevTab).setChecked(false);
-                bottom_tab.getMenu().getItem(position).setChecked(true);
-                current_tab_text.setText(tabTexts[position]);
-                prevTab = position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        //initialize shared preferences
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         //initialize Firebase components
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String currentUserId = mAuth.getCurrentUser().getUid();
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mChatIDReference = mFirebaseDatabase.getReference().child("AppUsers")
+                .child(currentUserId).child("PersonalInfo").child("ChatIDs");
         mUserPersonalInfoDatabaseReference = mFirebaseDatabase.getReference().child("AppUsers")
                 .child(currentUserId).child("PersonalInfo");
-
         mUserPersonalInfoDatabaseReference.getParent().keepSynced(true);
-
-        //initialize shared preferences
-        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        editor = preferences.edit();
-
-        height = preferences.getString("height", "0");
 
         //firebase fcm token listener
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -178,14 +128,89 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         mStorageReference = mFirebaseStorage.getReference().child("appUsers").child(currentUserId)
                 .child("photos");
 
-        profile_picture = findViewById(R.id.profile_pic);
-        user_name = findViewById(R.id.user_name);
+        //initialize shared preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //initialize shared preferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = preferences.edit();
+
+        height = preferences.getString("height", "0");
+
+        if (tab != null && tab.equals("meal_schedule")) {
+            viewPager.setCurrentItem(0);
+            current_tab_text.setText(tabTexts[0]);
+            bottom_tab.setSelectedItemId(R.id.navigation_besinlerim);
+            schedule_alert.setVisibility(View.INVISIBLE);
+        } else if (tab != null && tab.equals("chat")) {
+            viewPager.setCurrentItem(2);
+            current_tab_text.setText(tabTexts[2]);
+            bottom_tab.setSelectedItemId(R.id.navigation_sohbetler);
+            message_alert.setVisibility(View.INVISIBLE);
+        } else {
+            viewPager.setCurrentItem(1);
+            current_tab_text.setText(tabTexts[1]);
+            bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
+        }
+
+        bottom_tab.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if (viewPager.getVisibility() == View.INVISIBLE) {
+                    fragmentLayout.removeAllViews();
+                    fragmentLayout.setVisibility(View.INVISIBLE);
+                    viewPager.setVisibility(View.VISIBLE);
+                }
+
+                if (menuItem.getItemId() == R.id.navigation_besinlerim) {
+                    current_tab_text.setText(tabTexts[0]);
+                    viewPager.setCurrentItem(0);
+                    schedule_alert.setVisibility(View.INVISIBLE);
+                    mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_meal_schedule").setValue(false);
+                } else if (menuItem.getItemId() == R.id.navigation_olcumlerim) {
+                    current_tab_text.setText(tabTexts[1]);
+                    viewPager.setCurrentItem(1);
+                } else if (menuItem.getItemId() == R.id.navigation_sohbetler) {
+                    current_tab_text.setText(tabTexts[2]);
+                    viewPager.setCurrentItem(2);
+                    mFirebaseDatabase.getReference().child("AppUsers").child(currentUserId).child("PersonalInfo").child("new_message").setValue(false);
+                }
+
+                return false;
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottom_tab.getMenu().getItem(prevTab).setChecked(false);
+                bottom_tab.getMenu().getItem(position).setChecked(true);
+                current_tab_text.setText(tabTexts[position]);
+                prevTab = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
 
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (viewPager.getCurrentItem() != 1)
-                    MainRevampActivity.this.onBackPressed();
+                if (viewPager.getVisibility() == View.INVISIBLE) {
+                    fragmentLayout.removeAllViews();
+                    fragmentLayout.setVisibility(View.INVISIBLE);
+                    viewPager.setVisibility(View.VISIBLE);
+                    bottom_tab.setVisibility(View.VISIBLE);
+                    message_alert.setVisibility(message_state);
+                    schedule_alert.setVisibility(schedule_state);
+                    current_tab_text.setText(tabTexts[viewPager.getCurrentItem()]);
+                } else if (bottom_tab.getSelectedItemId() != R.id.navigation_olcumlerim) {
+                    bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
+                }
             }
         });
 
@@ -193,10 +218,14 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fragmentLayout.removeAllViews();
                 fragmentLayout.setVisibility(View.VISIBLE);
                 viewPager.setVisibility(View.INVISIBLE);
+                message_alert.setVisibility(View.GONE);
+                schedule_alert.setVisibility(View.GONE);
+                bottom_tab.setVisibility(View.GONE);
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_layout, new AyarlarFragment());
+                fragmentTransaction.add(R.id.fragment_layout, new AyarlarFragment());
                 fragmentTransaction.commit();
                 current_tab_text.setText("Ayarlar");
             }
@@ -206,10 +235,14 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fragmentLayout.removeAllViews();
                 fragmentLayout.setVisibility(View.VISIBLE);
                 viewPager.setVisibility(View.INVISIBLE);
+                message_alert.setVisibility(View.GONE);
+                schedule_alert.setVisibility(View.GONE);
+                bottom_tab.setVisibility(View.GONE);
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_layout, new ProfilimMainFragment());
+                fragmentTransaction.add(R.id.fragment_layout, new ProfilimMainFragment());
                 fragmentTransaction.commit();
                 current_tab_text.setText("Profil");
             }
@@ -217,6 +250,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
 
         initializeFirebaseListenersForPhoto();
         initializeFirebaseListenersForName();
+        initializeFirebaseListenerForAlerts();
     }
 
     @Override
@@ -225,6 +259,9 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
             fragmentLayout.removeAllViews();
             fragmentLayout.setVisibility(View.INVISIBLE);
             viewPager.setVisibility(View.VISIBLE);
+            bottom_tab.setVisibility(View.VISIBLE);
+            message_alert.setVisibility(message_state);
+            schedule_alert.setVisibility(schedule_state);
             current_tab_text.setText(tabTexts[viewPager.getCurrentItem()]);
         } else if (bottom_tab.getSelectedItemId() != R.id.navigation_olcumlerim) {
             bottom_tab.setSelectedItemId(R.id.navigation_olcumlerim);
@@ -237,9 +274,8 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String url = dataSnapshot.getValue(String.class);
-                if (url != null) {
+                if (url != null)
                     Glide.with(profile_picture.getContext()).load(url).into(profile_picture);
-                }
             }
 
             @Override
@@ -270,6 +306,47 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         mUserPersonalInfoDatabaseReference.child("name").addListenerForSingleValueEvent(mValueEventListener);
     }
 
+    private void initializeFirebaseListenerForAlerts() {
+
+        ValueEventListener mNewMessageListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Boolean new_message = (Boolean) dataSnapshot.getValue();
+                if (new_message != null && new_message && bottom_tab.getSelectedItemId() != R.id.navigation_sohbetler)
+                    message_state = View.VISIBLE;
+                else
+                    message_state = View.INVISIBLE;
+                message_alert.setVisibility(message_state);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        mUserPersonalInfoDatabaseReference.child("new_message").addValueEventListener(mNewMessageListener);
+
+        ValueEventListener mNewMealScheduleListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Boolean new_schedule = (Boolean) dataSnapshot.getValue();
+                if (new_schedule != null && new_schedule && bottom_tab.getSelectedItemId() != R.id.navigation_besinlerim)
+                    schedule_state = View.VISIBLE;
+                else
+                    schedule_state = View.INVISIBLE;
+                schedule_alert.setVisibility(schedule_state);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        mUserPersonalInfoDatabaseReference.child("new_meal_schedule").addValueEventListener(mNewMealScheduleListener);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -295,8 +372,8 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
-                        Log.e("hasanurl", downloadUri.toString());
                         mUserPersonalInfoDatabaseReference.child("photo_url").setValue(downloadUri.toString());
+                        Toast.makeText(MainRevampActivity.this, "Profil fotoğrafınız güncellendi", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -304,5 +381,9 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         } else if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_CANCELED) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
     }
 }

@@ -600,6 +600,9 @@ public class CollapsibleCalendar extends UICalendar {
     }
 
     public void select(Day day) {
+        if (!mAdapter.contains(day))
+            return;
+
         setSelectedItem(new Day(day.getYear(), day.getMonth(), day.getDay()));
 
         redraw();

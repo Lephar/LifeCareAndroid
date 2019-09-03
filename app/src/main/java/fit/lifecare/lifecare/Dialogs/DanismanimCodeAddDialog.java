@@ -40,7 +40,6 @@ public class DanismanimCodeAddDialog extends DialogFragment {
     private String currentUserId;
     private String currentName;
 
-
     // Firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -116,7 +115,7 @@ public class DanismanimCodeAddDialog extends DialogFragment {
                             String AppUserID = (String) olcumlerimSnapshot.child("AppUserID").getValue();
 
                             if(AppUserID != null) {
-                                Toast.makeText(view.getContext(),getString(R.string.used_code),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), getResources().getString(R.string.used_code), Toast.LENGTH_SHORT).show();
                             } else {
                                 String DietitianID = (String) olcumlerimSnapshot.child("dietitian_id").getValue();
 
@@ -128,12 +127,12 @@ public class DanismanimCodeAddDialog extends DialogFragment {
                                 mAppUsersReference.child(currentUserId)
                                         .child("PersonalInfo").child("ChatIDs").child(DietitianID).setValue(chatID);
 
-                                Toast.makeText(view.getContext(),getString(R.string.match_succes),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), getResources().getString(R.string.match_succes), Toast.LENGTH_SHORT).show();
                             }
                             return;
                         }
                     }
-                    Toast.makeText(view.getContext(), getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), getResources().getString(R.string.invalid_code), Toast.LENGTH_SHORT).show();
                 }
             }
 

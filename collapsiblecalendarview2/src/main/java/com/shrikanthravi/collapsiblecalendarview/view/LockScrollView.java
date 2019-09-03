@@ -31,7 +31,8 @@ public class LockScrollView extends ScrollView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        return gestureDetectorCompat.onTouchEvent(event);
+        gestureDetectorCompat.onTouchEvent(event);
+        return false;
     }
 
     @Override

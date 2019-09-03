@@ -53,7 +53,7 @@ public class MessageAdapter extends ArrayAdapter {
                     .load(message.getPhotoUrl())
                     .into(photoImageView);
 
-            DateFormat df = new SimpleDateFormat("HH:mm");
+            DateFormat df = new SimpleDateFormat("HH:mm d/M/yy");
             Date date = new Date(message.getMessageTime());
             String messageTime = df.format(date);
             img_messageClock.setText(messageTime);
@@ -62,7 +62,7 @@ public class MessageAdapter extends ArrayAdapter {
             image_frame.setVisibility(View.GONE);
             messageText.setText(message.getMessageText());
 
-            DateFormat df = new SimpleDateFormat("HH:mm");
+            DateFormat df = new SimpleDateFormat("HH:mm d/M/yy");
             Date date = new Date(message.getMessageTime());
             String messageTime = df.format(date);
             messageClock.setText(messageTime);
