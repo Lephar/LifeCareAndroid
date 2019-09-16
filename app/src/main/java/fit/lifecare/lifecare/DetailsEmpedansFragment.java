@@ -28,19 +28,9 @@ public class DetailsEmpedansFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detEmpBackButton);
         backText = getView().findViewById(R.id.detEmpBackText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-        backText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backButton.performClick();
-            }
-        });
-
+        pattern = "0";
+        unit = "Ω";
+        color = R.color.empColor;
         initialized = true;
         draw();
     }
@@ -50,8 +40,8 @@ public class DetailsEmpedansFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        fillChart(R.color.empColor);
-        fillLayout("0", "Ω", R.color.empColor);
+        fillChart();
+        fillLayout();
         painted = true;
     }
 }

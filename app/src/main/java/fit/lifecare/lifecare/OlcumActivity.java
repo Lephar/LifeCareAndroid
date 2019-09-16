@@ -55,7 +55,6 @@ public class OlcumActivity extends AppCompatActivity
             }
         });
 
-
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = preferences.edit();
         height = preferences.getString("height", "0");

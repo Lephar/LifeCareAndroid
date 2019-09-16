@@ -28,19 +28,9 @@ public class DetailsMuscleFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detMusBackButton);
         backText = getView().findViewById(R.id.detMusBackText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-        backText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backButton.performClick();
-            }
-        });
-
+        pattern = "0.#";
+        unit = "kg";
+        color = R.color.muscleColor;
         initialized = true;
         draw();
     }
@@ -50,8 +40,8 @@ public class DetailsMuscleFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        fillChart(R.color.muscleColor);
-        fillLayout("0.#", "kg", R.color.muscleColor);
+        fillChart();
+        fillLayout();
         painted = true;
     }
 }

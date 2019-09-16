@@ -28,19 +28,9 @@ public class DetailsWeightFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detWghBackButton);
         backText = getView().findViewById(R.id.detWghBackText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-        backText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backButton.performClick();
-            }
-        });
-
+        pattern = "0.#";
+        unit = "kg";
+        color = R.color.weightColor;
         initialized = true;
         draw();
     }
@@ -50,8 +40,8 @@ public class DetailsWeightFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        fillChart(R.color.weightColor);
-        fillLayout("0.#", "kg", R.color.weightColor);
+        fillChart();
+        fillLayout();
         painted = true;
     }
 }

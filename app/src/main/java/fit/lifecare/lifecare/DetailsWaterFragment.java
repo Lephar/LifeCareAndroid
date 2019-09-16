@@ -28,19 +28,9 @@ public class DetailsWaterFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detWatBackButton);
         backText = getView().findViewById(R.id.detWatBackText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-        backText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backButton.performClick();
-            }
-        });
-
+        pattern = "0.#";
+        unit = "lt";
+        color = R.color.waterColor;
         initialized = true;
         draw();
     }
@@ -50,8 +40,8 @@ public class DetailsWaterFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        fillChart(R.color.waterColor);
-        fillLayout("0.#", "lt", R.color.waterColor);
+        fillChart();
+        fillLayout();
         painted = true;
     }
 }

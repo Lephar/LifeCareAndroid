@@ -28,19 +28,9 @@ public class DetailsFatFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detFatBackButton);
         backText = getView().findViewById(R.id.detFatBackText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-        backText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backButton.performClick();
-            }
-        });
-
+        pattern = "0.#";
+        unit = "kg";
+        color = R.color.fatColor;
         initialized = true;
         draw();
     }
@@ -50,8 +40,8 @@ public class DetailsFatFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        fillChart(R.color.fatColor);
-        fillLayout("0.#", "kg", R.color.fatColor);
+        fillChart();
+        fillLayout();
         painted = true;
     }
 }

@@ -46,10 +46,11 @@ public class CihazOlcumFragment extends Fragment {
 
     private static final String TAG = "BluTut";
     private static final int REQUEST_ENABLE_BT = 5;
-    boolean authorized = false;
-    DeviceScanActivity deviceScanActivity;
+    private boolean authorized = false;
+    private DeviceScanActivity deviceScanActivity;
     private ViewPager viewPager;
     private Button start_button;
+
     //firebase instance variables
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -63,12 +64,6 @@ public class CihazOlcumFragment extends Fragment {
     private FormulaData formulaDataErkek;
     private FormulaData formulaDataKadin;
     private String gender, birthday, weight, height;
-    // Handles various events fired by the Service.
-    // ACTION_GATT_CONNECTED: connected to a GATT server.
-    // ACTION_GATT_DISCONNECTED: disconnected from a GATT server.
-    // ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
-    // ACTION_DATA_AVAILABLE: received data from the device.  This can be a result of read
-    //                        or notification operations.
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -93,7 +88,7 @@ public class CihazOlcumFragment extends Fragment {
 
                     // calculate with formula and put it to firebase database
                     CalculateFromBluetoothData(emp);
-                    deviceScanActivity.setStartClicked(false);
+                    deviceScanActivity.disconnectDevice();
                     deviceScanActivity = null;
                     getActivity().finish();
 
@@ -104,6 +99,12 @@ public class CihazOlcumFragment extends Fragment {
             }
         }
     };
+    // Handles various events fired by the Service.
+    // ACTION_GATT_CONNECTED: connected to a GATT server.
+    // ACTION_GATT_DISCONNECTED: disconnected from a GATT server.
+    // ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
+    // ACTION_DATA_AVAILABLE: received data from the device.  This can be a result of read
+    //                        or notification operations.
     private BluetoothAdapter bluetoothAdapter;
 
     public CihazOlcumFragment() {
@@ -118,7 +119,7 @@ public class CihazOlcumFragment extends Fragment {
         viewPager = pager;
     }
 
-    private static IntentFilter makeGattUpdateIntentFilter() {
+    private IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(DeviceScanActivity.ACTION_GATT_CONNECTED);
         intentFilter.addAction(DeviceScanActivity.ACTION_GATT_DISCONNECTED);
@@ -155,12 +156,6 @@ public class CihazOlcumFragment extends Fragment {
 
         // initialize click listeners
         initializeClickListeners();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        deviceScanActivity = null;
     }
 
     @Override
@@ -239,26 +234,27 @@ public class CihazOlcumFragment extends Fragment {
 
                 if (authorized) {
                     new WeightSelect(CihazOlcumFragment.this, deviceScanActivity).show(getChildFragmentManager(), "Select Weight");
-
                 }
             }
         });
     }
 
-    public void initializeFirebaseListeners() {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mGattUpdateReceiver);
+    }
 
+    public void initializeFirebaseListeners() {
 
         mValueEventListenerFormulaErkek = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 formulaDataErkek = dataSnapshot.getValue(FormulaData.class);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         };
         mFormulDatabaseErkek.addValueEventListener(mValueEventListenerFormulaErkek);
@@ -266,14 +262,11 @@ public class CihazOlcumFragment extends Fragment {
         mValueEventListenerFormulaKadin = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 formulaDataKadin = dataSnapshot.getValue(FormulaData.class);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         };
         mFormulDatabaseKadin.addValueEventListener(mValueEventListenerFormulaKadin);
@@ -281,11 +274,9 @@ public class CihazOlcumFragment extends Fragment {
         mValueEventListenerPersonal = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 PersonalInfoData personalInfoData = dataSnapshot.getValue(PersonalInfoData.class);
 
                 if (personalInfoData != null) {
-
                     gender = personalInfoData.getGender();
                     birthday = personalInfoData.getBirth_date();
                     height = personalInfoData.getHeight();
@@ -295,7 +286,6 @@ public class CihazOlcumFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         };
         mPersonalDatabaseReference.addValueEventListener(mValueEventListenerPersonal);

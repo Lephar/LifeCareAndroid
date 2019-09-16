@@ -383,7 +383,7 @@
     <string name="profile_picture">Profil Fotoğrafın</string>
     <string name="next">İleri</string>
     <string name="name_surname">Ad - Soyad</string>
-    <string name="agreement"><font color='#0000FF'>Gizlilik ilkesi</font> ve <font color='#0000FF'>kayıt şartlarını</font> okuyup kabul ettiğimi onaylıyorum.</string>
+    <string name="agreement"><font color='@android:color/holo_blue_dark'>Gizlilik ilkesi</font> ve <font color='@android:color/holo_blue_dark'>kayıt şartlarını</font> okuyup kabul ettiğimi onaylıyorum.</string>
     <string name="sign_up">Kayıt Ol</string>
     <string name="signup_with_face">Facebook ile kayıt</string>
     <string name="Sign_Up_with_Gmail">Gmail ile kayıt</string>

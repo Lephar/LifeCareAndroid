@@ -167,21 +167,21 @@ public class DetailsActivity extends AppCompatActivity {
                 }
 
                 for (int i = yValues1.size(); i < 2; i++)
-                    yValues1.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues1.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
                 for (int i = yValues2.size(); i < 2; i++)
-                    yValues2.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues2.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
                 for (int i = yValues3.size(); i < 2; i++)
-                    yValues3.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues3.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
                 for (int i = yValues4.size(); i < 2; i++)
-                    yValues4.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues4.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
                 for (int i = yValues5.size(); i < 2; i++)
-                    yValues5.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues5.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
                 for (int i = yValues6.size(); i < 2; i++)
-                    yValues6.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues6.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
                 for (int i = yValues7.size(); i < 2; i++)
-                    yValues7.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues7.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
                 for (int i = yValues8.size(); i < 2; i++)
-                    yValues8.add(new Entry(i * 1000 * 60 * 60 * 24, -1));
+                    yValues8.add(new Entry(TimeUnit.MILLISECONDS.toDays(1000 * 60 * 60 * 24) + i, -1));
 
                 fatFragment.setData(yValues3, yValues1);
                 fatFragment.draw();

@@ -28,19 +28,9 @@ public class DetailsMetabolismFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detMetBackButton);
         backText = getView().findViewById(R.id.detMetBackText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-        backText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backButton.performClick();
-            }
-        });
-
+        pattern = "0";
+        unit = "kcal/gün";
+        color = R.color.metaColor;
         initialized = true;
         draw();
     }
@@ -50,8 +40,8 @@ public class DetailsMetabolismFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        fillChart(R.color.metaColor);
-        fillLayout("0", "kcal/gün", R.color.metaColor);
+        fillChart();
+        fillLayout();
         painted = true;
     }
 }

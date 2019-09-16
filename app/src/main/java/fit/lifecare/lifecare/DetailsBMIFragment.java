@@ -28,19 +28,9 @@ public class DetailsBMIFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detBmiBackButton);
         backText = getView().findViewById(R.id.detBmiBackText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-        backText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backButton.performClick();
-            }
-        });
-
+        pattern = "0.00";
+        unit = "kg/m²";
+        color = R.color.bmiColor;
         initialized = true;
         draw();
     }
@@ -50,11 +40,11 @@ public class DetailsBMIFragment extends DetailsAbstractFragment {
         if (!initialized || !loaded || painted)
             return;
 
-        if (values.size() == 2)
+        if (values.size() == 2 && values.get(0).getY() > 12)
             adjustIndicator(values.get(0).getY());
         else
             adjustIndicator(values.get(values.size() - 1).getY());
-        fillLayout("0.00", "kg/m²", R.color.bmiColor);
+        fillLayout();
         painted = true;
     }
 }

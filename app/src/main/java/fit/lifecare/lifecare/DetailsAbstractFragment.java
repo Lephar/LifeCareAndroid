@@ -25,11 +25,19 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public abstract class DetailsAbstractFragment extends Fragment {
 
     private final float EPSILON = 0.005f;
     private final long DAY_MILIS = 1000 * 60 * 60 * 24;
+    int color;
+    private float ang = -90.0f;
+    private int defColor;
+    private int prevIndex;
+    private TextView[] dateList;
+    private TextView[] valueList;
+
     LineChart chart = null;
     ImageView indicator = null;
     ImageButton backButton;
@@ -44,6 +52,10 @@ public abstract class DetailsAbstractFragment extends Fragment {
 
     public void setData(ArrayList<Entry> list) {
         values = list;
+        if (values.size() == 2 && values.get(0).getX() > values.get(1).getX())
+            Collections.swap(values, 0, 1);
+        if (values.size() == 2 && values.get(0).getY() < EPSILON)
+            values.set(0, new Entry(values.get(1).getX() - 30, values.get(0).getY()));
         painted = false;
         loaded = true;
     }
@@ -51,6 +63,12 @@ public abstract class DetailsAbstractFragment extends Fragment {
     public void setData(ArrayList<Entry> list, ArrayList<Entry> list2) {
         values = list;
         weights = list2;
+        if (values.size() == 2 && values.get(0).getX() > values.get(1).getX()) {
+            Collections.swap(values, 0, 1);
+            Collections.swap(weights, 0, 1);
+        }
+        if (values.size() == 2 && values.get(0).getY() < EPSILON)
+            values.set(0, new Entry(values.get(1).getX() - 30, values.get(0).getY()));
         painted = false;
         loaded = true;
     }
@@ -61,7 +79,9 @@ public abstract class DetailsAbstractFragment extends Fragment {
         else if (val > 42)
             val = 42;
 
-        float ang = -90;
+        float rec = ang;
+        ang = -90f;
+
         if (val < 18.5)
             ang += 30 * (val - 12) / 6.5;
         else if (val >= 18.5 && val < 25)
@@ -78,17 +98,16 @@ public abstract class DetailsAbstractFragment extends Fragment {
         animSet.setFillAfter(true);
         animSet.setFillEnabled(true);
 
-        final RotateAnimation animRotate = new RotateAnimation(0.0f, ang,
+        final RotateAnimation animRotate = new RotateAnimation(rec, ang,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                 RotateAnimation.RELATIVE_TO_SELF, 1.0f);
 
         animRotate.setDuration(1200);
-        animRotate.setFillAfter(true);
         animSet.addAnimation(animRotate);
         indicator.startAnimation(animSet);
     }
 
-    void fillChart(int color) {
+    void fillChart() {
         LineDataSet set;
         set = new LineDataSet(values, "");
         set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
@@ -130,28 +149,39 @@ public abstract class DetailsAbstractFragment extends Fragment {
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                update(e);
+                int index = values.size() - 1;
+                for (int i = index; i >= 0; i--) {
+                    if (e.getX() == values.get(i).getX()) {
+                        index = i;
+                        break;
+                    }
+                }
+                update(index);
             }
 
             @Override
             public void onNothingSelected() {
-
             }
         });
     }
 
-    void fillLayout(String pattern, String unit) {
-        fillLayout(pattern, unit, R.color.colorGray400);
-    }
+    void fillLayout() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+        backText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backButton.performClick();
+            }
+        });
 
-    void fillLayout(String pattern, String unit, int color) {
-        this.unit = unit;
-        this.pattern = pattern;
-
-        if (values.size() == 2)
-            update(values.get(0));
-        else
-            update(values.get(values.size() - 1));
+        dateList = new TextView[values.size()];
+        valueList = new TextView[values.size()];
+        defColor = topValueText.getTextColors().getDefaultColor();
 
         ConstraintSet set = new ConstraintSet();
         View lastView = layout;
@@ -162,7 +192,7 @@ public abstract class DetailsAbstractFragment extends Fragment {
             final int index = i;
             final Entry value = values.get(index);
 
-            if (value.getY() < 0)
+            if (value.getY() < EPSILON)
                 continue;
 
             ImageView separator = new ImageView(getContext());
@@ -173,7 +203,6 @@ public abstract class DetailsAbstractFragment extends Fragment {
             MontserratTextView dateText = new MontserratTextView(getContext());
             dateText.setText(date(value.getX()));
             dateText.setId(View.generateViewId());
-            //dateText.setTextColor(getResources().getColor(color));
 
             MontserratTextView valueText = new MontserratTextView(getContext());
             if (value.getY() > EPSILON && (weights == null || weights.get(i).getY() < EPSILON))
@@ -188,11 +217,11 @@ public abstract class DetailsAbstractFragment extends Fragment {
             placeholder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    update(value);
+                    update(index);
                     if (chart != null)
                         chart.highlightValue(value.getX(), 0);
-                    //if(indicator != null)
-                    //    adjustIndicator(value.getY());
+                    if (indicator != null)
+                        adjustIndicator(value.getY());
                 }
             });
 
@@ -214,6 +243,9 @@ public abstract class DetailsAbstractFragment extends Fragment {
             layout.addView(dateText);
             layout.addView(valueText);
             layout.addView(placeholder);
+
+            dateList[i] = dateText;
+            valueList[i] = valueText;
 
             set.clone(layout);
             set.constrainHeight(separator.getId(), 1);
@@ -247,6 +279,9 @@ public abstract class DetailsAbstractFragment extends Fragment {
             lastView = dateText;
         }
 
+        prevIndex = values.size() - 1;
+        update(prevIndex);
+
         View view = new View(getContext());
         view.setId(View.generateViewId());
         layout.addView(view);
@@ -259,13 +294,21 @@ public abstract class DetailsAbstractFragment extends Fragment {
         set.applyTo(layout);
     }
 
-    void update(Entry e) {
-        if (e.getY() < EPSILON) {
+    void update(int i) {
+        if (dateList[prevIndex] != null && dateList[i] != null) {
+            dateList[prevIndex].setTextColor(defColor);
+            valueList[prevIndex].setTextColor(defColor);
+            dateList[i].setTextColor(getResources().getColor(color));
+            valueList[i].setTextColor(getResources().getColor(color));
+            prevIndex = i;
+        }
+
+        if (values.get(i).getY() < EPSILON) {
             topValueText.setText("-");
             topDateText.setText("-");
         } else {
-            topValueText.setText(new DecimalFormat(pattern).format(e.getY()) + " " + unit);
-            topDateText.setText(date(e.getX()));
+            topValueText.setText(new DecimalFormat(pattern).format(values.get(i).getY()) + " " + unit);
+            topDateText.setText(date(values.get(i).getX()));
         }
     }
 

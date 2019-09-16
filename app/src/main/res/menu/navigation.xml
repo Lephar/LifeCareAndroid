@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_besinlerim"
-        android:icon="@drawable/besin_passive_icon"
+        android:icon="@drawable/bottom_navigator_meals"
         android:title="Besinlerim" />
 
     <item
         android:id="@+id/navigation_olcumlerim"
-        android:icon="@drawable/olcum_passive_icon"
+        android:icon="@drawable/bottom_navigator_measurements"
         android:title="Ölçümlerim" />
 
     <item
         android:id="@+id/navigation_sohbetler"
-        android:icon="@drawable/chat_passive_icon"
+        android:icon="@drawable/bottom_navigator_chats"
         android:title="Sohbetler" />
 
 </menu>
