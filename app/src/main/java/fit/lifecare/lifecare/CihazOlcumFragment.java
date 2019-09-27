@@ -1,6 +1,7 @@
 package fit.lifecare.lifecare;
 
 import android.Manifest;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
@@ -50,6 +51,7 @@ public class CihazOlcumFragment extends Fragment {
     private DeviceScanActivity deviceScanActivity;
     private ViewPager viewPager;
     private Button start_button;
+    private boolean registered = false;
 
     //firebase instance variables
     private FirebaseAuth mAuth;
@@ -64,23 +66,52 @@ public class CihazOlcumFragment extends Fragment {
     private FormulaData formulaDataErkek;
     private FormulaData formulaDataKadin;
     private String gender, birthday, weight, height;
+    private float z0, z1, r0, r1, i0, i1;
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (DeviceScanActivity.ACTION_GATT_CONNECTED.equals(action)) {
-
                 Toast.makeText(getContext(), "Bluetooth connected with Lifecare", Toast.LENGTH_SHORT).show();
             } else if (DeviceScanActivity.ACTION_GATT_DISCONNECTED.equals(action)) {
-
                 Toast.makeText(getContext(), "Bluetooth disconnected with Lifecare", Toast.LENGTH_SHORT).show();
-            } else if (DeviceScanActivity.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
-
-                Toast.makeText(getContext(), "Bluetooth services discovered", Toast.LENGTH_SHORT).show();
+                //} else if (DeviceScanActivity.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
+                //    Toast.makeText(getContext(), "Bluetooth services discovered", Toast.LENGTH_SHORT).show();
             } else if (DeviceScanActivity.ACTION_DATA_AVAILABLE.equals(action)) {
 
                 String readed_value = intent.getStringExtra(DeviceScanActivity.EXTRA_DATA);
-                Float emp = Float.parseFloat(readed_value.substring(5));
+
+                if (readed_value.equals("FIN")) {
+                    deviceScanActivity.writeToDevice("Z0");
+                } else if (readed_value.startsWith("Z0")) {
+                    z0 = Float.parseFloat(readed_value.substring(3));
+                    deviceScanActivity.writeToDevice("Z1");
+                } else if (readed_value.startsWith("Z1")) {
+                    z1 = Float.parseFloat(readed_value.substring(3));
+                    deviceScanActivity.writeToDevice("R0");
+                } else if (readed_value.startsWith("R0")) {
+                    r0 = Float.parseFloat(readed_value.substring(3));
+                    deviceScanActivity.writeToDevice("R1");
+                } else if (readed_value.startsWith("R1")) {
+                    r1 = Float.parseFloat(readed_value.substring(3));
+                    deviceScanActivity.writeToDevice("I0");
+                } else if (readed_value.startsWith("I0")) {
+                    i0 = Float.parseFloat(readed_value.substring(3));
+                    deviceScanActivity.writeToDevice("I1");
+                } else if (readed_value.startsWith("I1")) {
+                    i1 = Float.parseFloat(readed_value.substring(3));
+                    Toast.makeText(getContext(), "Ölçüm bitti ", Toast.LENGTH_LONG).show();
+                    getView().findViewById(R.id.olcum_progress_bar).setVisibility(View.GONE);
+                    CalculateFromBluetoothData(z1);
+                    if (deviceScanActivity != null) {
+                        deviceScanActivity.setStartClicked(false);
+                        deviceScanActivity.disconnectDevice();
+                        deviceScanActivity = null;
+                    }
+                    getActivity().finish();
+                }
+
+                /*Float emp = Float.parseFloat(readed_value.substring(5));
 
                 if (emp < 10000) {
                     Toast.makeText(getContext(), "Ölçüm bitti ", Toast.LENGTH_LONG).show();
@@ -88,14 +119,18 @@ public class CihazOlcumFragment extends Fragment {
 
                     // calculate with formula and put it to firebase database
                     CalculateFromBluetoothData(emp);
-                    deviceScanActivity.disconnectDevice();
-                    deviceScanActivity = null;
+                    if(deviceScanActivity != null)
+                    {
+                        deviceScanActivity.disconnectDevice();
+                        deviceScanActivity = null;
+                    }
                     getActivity().finish();
 
                 } else {
                     Toast.makeText(getContext(), "Hatalı ölçüm tekrar ölçünüz ", Toast.LENGTH_LONG).show();
                     getView().findViewById(R.id.olcum_progress_bar).setVisibility(View.GONE);
-                }
+                }*/
+                //getActivity().finish();
             }
         }
     };
@@ -226,6 +261,7 @@ public class CihazOlcumFragment extends Fragment {
                             deviceScanActivity.scanLeDevice(true);
 
                             getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+                            registered = true;
                             Log.d(TAG, "le scan started");
                             authorized = true;
                         }
@@ -242,7 +278,11 @@ public class CihazOlcumFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(mGattUpdateReceiver);
+        Activity activity = getActivity();
+        if (activity != null && registered) {
+            activity.unregisterReceiver(mGattUpdateReceiver);
+            registered = false;
+        }
     }
 
     public void initializeFirebaseListeners() {
@@ -306,24 +346,35 @@ public class CihazOlcumFragment extends Fragment {
 
         Log.d(TAG, yas + "**" + -yas);
 
+        double resistance = 0.6795 * 3.7822 * emp;
+        double reactance = 0.6795 * 0.4052 * emp;
+        //double resistance = 0.6941 * 3.7822 * emp;
+        //double reactance = 0.6941 * 0.4052 * emp;
+
+        double bazal = 88.362 + (4.799 * boy) + 13.397 * kilo - 5.677 * yas;
 
         if (gender.equals("Erkek")) {
 
-            double fatfreeMass = formulaDataErkek.getK() + formulaDataErkek.getX() * (boy * boy) / (emp + 100 * formulaDataErkek.getY()) +
-                    boy * formulaDataErkek.getL() + formulaDataErkek.getZ() * (kilo + formulaDataErkek.getM()) +
-                    formulaDataErkek.getT() * (-yas + formulaDataErkek.getN()) + 1 * formulaDataErkek.getO();
+            //double fatFreeMass = 0.7344 + 0.00062709 * boy * boy + 0.4637 * kilo + 0.0996 * yas;
 
-            double suKutlesi = fatfreeMass * 0.73;
+            double fatFreeMass = 0.125 + 0.518 * boy * boy / resistance + 0.231 * kilo + 0.130 * reactance;
+
+            //double fatFreeMass = -25.3 + 1.84 * (boy * boy) / (emp * 7.8) + 0.142 * kilo + 0.05 * yas + emp * 7.8 * 0.0169;
+            //double fatFreeMass = formulaDataErkek.getK() + formulaDataErkek.getX() * (boy * boy) / ((emp * 7.8) + 100 * formulaDataErkek.getY()) +
+            //        boy * formulaDataErkek.getL() + formulaDataErkek.getZ() * (kilo + formulaDataErkek.getM()) +
+            //        formulaDataErkek.getT() * (-yas + formulaDataErkek.getN()) + 1 * formulaDataErkek.getO();
+
+            //double suKutlesi = fatFreeMass * 0.73;
+            double suKutlesi = 1.2 + 0.45 * boy * boy / resistance + 0.18 * kilo;
             double suYuzdesi = (suKutlesi * 100) / kilo;
 
-            double kasKutlesi = fatfreeMass - suKutlesi;
+            double kasKutlesi = fatFreeMass - suKutlesi;
             double kasYuzdesi = (kasKutlesi * 100) / kilo;
 
-            double yagKutlesi = kilo - fatfreeMass;
-            double yagYuzdesi = (yagKutlesi * 100) / kilo;
+            double yagKutlesi = kilo - fatFreeMass;
+            double yagYuzdesi = (yagKutlesi * 100) / (kilo * 1.156);
 
             double bmi = kilo / (boy * boy / 10000);
-            double bazal = 88.362 + (4.799 * boy) + 13.397 * kilo - 5.677 * yas;
 
             Log.d("SONN", yagYuzdesi + "****" + emp);
 
@@ -337,21 +388,25 @@ public class CihazOlcumFragment extends Fragment {
 
         } else {
 
-            double fatfreeMass = formulaDataKadin.getK() + formulaDataKadin.getX() * (boy * boy) / (emp + 100 * formulaDataKadin.getY()) +
-                    boy * formulaDataKadin.getL() + formulaDataKadin.getZ() * (kilo + formulaDataKadin.getM()) +
-                    formulaDataKadin.getT() * (-yas + formulaDataKadin.getN()) + 0 * formulaDataKadin.getO();
+            //double fatFreeMass = 0.00069152 * boy * boy + 0.4327 * kilo - 0.0604 * yas - 0.2195;
 
-            double suKutlesi = fatfreeMass * 0.73;
+            double fatFreeMass = 0.518 * boy * boy / resistance + 0.231 * kilo + 0.130 * reactance - 4.104;
+
+            //double fatFreeMass = formulaDataKadin.getK() + formulaDataKadin.getX() * (boy * boy) / ((emp / 6.02 - 60) * 7.93 + 100 * formulaDataKadin.getY()) +
+            //        boy * formulaDataKadin.getL() + (-0.034 * formulaDataKadin.getX()) * (kilo + formulaDataKadin.getM()) +
+            //        formulaDataKadin.getT() * (-yas + formulaDataKadin.getN()) + 0 * formulaDataKadin.getO();
+
+            //double suKutlesi = fatFreeMass * 0.73;
+            double suKutlesi = 3.75 + 0.45 * boy * boy / resistance + 0.11 * kilo;
             double suYuzdesi = (suKutlesi * 100) / kilo;
 
-            double kasKutlesi = fatfreeMass - suKutlesi;
+            double kasKutlesi = fatFreeMass - suKutlesi;
             double kasYuzdesi = (kasKutlesi * 100) / kilo;
 
-            double yagKutlesi = kilo - fatfreeMass;
+            double yagKutlesi = kilo - fatFreeMass;
             double yagYuzdesi = (yagKutlesi * 100) / kilo;
 
             double bmi = kilo / (boy * boy / 10000);
-            double bazal = 88.362 + (4.799 * boy) + 13.397 * kilo - 5.677 * yas;
 
             Log.d("SONN", yagYuzdesi + "****" + emp);
 

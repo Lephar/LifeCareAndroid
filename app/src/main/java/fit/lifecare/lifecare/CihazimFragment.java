@@ -240,7 +240,7 @@ public class CihazimFragment extends Fragment {
 
                 new WeightSelect(new CihazOlcumFragment(), deviceScanActivity).show(getChildFragmentManager(), "Select Weight");
                 deviceScanActivity.setStartClicked(true);
-                deviceScanActivity.WriteToDevice("re");
+                deviceScanActivity.writeToDevice("re");
 
             }
         });

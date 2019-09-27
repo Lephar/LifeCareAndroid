@@ -93,8 +93,9 @@ public class DeviceScanActivity extends ListActivity {
                 
                             Log.w(TAG, "onServicesDiscovered: found Lifecare");
                             gatt.setCharacteristicNotification(characteristic,true);
-    
+
                             BluetoothGattDescriptor descriptor = characteristic.getDescriptor( UUID.fromString("00002902-0000-1000-8000-00805f9b34fb") );
+                            //BluetoothGattDescriptor descriptor = characteristic.getDescriptor( UUID.fromString("00002902-0000-1000-8000-00805f9b34fb") );
                             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                             mBluetoothGatt.writeDescriptor(descriptor);
                             
@@ -124,17 +125,10 @@ public class DeviceScanActivity extends ListActivity {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             super.onCharacteristicChanged(gatt, characteristic);
-            String str = new String(characteristic.getValue());
-            Log.d(TAG, " changed " + str );
-            Log.d(TAG, str + " *** " + readed_value);
-            if(! str.equals(readed_value)) {
-                readed_value = str;
-    
-                Log.d(TAG, " changed2 " + str );
-                if(start_clicked) {
-    
-                    broadcastUpdate(ACTION_DATA_AVAILABLE, str);
-                }
+            readed_value = new String(characteristic.getValue());
+            Log.d(TAG, " changed " + readed_value);
+            if (start_clicked) {
+                broadcastUpdate(ACTION_DATA_AVAILABLE, readed_value);
             }
         }
     };
@@ -144,8 +138,8 @@ public class DeviceScanActivity extends ListActivity {
         public void onScanResult(int callbackType, ScanResult result) {
     
             if(!isConnected) {
-    
-                if(result.getDevice().getAddress().equals("30:AE:A4:EA:BE:2E")){
+
+                if (result.getDevice().getAddress().equals("80:7D:3A:F2:31:96")) {
                     
                     isConnected = true;
                     mBluetoothGatt = result.getDevice().connectGatt( mainAppActivity,false, mGattCallback);
@@ -174,7 +168,8 @@ public class DeviceScanActivity extends ListActivity {
             return;
         }
         isConnected = false;
-        mBluetoothGatt.disconnect();
+        if (mBluetoothGatt != null)
+            mBluetoothGatt.disconnect();
     }
 
     public DeviceScanActivity(Activity mainActivity) {
@@ -230,8 +225,8 @@ public class DeviceScanActivity extends ListActivity {
         
         this.start_clicked = isClicked;
     }
-    
-    public void WriteToDevice(String str) {
+
+    public void writeToDevice(String str) {
     
         UUID uid_service = UUID.fromString("ab0828b1-198e-4351-b779-901fa0e0371e");
         UUID uid_characteristic = UUID.fromString("4ac8a682-9736-4e5d-932b-e9b31405049c");

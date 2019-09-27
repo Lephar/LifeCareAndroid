@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import androidx.fragment.app.DialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
 
 import fit.lifecare.lifecare.Bluetooth.DeviceScanActivity;
 import fit.lifecare.lifecare.CihazOlcumFragment;
@@ -82,17 +85,32 @@ public class WeightSelect extends DialogFragment {
                 
                 mProfilimKisiselDatabaseReference.setValue(weight_select.getText().toString());
                 final Context context = getContext();
-                Toast.makeText(context, "3 saniye içinde Ölçüm başlayacak", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "5 saniye içinde Ölçüm başlayacak", Toast.LENGTH_SHORT).show();
+                final ProgressBar bar = cihazOlcumFragment.getView().findViewById(R.id.olcum_progress_bar);
+                final long begin = Calendar.getInstance().getTimeInMillis() + 5000;
+                final Handler timer = new Handler();
+                timer.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        final long now = Calendar.getInstance().getTimeInMillis();
+                        int val = (int) (0.0034 * (now - begin));
+                        if (bar.getVisibility() == View.INVISIBLE)
+                            bar.setVisibility(View.VISIBLE);
+                        if (val > 100)
+                            return;
+                        bar.setProgress(val);
+                        timer.postDelayed(this, 40);
+                    }
+                }, 5000);
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         deviceScanActivity.setStartClicked(true);
-                        deviceScanActivity.WriteToDevice("re");
-                        cihazOlcumFragment.getView().findViewById(R.id.olcum_progress_bar).setVisibility(View.VISIBLE);
+                        deviceScanActivity.writeToDevice("STR");
                         Toast.makeText(context, "Ölçüm başladı", Toast.LENGTH_SHORT).show();
                     }
-                }, 3000);
+                }, 5000);
                 dismiss();
             }
         });
