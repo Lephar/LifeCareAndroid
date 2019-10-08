@@ -386,7 +386,7 @@
     <string name="agreement"><font color='@android:color/holo_blue_dark'>Gizlilik ilkesi</font> ve <font color='@android:color/holo_blue_dark'>kayıt şartlarını</font> okuyup kabul ettiğimi onaylıyorum.</string>
     <string name="sign_up">Kayıt Ol</string>
     <string name="signup_with_face">Facebook ile kayıt</string>
-    <string name="Sign_Up_with_Gmail">Gmail ile kayıt</string>
+    <string name="sign_up_with_gmail">Gmail ile kayıt</string>
     <string name="welcome">Hoşgeldiniz!</string>
     <string name="welcome_after_login">Merhaba x\n Lifecare ile\n Sağlıklı Hayata\n Başlıyoruz!</string>
     <string name="enter_code">Danışmanınızdan aldığınız kodu giriniz.</string>
@@ -401,7 +401,7 @@
     <string name="ferittin">Ferittin</string>
     <string name="olcumler">Ölçümlerim</string>
     <string name="total_mass">Toplam Vücut Kütlesi (kg)</string>
-    <string name="BMI">BKİ (kg/m2)</string>
+    <string name="bmi_detailed">BKİ (kg/m2)</string>
     <string name="lipid_ratio">Yağ (%)</string>
     <string name="water_ratio">Su (%)</string>
     <string name="muscle_ratio">Kas (%)</string>
@@ -430,7 +430,7 @@
     <string name="faqs">Sıkça Sorulan Sorular</string>
     <string name="phone">Telefon</string>
     <string name="country">Ülke</string>
-    <string name="City">Şehir</string>
+    <string name="city">Şehir</string>
     <string name="absent">yok</string>
     <string name="exist">var</string>
     <string name="enter_and_save">Açıklamanızı buraya yazın ve kaydedin.</string>
@@ -490,7 +490,7 @@
     <string name="health">SAĞLIK</string>
     <string name="meal">ÖĞÜN</string>
     <string name="blood">KAN</string>
-    <string name="measure">ÖLÇÜ</string>
+    <string name="measurement">ÖLÇÜ</string>
     <string name="select_gender">Lütfen cinsiyetinizi seçiniz</string>
     <string name="accept_aggrements">Lütfen gizlilik sözleşmelerini onaylayın</string>
     <string name="email_in_use">Bu mail adresi kullanılıyor.</string>
@@ -543,4 +543,33 @@
     <string name="change_picture">Profil Fotoğrafı</string>
     <string name="measurement_date">Ölçüm Tarihi</string>
     <string name="privacy_policy_full_text">Privacy Policy Burda Olacak</string>
+    <string name="beden_kutle_indeksi">Beden Kütle İndeksi</string>
+    <string name="past_measurements">Geçmiş Ölçümlerim</string>
+    <string name="impedance">Empedans</string>
+    <string name="fat_analysis">Yağ Analizi</string>
+    <string name="meta_rate">Metabolizma Hızı</string>
+    <string name="muscle_analysis">Kas Analizi</string>
+    <string name="water_analysis">Su Analizi</string>
+    <string name="weight_analysis">Kilo Analizi</string>
+    <string name="measurements">Ölçümlerim</string>
+    <string name="meals">Besinlerim</string>
+    <string name="chats">Sohbetlerim</string>
+    <string name="add_measurement">Ölçüm Ekle</string>
+    <string name="measure">Ölç</string>
+    <string name="enter">Yaz</string>
+    <string name="weight">Vücut Ağırlığı</string>
+    <string name="bmi">BKİ</string>
+    <string name="fat">Yağ</string>
+    <string name="muscle">Kas</string>
+    <string name="water">Su</string>
+    <string name="save">Kaydet</string>
+    <string name="not_enough_data">En az bir veri girmeniz gerekli</string>
+    <string name="body_weight">Vücut Ağırlığı</string>
+    <string name="begin_measurement">Ölçüme Başla</string>
+    <string name="profile">Profil</string>
+    <string name="measure_countdown">5 saniye içinde Ölçüm başlayacak</string>
+    <string name="measurement_began">Ölçüm Başladı</string>
+    <string name="waiting_device">Cihazın bağlanması bekleniyor</string>
+    <string name="meta_unit">kcal/gün</string>
+    <string name="no_device">Cihazı bağlayıp tekrar deneyin</string>
 </resources>

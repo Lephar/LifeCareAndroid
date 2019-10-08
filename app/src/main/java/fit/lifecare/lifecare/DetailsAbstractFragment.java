@@ -37,6 +37,7 @@ public abstract class DetailsAbstractFragment extends Fragment {
     private int prevIndex;
     private TextView[] dateList;
     private TextView[] valueList;
+    boolean doubleValued;
 
     LineChart chart = null;
     ImageView indicator = null;
@@ -205,10 +206,12 @@ public abstract class DetailsAbstractFragment extends Fragment {
             dateText.setId(View.generateViewId());
 
             MontserratTextView valueText = new MontserratTextView(getContext());
-            if (value.getY() > EPSILON && (weights == null || weights.get(i).getY() < EPSILON))
+            if (doubleValued && value.getY() > EPSILON && weights != null && weights.get(i).getY() > EPSILON)
+                valueText.setText(new DecimalFormat(pattern).format(value.getY()) + " %" + ", " + new DecimalFormat(pattern).format(100 * value.getY() / weights.get(i).getY()) + " " + unit);
+            else if (doubleValued && value.getY() > EPSILON)
                 valueText.setText(new DecimalFormat(pattern).format(value.getY()) + " %");
             else if (value.getY() > EPSILON)
-                valueText.setText(new DecimalFormat(pattern).format(value.getY()) + " %" + ", " + new DecimalFormat(pattern).format(100 * value.getY() / weights.get(i).getY()) + " " + unit);
+                valueText.setText(new DecimalFormat(pattern).format(value.getY()) + " " + unit);
             valueText.setId(View.generateViewId());
 
             final View placeholder = new View(getContext());

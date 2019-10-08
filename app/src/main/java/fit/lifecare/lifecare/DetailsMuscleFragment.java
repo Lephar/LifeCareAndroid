@@ -28,6 +28,7 @@ public class DetailsMuscleFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detMusBackButton);
         backText = getView().findViewById(R.id.detMusBackText);
 
+        doubleValued = true;
         pattern = "0.#";
         unit = "kg";
         color = R.color.muscleColor;

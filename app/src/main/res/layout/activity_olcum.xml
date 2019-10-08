@@ -25,7 +25,7 @@
         android:layout_marginStart="8dp"
         android:fontFamily="@font/montserrat"
         android:padding="8dp"
-        android:text="Ölçüm Ekle"
+        android:text="@string/add_measurement"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton16"
         app:layout_constraintStart_toEndOf="@+id/imageButton16"

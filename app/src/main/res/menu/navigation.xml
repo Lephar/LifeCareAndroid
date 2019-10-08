@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navigation_besinlerim"
         android:icon="@drawable/bottom_navigator_meals"
-        android:title="Besinlerim" />
+        android:title="@string/meals" />
 
     <item
         android:id="@+id/navigation_olcumlerim"
         android:icon="@drawable/bottom_navigator_measurements"
-        android:title="Ölçümlerim" />
+        android:title="@string/measurements" />
 
     <item
         android:id="@+id/navigation_sohbetler"
         android:icon="@drawable/bottom_navigator_chats"
-        android:title="Sohbetler" />
+        android:title="@string/chats" />
 
 </menu>

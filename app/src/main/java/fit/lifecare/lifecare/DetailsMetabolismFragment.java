@@ -28,8 +28,9 @@ public class DetailsMetabolismFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detMetBackButton);
         backText = getView().findViewById(R.id.detMetBackText);
 
+        doubleValued = false;
         pattern = "0";
-        unit = "kcal/gün";
+        unit = getString(R.string.meta_unit);
         color = R.color.metaColor;
         initialized = true;
         draw();

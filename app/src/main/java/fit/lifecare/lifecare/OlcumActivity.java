@@ -60,8 +60,8 @@ public class OlcumActivity extends AppCompatActivity
         height = preferences.getString("height", "0");
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CihazOlcumFragment(viewPager), "Ölç");
-        adapter.addFragment(new OlcumGirisFragment(height), "Yaz");
+        adapter.addFragment(new CihazOlcumFragment(viewPager), getString(R.string.measure));
+        adapter.addFragment(new OlcumGirisFragment(height), getString(R.string.enter));
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

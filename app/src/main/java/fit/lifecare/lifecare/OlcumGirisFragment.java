@@ -104,7 +104,7 @@ public class OlcumGirisFragment extends Fragment {
                     mPersonalDatabaseReference.child("weight").setValue(weightText.getText().toString());
                     getActivity().finish();
                 } else
-                    Toast.makeText(getActivity(), "En az bir veri girmeniz gerekli", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.not_enough_data), Toast.LENGTH_SHORT).show();
             }
         });
 

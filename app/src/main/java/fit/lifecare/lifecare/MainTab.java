@@ -402,7 +402,7 @@ public class MainTab extends Fragment {
                     muscle = -1;
                     water = -1;
                     collapsibleCalendar.select(new Day(lyy, lmm - 1, ldd));
-                    lastMeasureText.setText("Son Ölçüm\n" + dd + (mm >= 10 ? "." : ".0") + mm + "." + yy);
+                    lastMeasureText.setText(getString(R.string.measurement_date) + "\n" + dd + (mm >= 10 ? "." : ".0") + mm + "." + yy);
                 }
             }
 
@@ -583,13 +583,13 @@ public class MainTab extends Fragment {
                                 weightValueText.setText(new DecimalFormat("0.0").format(weight) + " kg");
                                 bmiValueText.setText(new DecimalFormat("0.00").format(bmi) + " kg/m²");
                                 empValueText.setText(new DecimalFormat("0").format(emp) + " Ω");
-                                metaValueText.setText(new DecimalFormat("0").format(meta) + " kcal/gün");
+                                metaValueText.setText(new DecimalFormat("0").format(meta) + " " + getString(R.string.meta_unit));
 
                                 fatPercentText.setText(new DecimalFormat("0.#").format(fat) + "%");
                                 musclePercentText.setText(new DecimalFormat("0.#").format(muscle) + "%");
                                 waterPercentText.setText(new DecimalFormat("0.#").format(water) + "%");
 
-                                lastMeasureText.setText("Ölçüm Tarihi");
+                                lastMeasureText.setText(getString(R.string.measurement_date));
                                 lastMeasureDate.setText((dd < 10 ? "0" : "") + dd + (mm < 10 ? ".0" : ".") + mm + "." + yy);
                             }
                         }

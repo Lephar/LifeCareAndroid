@@ -28,6 +28,7 @@ public class DetailsFatFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detFatBackButton);
         backText = getView().findViewById(R.id.detFatBackText);
 
+        doubleValued = true;
         pattern = "0.#";
         unit = "kg";
         color = R.color.fatColor;

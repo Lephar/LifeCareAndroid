@@ -28,6 +28,7 @@ public class DetailsBMIFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detBmiBackButton);
         backText = getView().findViewById(R.id.detBmiBackText);
 
+        doubleValued = false;
         pattern = "0.00";
         unit = "kg/m²";
         color = R.color.bmiColor;

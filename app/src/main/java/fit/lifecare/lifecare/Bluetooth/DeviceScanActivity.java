@@ -46,7 +46,7 @@ public class DeviceScanActivity extends ListActivity {
     public Boolean mScanning;
     private static final int SCAN_PERIOD = 10000;
     private boolean start_clicked = false;
-    private boolean isConnected = false;
+    public boolean isConnected = false;
     
     private static final String TAG = "BluTutScan";
     

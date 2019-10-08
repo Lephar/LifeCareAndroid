@@ -28,6 +28,7 @@ public class DetailsWaterFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detWatBackButton);
         backText = getView().findViewById(R.id.detWatBackText);
 
+        doubleValued = true;
         pattern = "0.#";
         unit = "lt";
         color = R.color.waterColor;

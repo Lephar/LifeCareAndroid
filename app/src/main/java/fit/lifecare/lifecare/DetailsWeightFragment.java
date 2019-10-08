@@ -28,6 +28,7 @@ public class DetailsWeightFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detWghBackButton);
         backText = getView().findViewById(R.id.detWghBackText);
 
+        doubleValued = false;
         pattern = "0.#";
         unit = "kg";
         color = R.color.weightColor;

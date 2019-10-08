@@ -28,6 +28,7 @@ public class DetailsEmpedansFragment extends DetailsAbstractFragment {
         backButton = getView().findViewById(R.id.detEmpBackButton);
         backText = getView().findViewById(R.id.detEmpBackText);
 
+        doubleValued = false;
         pattern = "0";
         unit = "Ω";
         color = R.color.empColor;

@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
-        android:text="Ölçümlerim"
+        android:text="@string/measurements"
         android:textColor="@color/ourPurple"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/profile_pic"

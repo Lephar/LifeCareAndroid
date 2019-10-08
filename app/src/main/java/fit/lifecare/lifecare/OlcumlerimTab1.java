@@ -66,7 +66,7 @@ public class OlcumlerimTab1 extends Fragment{
         mChart2 = view.findViewById(R.id.chart2);
         
         title1.setText(getString(R.string.total_mass));
-        title2.setText(getString(R.string.BMI));
+        title2.setText(getString(R.string.bmi_detailed));
 
         if (!yValues1.isEmpty()) {
             setData1();

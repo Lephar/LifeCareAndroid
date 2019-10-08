@@ -46,7 +46,7 @@ public class ProfilimMainFragment extends Fragment {
         adapter.addFragment(new ProfilimTab2(),getString(R.string.health));
         adapter.addFragment(new ProfilimTab3(),getString(R.string.meal));
         adapter.addFragment(new ProfilimTab4(),getString(R.string.blood));
-        adapter.addFragment(new ProfilimTab5(),getString(R.string.measure));
+        adapter.addFragment(new ProfilimTab5(), getString(R.string.measurement));
 
         viewPager.setAdapter(adapter);
     }

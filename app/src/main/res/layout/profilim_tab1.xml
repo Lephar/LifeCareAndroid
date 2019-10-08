@@ -231,7 +231,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/City"
+            android:text="@string/city"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/textView12"
             app:layout_constraintHorizontal_chainStyle="spread_inside"

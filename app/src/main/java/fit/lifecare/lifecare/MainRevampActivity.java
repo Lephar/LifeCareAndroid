@@ -83,18 +83,20 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
         profile_picture = findViewById(R.id.profile_pic);
         user_name = findViewById(R.id.user_name);
 
-        tabTexts = new String[3];
-        tabTexts[0] = "Beslenme Programım";
-        tabTexts[1] = "Ölçümlerim";
-        tabTexts[2] = "Sohbetlerim";
+        tabTexts = new String[5];
+        tabTexts[0] = getString(R.string.meals);
+        tabTexts[1] = getString(R.string.measurements);
+        tabTexts[2] = getString(R.string.chats);
+        tabTexts[3] = getString(R.string.settings);
+        tabTexts[4] = getString(R.string.profile);
 
         fragmentManager = getSupportFragmentManager();
         String tab = getIntent().getStringExtra("start_where");
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ProgramFragment(), "Besinlerim");
-        adapter.addFragment(new MainTab(), "Ölçümlerim");
-        adapter.addFragment(new DanismanimFragment(), "Sohbetler");
+        adapter.addFragment(new ProgramFragment(), tabTexts[0]);
+        adapter.addFragment(new MainTab(), tabTexts[1]);
+        adapter.addFragment(new DanismanimFragment(), tabTexts[2]);
 
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapter);
@@ -227,7 +229,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.fragment_layout, new AyarlarFragment());
                 fragmentTransaction.commit();
-                current_tab_text.setText("Ayarlar");
+                current_tab_text.setText(tabTexts[3]);
             }
         });
 
@@ -244,7 +246,7 @@ public class MainRevampActivity extends AppCompatActivity implements MainTab.OnF
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.fragment_layout, new ProfilimMainFragment());
                 fragmentTransaction.commit();
-                current_tab_text.setText("Profil");
+                current_tab_text.setText(tabTexts[4]);
             }
         });
 

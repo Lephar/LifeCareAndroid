@@ -171,7 +171,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:padding="8dp"
-            android:text="@string/BMI"
+            android:text="@string/bmi_detailed"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/right2"
             app:layout_constraintHorizontal_chainStyle="spread_inside"

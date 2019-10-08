@@ -219,7 +219,7 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
-        android:text="@string/Sign_Up_with_Gmail"
+        android:text="@string/sign_up_with_gmail"
         android:textColor="@android:color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/google_signup"

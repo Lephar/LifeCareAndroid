@@ -85,13 +85,17 @@ public class WeightSelect extends DialogFragment {
                 
                 mProfilimKisiselDatabaseReference.setValue(weight_select.getText().toString());
                 final Context context = getContext();
-                Toast.makeText(context, "5 saniye içinde Ölçüm başlayacak", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.measure_countdown), Toast.LENGTH_SHORT).show();
                 final ProgressBar bar = cihazOlcumFragment.getView().findViewById(R.id.olcum_progress_bar);
                 final long begin = Calendar.getInstance().getTimeInMillis() + 5000;
+                final String beganText = getString(R.string.measurement_began);
+                final String noDeviceText = getString(R.string.no_device);
                 final Handler timer = new Handler();
                 timer.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if (deviceScanActivity == null || !deviceScanActivity.isConnected)
+                            return;
                         final long now = Calendar.getInstance().getTimeInMillis();
                         int val = (int) (0.0034 * (now - begin));
                         if (bar.getVisibility() == View.INVISIBLE)
@@ -106,9 +110,13 @@ public class WeightSelect extends DialogFragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        deviceScanActivity.setStartClicked(true);
-                        deviceScanActivity.writeToDevice("STR");
-                        Toast.makeText(context, "Ölçüm başladı", Toast.LENGTH_SHORT).show();
+                        if (deviceScanActivity == null || !deviceScanActivity.isConnected) {
+                            Toast.makeText(context, noDeviceText, Toast.LENGTH_SHORT).show();
+                        } else {
+                            deviceScanActivity.setStartClicked(true);
+                            deviceScanActivity.writeToDevice("STR");
+                            Toast.makeText(context, beganText, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }, 5000);
                 dismiss();
